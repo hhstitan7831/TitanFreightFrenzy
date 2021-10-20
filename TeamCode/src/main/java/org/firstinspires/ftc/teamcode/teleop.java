@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name = "teleop")
 public class teleop extends OpMode {
-    DcMotor frontLeft, frontRight, backLeft, backRight;
+    DcMotor frontLeft, frontRight, backLeft, backRight, motor5;
 
     @Override
     public void init() {
@@ -14,6 +14,7 @@ public class teleop extends OpMode {
         frontRight = hardwareMap.dcMotor.get("frontRight");
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
+        motor5 = hardwareMap.dcMotor.get("motor5");
 
 
     }
@@ -32,8 +33,15 @@ public class teleop extends OpMode {
             frontRight.setPower(gamepad1.right_stick_y);
             backRight.setPower(gamepad1.right_stick_y);
         } else {
-            frontLeft.setPower(0);
+            frontRight.setPower(0);
+            backRight.setPower(0);
         }
-        frontRight.setPower(0);
+            if (gamepad1.b) {
+                motor5.setPower(.5);
+            } else {
+                motor5.setPower(0);
+            }
+
+        }
+
     }
-}

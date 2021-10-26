@@ -51,12 +51,6 @@ public class c2 extends LinearOpMode {
         backRight.setPower(-.2);
         sleep(500);
 
-        //Grab object
-        servo1.setPosition(50);
-
-        //Lift Object
-        motor6.setPower(.5);
-        sleep(600);
 
 
 

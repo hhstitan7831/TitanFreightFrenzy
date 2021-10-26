@@ -25,7 +25,7 @@ public class teleop extends OpMode {
 
 
         carousel = hardwareMap.dcMotor.get("carousel");
-        arm = hardwareMap.dcMotor.get("claw");
+        arm = hardwareMap.dcMotor.get("arm");
 
         claw = hardwareMap.servo.get("claw");
 
@@ -34,7 +34,7 @@ public class teleop extends OpMode {
     @Override
     public void loop() {
         //Movement (P1)
-        if (Math.abs(-gamepad1.left_stick_y) > .1) {
+        if (Math.abs(gamepad1.left_stick_y) > .1) {
             frontLeft.setPower(gamepad1.left_stick_y);
             backLeft.setPower(gamepad1.left_stick_y);
         } else {
@@ -49,11 +49,6 @@ public class teleop extends OpMode {
             backRight.setPower(0);
         }
 
-        if (gamepad1.b) {
-            carousel.setPower(.3);
-        } else {
-            carousel.setPower(0);
-        }
         //Strafing
         if (Math.abs(gamepad1.right_stick_x) > .1) {
             frontLeft.setPower(-gamepad1.right_stick_x);
@@ -71,6 +66,11 @@ public class teleop extends OpMode {
             arm.setPower(gamepad2.left_stick_y);
         } else {
             arm.setPower(0);
+        }
+        if (gamepad2.b) {
+            carousel.setPower(.3);
+        } else {
+            carousel.setPower(0);
         }
         if (gamepad2.a) {
             claw.setPosition(1);

@@ -34,7 +34,7 @@ public class c3 extends LinearOpMode {
         sleep(1000);
 
         //motor 5 spin
-        motor5.setPower(.5);
+        motor5.setPower(-.5);
         sleep(20000);
 
         //Strafe Left

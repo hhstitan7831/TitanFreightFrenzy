@@ -25,7 +25,7 @@ public class teleop extends OpMode {
 
 
         carousel = hardwareMap.dcMotor.get("carousel");
-        arm = hardwareMap.dcMotor.get("claw");
+        arm = hardwareMap.dcMotor.get("arm");
 
         claw = hardwareMap.servo.get("claw");
 
@@ -80,11 +80,3 @@ public class teleop extends OpMode {
         }
     }
 }
-
-
-
-
-
-
-
-

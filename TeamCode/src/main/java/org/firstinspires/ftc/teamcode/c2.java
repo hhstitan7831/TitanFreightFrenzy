@@ -13,16 +13,18 @@ public class c2 extends LinearOpMode {
     DcMotor frontRight;
     DcMotor backLeft;
     DcMotor backRight;
-    DcMotor motor5;
-    Servo  servo1;
-    DcMotor motor6;
+    DcMotor carousel;
+    Servo  claw;
+    DcMotor arm;
     @Override
     public void runOpMode() throws InterruptedException{
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
-        motor5 = hardwareMap.dcMotor.get("motor5");
+        carousel = hardwareMap.dcMotor.get("carousel");
+        arm = hardwareMap.dcMotor.get("arm");
+        claw = hardwareMap.servo.get("claw");
 
         waitForStart();
         //Strafe Right
@@ -32,9 +34,7 @@ public class c2 extends LinearOpMode {
         backRight.setPower(.3);
         sleep(2000);
 
-        //motor 5 spin
-
-        motor5.setPower(-.5);
+        carousel.setPower(.5);
         sleep(20000);
 
         //Strafe Left

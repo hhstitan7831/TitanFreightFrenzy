@@ -102,11 +102,3 @@ public class teleop extends OpMode {
         telemetry.update();
     }
 }
-
-
-
-
-
-
-
-

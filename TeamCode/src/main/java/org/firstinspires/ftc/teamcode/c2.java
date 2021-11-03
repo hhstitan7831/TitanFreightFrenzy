@@ -6,16 +6,21 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Disabled
-@Autonomous (name = "c2")
+
+@Autonomous (name = "blueCarouselAuto")
 public class c2 extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor carousel;
-    Servo  claw;
+    Servo claw;
     DcMotor arm;
+
+
+
+
+
     @Override
     public void runOpMode() throws InterruptedException{
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
@@ -28,34 +33,38 @@ public class c2 extends LinearOpMode {
 
         waitForStart();
         //Strafe Right
+        frontLeft.setPower(-1);
+        frontRight.setPower(-1);
+        backLeft.setPower(1);
+        backRight.setPower(1);
+        sleep(2000);
+
+        carousel.setPower(.5);
+        sleep(10000);
+
+        //Strafe Left
         frontLeft.setPower(.3);
         frontRight.setPower(-.3);
         backLeft.setPower(-.3);
         backRight.setPower(.3);
+        sleep(3000);
+
+        forward();
         sleep(2000);
 
-        //motor 5 spin
 
-        carousel.setPower(.5);
-        sleep(20000);
 
-        //Strafe Left
-        frontLeft.setPower(-.3);
-        frontRight.setPower(.3);
-        backLeft.setPower(.3);
-        backRight.setPower(-.3);
-        sleep(2000);
 
-        //Forward
+    }
+
+    public void forward () {
+        //Code here
         frontLeft.setPower(.2);
         frontLeft.setPower(-.2);
         backLeft.setPower(.2);
         backRight.setPower(-.2);
-        sleep(500);
-
-
-
-
+    }
+    public void backward () {
 
     }
 }

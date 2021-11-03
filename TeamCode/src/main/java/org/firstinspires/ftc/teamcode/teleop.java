@@ -33,43 +33,55 @@ public class teleop extends OpMode {
     @Override
     public void loop() {
         //Movement (P1)
-        if (Math.abs(gamepad1.left_stick_y) > .1) {
-            gamepad1.left_stick_y = gamepad1.left_stick_y * (2/3);
-
+        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1) {
             frontLeft.setPower(gamepad1.left_stick_y);
             backLeft.setPower(gamepad1.left_stick_y);
+            frontRight.setPower(-gamepad1.right_stick_y);
+            backRight.setPower(-gamepad1.right_stick_y);
+        } else if (gamepad1.right_trigger > .1) {
+            frontLeft.setPower(gamepad1.right_trigger);
+            backLeft.setPower(-gamepad1.right_trigger);
+            frontRight.setPower(gamepad1.right_trigger);
+            backRight.setPower(-gamepad1.right_trigger);
+        } else if (gamepad1.left_trigger > .1) {
+            frontLeft.setPower(-gamepad1.left_trigger);
+            backLeft.setPower(gamepad1.left_trigger);
+            frontRight.setPower(-gamepad1.left_trigger);
+            backRight.setPower(gamepad1.left_trigger);
         } else {
             frontLeft.setPower(0);
             backLeft.setPower(0);
-        }
-
-        if (Math.abs(gamepad1.right_stick_x) > .3) {
-            gamepad1.right_stick_x = gamepad1.right_stick_x / 2;
-
-            frontLeft.setPower(gamepad1.right_stick_x);
-            backLeft.setPower(-gamepad1.right_stick_x);
-            frontRight.setPower(gamepad1.right_stick_x);
-            backRight.setPower(-gamepad1.right_stick_x);
-        } else if (Math.abs(gamepad1.right_stick_y) > .1) {
-            gamepad1.right_stick_y = gamepad1.right_stick_y * (2/3);
-
-            frontRight.setPower(-gamepad1.right_stick_y);
-            backRight.setPower(-gamepad1.right_stick_y);
-        } else {
             frontRight.setPower(0);
             backRight.setPower(0);
         }
 
         //Strafing
-
+   /*    if (Math.abs(gamepad1.right_stick_x) > .3){
+           frontLeft.setPower(gamepad1.right_stick_x);
+           backLeft.setPower(-gamepad1.right_stick_x);
+       } else {
+           frontLeft.setPower(0);
+           backLeft.setPower(0);
+        }
+        if (Math.abs(gamepad1.right_stick_x) > .3){
+            frontRight.setPower(gamepad1.right_stick_x);
+            backRight.setPower(-gamepad1.right_stick_x);
+       } else {
+           frontRight.setPower(0);
+           backRight.setPower(0);
+       }*/
         //Game Related (P2)
-        if (Math.abs(gamepad2.left_stick_y) > .1) {
-            arm.setPower(gamepad2.left_stick_y);
-        } else {
+        if (gamepad2.dpad_up) {
+            arm.setPower(.5);
+        } else if (gamepad2.dpad_down) {
+            arm.setPower(-.5);
+        }
+        else {
             arm.setPower(0);
         }
+
         if (gamepad2.b) {
-            carousel.setPower(-.3);
+            carousel.setPower(.3);
         } else {
             carousel.setPower(0);
         }
@@ -79,6 +91,15 @@ public class teleop extends OpMode {
             //     claw.setPosition(0);
 
         }
+
+
+        telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
+        telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
+        telemetry.addData("fL", frontLeft.getPower());
+        telemetry.addData("fR", frontRight.getPower());
+        telemetry.addData("bL", backLeft.getPower());
+        telemetry.addData("bR", backRight.getPower());
+        telemetry.update();
     }
 }
 

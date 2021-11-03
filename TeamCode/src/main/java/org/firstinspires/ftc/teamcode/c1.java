@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Disabled
-@Autonomous (name = "c1")
+
+@Autonomous (name = "blue")
 public class c1 extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;

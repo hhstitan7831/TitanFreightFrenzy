@@ -49,22 +49,38 @@ public class c2 extends LinearOpMode {
         backRight.setPower(.3);
         sleep(3000);
 
-        forward();
-        sleep(2000);
+        forward(.2, 2000);
 
 
 
 
     }
 
-    public void forward () {
+    public void forward (double speed, long time) {
         //Code here
-        frontLeft.setPower(.2);
-        frontLeft.setPower(-.2);
-        backLeft.setPower(.2);
-        backRight.setPower(-.2);
+        frontLeft.setPower(speed);
+        frontLeft.setPower(-speed);
+        backLeft.setPower(speed);
+        backRight.setPower(-speed);
+        sleep(time);
     }
-    public void backward () {
+    public void backward (double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
+    public void strafeRight (double speed, long time) {
+
+    }
+    public void strafeLeft (double speed, long time) {
+
+    }
+    public void turnRight (double speed, long time) {
+
+    }
+    public void turnLeft (double speed, long time) {
 
     }
 }

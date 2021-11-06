@@ -65,7 +65,6 @@ public class c2 extends LinearOpMode {
         sleep(2000);
 
 
-        forward();
         sleep(2000);
         //stop
         frontLeft.setPower(0);

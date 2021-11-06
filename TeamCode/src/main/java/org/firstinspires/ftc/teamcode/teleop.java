@@ -68,11 +68,14 @@ public class teleop extends OpMode {
 
         if (gamepad2.b) {
             carousel.setPower(.3);
+        } else if (gamepad2.x) {
+            carousel.setPower(-.3);
         } else {
             carousel.setPower(0);
         }
         if (gamepad2.right_bumper) {
-            claw.setPosition(.8);
+            claw.setPosition(1)
+            ;
         } else if (gamepad2.left_bumper) {
             claw.setPosition(0);
         }

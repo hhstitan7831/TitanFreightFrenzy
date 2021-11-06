@@ -58,7 +58,7 @@ public class teleop extends OpMode {
 
         //Game Related (P2)
         if (gamepad2.dpad_up) {
-            arm.setPower(.7);
+            arm.setPower(.5);
         } else if (gamepad2.dpad_down) {
             arm.setPower(-.3);
         }

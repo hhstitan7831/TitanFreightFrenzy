@@ -13,7 +13,7 @@ public class teleop extends OpMode {
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
     DcMotor carousel, arm;
-    //Servo claw;
+    Servo claw;
 
 
     @Override
@@ -25,8 +25,9 @@ public class teleop extends OpMode {
 
         carousel = hardwareMap.dcMotor.get("carousel");
         arm = hardwareMap.dcMotor.get("arm");
+       // arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //claw = hardwareMap.servo.get("claw");
+        claw = hardwareMap.servo.get("claw");
 
     }
 
@@ -38,16 +39,16 @@ public class teleop extends OpMode {
             backLeft.setPower(gamepad1.left_stick_y);
             frontRight.setPower(-gamepad1.right_stick_y);
             backRight.setPower(-gamepad1.right_stick_y);
-        } else if (gamepad1.right_trigger > .1) {
-            frontLeft.setPower(gamepad1.right_trigger);
-            backLeft.setPower(-gamepad1.right_trigger);
-            frontRight.setPower(gamepad1.right_trigger);
-            backRight.setPower(-gamepad1.right_trigger);
         } else if (gamepad1.left_trigger > .1) {
-            frontLeft.setPower(-gamepad1.left_trigger);
-            backLeft.setPower(gamepad1.left_trigger);
-            frontRight.setPower(-gamepad1.left_trigger);
-            backRight.setPower(gamepad1.left_trigger);
+            frontLeft.setPower(gamepad1.left_trigger);
+            backLeft.setPower(-gamepad1.left_trigger);
+            frontRight.setPower(gamepad1.left_trigger);
+            backRight.setPower(-gamepad1.left_trigger);
+        } else if (gamepad1.right_trigger> .1) {
+            frontLeft.setPower(-gamepad1.right_trigger);
+            backLeft.setPower(gamepad1.right_trigger);
+            frontRight.setPower(-gamepad1.right_trigger);
+            backRight.setPower(gamepad1.right_trigger);
         } else {
             frontLeft.setPower(0);
             backLeft.setPower(0);
@@ -55,26 +56,11 @@ public class teleop extends OpMode {
             backRight.setPower(0);
         }
 
-        //Strafing
-   /*    if (Math.abs(gamepad1.right_stick_x) > .3){
-           frontLeft.setPower(gamepad1.right_stick_x);
-           backLeft.setPower(-gamepad1.right_stick_x);
-       } else {
-           frontLeft.setPower(0);
-           backLeft.setPower(0);
-        }
-        if (Math.abs(gamepad1.right_stick_x) > .3){
-            frontRight.setPower(gamepad1.right_stick_x);
-            backRight.setPower(-gamepad1.right_stick_x);
-       } else {
-           frontRight.setPower(0);
-           backRight.setPower(0);
-       }*/
         //Game Related (P2)
         if (gamepad2.dpad_up) {
-            arm.setPower(.5);
+            arm.setPower(.7);
         } else if (gamepad2.dpad_down) {
-            arm.setPower(-.5);
+            arm.setPower(-.3);
         }
         else {
             arm.setPower(0);
@@ -85,11 +71,10 @@ public class teleop extends OpMode {
         } else {
             carousel.setPower(0);
         }
-        if (gamepad2.a) {
-      //      claw.setPosition(.8);
-        } else {
-            //     claw.setPosition(0);
-
+        if (gamepad2.right_bumper) {
+            claw.setPosition(.8);
+        } else if (gamepad2.left_bumper) {
+            claw.setPosition(0);
         }
 
 

@@ -14,8 +14,8 @@ public class c2 extends LinearOpMode {
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor carousel;
-    Servo claw;
-    DcMotor arm;
+   // Servo claw;
+   // DcMotor arm;
 
 
 
@@ -28,30 +28,50 @@ public class c2 extends LinearOpMode {
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
         carousel = hardwareMap.dcMotor.get("carousel");
-        arm = hardwareMap.dcMotor.get("arm");
-        claw = hardwareMap.servo.get("claw");
+        //arm = hardwareMap.dcMotor.get("arm");
+        //claw = hardwareMap.servo.get("claw");
 
         waitForStart();
         //Strafe Right
-        frontLeft.setPower(-1);
-        frontRight.setPower(-1);
-        backLeft.setPower(1);
-        backRight.setPower(1);
-        sleep(2000);
+        frontLeft.setPower(-.5);
+        frontRight.setPower(-.5);
+        backLeft.setPower(.5);
+        backRight.setPower(.5);
+        sleep(2100);
+        //stop
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        sleep(1000);
 
-        carousel.setPower(.5);
-        sleep(10000);
+        carousel.setPower(-.2);
+        sleep(5000);
+        //stop
+        carousel.setPower(0);
+        sleep(2000);
 
         //Strafe Left
         frontLeft.setPower(.3);
-        frontRight.setPower(-.3);
+        frontRight.setPower(.3);
         backLeft.setPower(-.3);
-        backRight.setPower(.3);
-        sleep(3000);
+        backRight.setPower(-.3);
+        sleep(4000);
+        //stop
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        sleep(2000);
 
         forward();
         sleep(2000);
-
+        //stop
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        sleep(2000);
 
 
 
@@ -66,5 +86,5 @@ public class c2 extends LinearOpMode {
     }
     public void backward () {
 
-    }
 }
+    }

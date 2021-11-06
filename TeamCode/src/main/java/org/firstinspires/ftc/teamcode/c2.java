@@ -14,8 +14,8 @@ public class c2 extends LinearOpMode {
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor carousel;
-   // Servo claw;
-   // DcMotor arm;
+    Servo claw;
+    DcMotor arm;
 
 
 
@@ -28,8 +28,8 @@ public class c2 extends LinearOpMode {
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
         carousel = hardwareMap.dcMotor.get("carousel");
-        //arm = hardwareMap.dcMotor.get("arm");
-        //claw = hardwareMap.servo.get("claw");
+        arm = hardwareMap.dcMotor.get("arm");
+        claw = hardwareMap.servo.get("claw");
 
         waitForStart();
         //Strafe Right
@@ -64,6 +64,7 @@ public class c2 extends LinearOpMode {
         backRight.setPower(0);
         sleep(2000);
 
+
         forward();
         sleep(2000);
         //stop
@@ -73,18 +74,33 @@ public class c2 extends LinearOpMode {
         backRight.setPower(0);
         sleep(2000);
 
-
-
     }
 
-    public void forward () {
+    public void forward (double speed, long time) {
         //Code here
-        frontLeft.setPower(.2);
-        frontLeft.setPower(-.2);
-        backLeft.setPower(.2);
-        backRight.setPower(-.2);
+        frontLeft.setPower(speed);
+        frontLeft.setPower(-speed);
+        backLeft.setPower(speed);
+        backRight.setPower(-speed);
+        sleep(time);
     }
-    public void backward () {
+    public void backward (double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
+    public void strafeRight (double speed, long time) {
+
+    }
+    public void strafeLeft (double speed, long time) {
+
+    }
+    public void turnRight (double speed, long time) {
+
+    }
+    public void turnLeft (double speed, long time) {
 
 }
-    }
+   }

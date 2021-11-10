@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
-@Autonomous (name = "red")
+//Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
+@Autonomous (name = "redOnlyCarouselAuto")
 public class c1 extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
@@ -56,7 +56,7 @@ public class c1 extends LinearOpMode {
     public void forward () {
         //Code here
         frontLeft.setPower(.2);
-        frontLeft.setPower(-.2);
+        frontRight.setPower(-.2);
         backLeft.setPower(.2);
         backRight.setPower(-.2);
     }
@@ -70,7 +70,3 @@ public class c1 extends LinearOpMode {
 
 
 
-
-
-    }
-}

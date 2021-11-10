@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
-@Autonomous (name = "blueCarouselAuto")
+//Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
+@Autonomous (name = "blueOnlyCarouselAuto")
 public class c2 extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
@@ -32,53 +32,29 @@ public class c2 extends LinearOpMode {
         claw = hardwareMap.servo.get("claw");
 
         waitForStart();
-        //Strafe Right
-        frontLeft.setPower(-.5);
-        frontRight.setPower(-.5);
-        backLeft.setPower(.5);
-        backRight.setPower(.5);
-        sleep(2100);
-        //stop
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        backLeft.setPower(0);
-        backRight.setPower(0);
-        sleep(1000);
+       forward(.5,2000);
+       sleep(250);
 
-        carousel.setPower(-.2);
-        sleep(5000);
-        //stop
-        carousel.setPower(0);
-        sleep(2000);
+       backward(.5,2000);
+       sleep(250);
 
-        //Strafe Left
-        frontLeft.setPower(.3);
-        frontRight.setPower(.3);
-        backLeft.setPower(-.3);
-        backRight.setPower(-.3);
-        sleep(4000);
-        //stop
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        backLeft.setPower(0);
-        backRight.setPower(0);
-        sleep(2000);
+       strafeRight(.5,1000);
+       sleep(250);
 
+       strafeLeft(.5,1000);
+       sleep(250);
 
-        sleep(2000);
-        //stop
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        backLeft.setPower(0);
-        backRight.setPower(0);
-        sleep(2000);
+       turnRight(.5,1000);
+       sleep(250);
 
+       turnLeft(.5,1000);
+       sleep(250);
     }
 
     public void forward (double speed, long time) {
         //Code here
         frontLeft.setPower(speed);
-        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
         backLeft.setPower(speed);
         backRight.setPower(-speed);
         sleep(time);
@@ -91,15 +67,31 @@ public class c2 extends LinearOpMode {
         sleep(time);
     }
     public void strafeRight (double speed, long time) {
-
+        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+        sleep(time);
     }
     public void strafeLeft (double speed, long time) {
-
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(-speed);
+        sleep(time);
     }
     public void turnRight (double speed, long time) {
-
+        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(-speed);
+        sleep(time);
     }
     public void turnLeft (double speed, long time) {
-
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
 }
-   }

@@ -19,7 +19,7 @@ public class c1 extends LinearOpMode {
     DcMotor arm;
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() throws InterruptedException {
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
         backLeft = hardwareMap.dcMotor.get("backLeft");
@@ -28,42 +28,91 @@ public class c1 extends LinearOpMode {
         arm = hardwareMap.dcMotor.get("arm");
         claw = hardwareMap.servo.get("claw");
 
-        //Strafe Right
-        frontLeft.setPower(-1);
-        frontRight.setPower(-1);
-        backLeft.setPower(1);
-        backRight.setPower(1);
-        sleep(2000);
+        strafeRight(.3, 2000);
+        stop(0,250);
 
-        carousel.setPower(.5);
-        sleep(10000);
-
-        //Strafe Left
-        frontLeft.setPower(.3);
-        frontRight.setPower(-.3);
-        backLeft.setPower(-.3);
-        backRight.setPower(.3);
+        carousel.setPower(-.3);
         sleep(3000);
+        stop(0,250);
 
-        forward();
-        sleep(2000);
+        strafeLeft(.4, 600);
+        stop(0,250);
+
+        forward(.3, 650);
+        stop(0,250);
+
+
+        turnRight(.4, 600);
+        stop(0,250);
+
+
+
+        forward(.4, 500);
+        stop(0,250);
+
+
 
 
 
 
     }
-
-    public void forward () {
+    public void backward(double speed, long time) {
         //Code here
-        frontLeft.setPower(.2);
-        frontRight.setPower(-.2);
-        backLeft.setPower(.2);
-        backRight.setPower(-.2);
+        frontLeft.setPower(speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(speed);
+        backRight.setPower(-speed);
+        sleep(time);
     }
-    public void backward () {
+
+    public void forward(double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
+
+    public void strafeRight(double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
+
+    public void strafeLeft(double speed, long time) {
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(-speed);
+        sleep(time);
+    }
+
+    public void turnRight(double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(-speed);
+        sleep(time);
+    }
+
+    public void turnLeft(double speed, long time) {
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(speed);
 
     }
-}
+
+    public void stop(double speed, long time) {
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+        carousel.setPower(speed);
+        sleep(time);
+        }
+    }
 
 
 

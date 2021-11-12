@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-//Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
-@Autonomous (name = "blueOnlyCarouselAuto")
-public class CarouselBlue extends LinearOpMode {
+@Autonomous (name = "parkingBlue")
+public class blueParking extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
@@ -29,30 +27,18 @@ public class CarouselBlue extends LinearOpMode {
         claw = hardwareMap.servo.get("claw");
 
         waitForStart();
-        strafeRight(.3, 2000);
-        stop(0,250);
 
-        carousel.setPower(-.3);
-        sleep(3300);
-        stop(0,250);
+        forward(.4,500);
+        stop(150);
 
-        strafeLeft(.4, 600);
-        stop(0,250);
+        turnRight(.5,1000);
+        stop(150);
 
-        forward(.4, 650);
-        stop(0,250);
+        backward(.6,1500);
+        stop(150);
 
-
-        turnRight(.4, 800);
-        stop(0,250);
-
-
-
-        forward(.4, 500);
-        stop(0,250);
 
     }
-
     public void backward(double speed, long time) {
         //Code here
         frontLeft.setPower(speed);
@@ -101,12 +87,12 @@ public class CarouselBlue extends LinearOpMode {
 
     }
 
-    public void stop(double speed, long time) {
-        frontLeft.setPower(speed);
-        frontRight.setPower(speed);
-        backLeft.setPower(speed);
-        backRight.setPower(speed);
-        carousel.setPower(speed);
+    public void stop(long time) {
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        carousel.setPower(0);
         sleep(time);
     }
 }

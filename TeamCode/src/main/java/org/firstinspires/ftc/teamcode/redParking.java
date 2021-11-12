@@ -4,12 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-//Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
-@Autonomous (name = "redOnlyCarouselAuto")
-public class c1 extends LinearOpMode {
+
+@Autonomous (name = "Red Only Parking Auto")
+public class redParking extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
@@ -19,41 +18,24 @@ public class c1 extends LinearOpMode {
     DcMotor arm;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException{
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
-        carousel = hardwareMap.dcMotor.get("motor5");
-        arm = hardwareMap.dcMotor.get("arm");
+        carousel = hardwareMap.dcMotor.get("carousel");
         claw = hardwareMap.servo.get("claw");
+        arm = hardwareMap.dcMotor.get("arm");
 
-        strafeRight(.3, 2000);
-        stop(0,250);
+        waitForStart();
+       backward(.3,500);
+       stop(150);
 
-        carousel.setPower(-.3);
-        sleep(3000);
-        stop(0,250);
+       turnLeft(.6,500);
+       stop(150);
 
-        strafeLeft(.4, 600);
-        stop(0,250);
-
-        forward(.3, 650);
-        stop(0,250);
-
-
-        turnRight(.4, 600);
-        stop(0,250);
-
-
-
-        forward(.4, 500);
-        stop(0,250);
-
-
-
-
-
+       backward(.6,1500);
+       stop(150);
 
     }
     public void backward(double speed, long time) {
@@ -104,18 +86,12 @@ public class c1 extends LinearOpMode {
 
     }
 
-    public void stop(double speed, long time) {
-        frontLeft.setPower(speed);
-        frontRight.setPower(speed);
-        backLeft.setPower(speed);
-        backRight.setPower(speed);
-        carousel.setPower(speed);
+    public void stop(long time) {
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        carousel.setPower(0);
         sleep(time);
-        }
     }
-
-
-
-
-
-
+}

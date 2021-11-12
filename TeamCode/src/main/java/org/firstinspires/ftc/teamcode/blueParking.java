@@ -31,10 +31,10 @@ public class blueParking extends LinearOpMode {
         forward(.4,500);
         stop(150);
 
-        turnRight(.5,1000);
+        turnRight(.5,600);
         stop(150);
 
-        backward(.6,1500);
+        backward(1,1000);
         stop(150);
 
 

@@ -31,7 +31,7 @@ public class redParking extends LinearOpMode {
        backward(.3,500);
        stop(150);
 
-       turnLeft(.6,500);
+       turnRight(.6,1500);
        stop(150);
 
        backward(.6,1500);
@@ -83,6 +83,7 @@ public class redParking extends LinearOpMode {
         frontLeft.setPower(speed);
         frontRight.setPower(speed);
         backLeft.setPower(speed);
+        backRight.setPower(speed);
 
     }
 

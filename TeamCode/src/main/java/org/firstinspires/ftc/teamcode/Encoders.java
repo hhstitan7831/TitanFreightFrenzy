@@ -23,7 +23,7 @@ public class Encoders extends LinearOpMode {
 
     static final double     COUNTS_PER_MOTOR_REV    = 973.875;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = .5;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_INCHES   = 3.77953;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
@@ -75,10 +75,10 @@ public class Encoders extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  12,  12, 5.0);
+        encoderDrive(DRIVE_SPEED,  24,  24, 5.0);
         encoderDrive(TURN_SPEED,   12, -12, 4.0);
-        encoderDrive(DRIVE_SPEED, -12, -12, 4.0);
-        encoderDriveStrafe(DRIVE_SPEED, 12,12,5.0);
+        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);
+        encoderDriveStrafe(DRIVE_SPEED, 24,24,5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

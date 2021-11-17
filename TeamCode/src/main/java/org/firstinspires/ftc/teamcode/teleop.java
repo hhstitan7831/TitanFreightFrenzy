@@ -57,12 +57,11 @@ public class teleop extends OpMode {
         }
 
         //Game Related (P2)
-        if (gamepad2.dpad_up) {
-            arm.setPower(.5);
-        } else if (gamepad2.dpad_down) {
-            arm.setPower(-.3);
-        }
-        else {
+        if (Math.abs(gamepad2.left_trigger) > .1) {
+            arm.setPower(gamepad2.left_trigger);
+        } else if (Math.abs(gamepad2.right_trigger) > .1){
+            arm.setPower(-gamepad2.right_trigger);
+        } else {
             arm.setPower(0);
         }
 
@@ -77,7 +76,7 @@ public class teleop extends OpMode {
             claw.setPosition(1)
             ;
         } else if (gamepad2.left_bumper) {
-            claw.setPosition(0);
+            claw.setPosition(.7);
         }
 
 

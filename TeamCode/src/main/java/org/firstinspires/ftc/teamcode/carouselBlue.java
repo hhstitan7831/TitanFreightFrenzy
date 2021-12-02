@@ -32,29 +32,17 @@ public class carouselBlue extends LinearOpMode {
         claw.setPosition(.7);
         stop(250);
 
-        strafeRight(.3, 2000);
+        strafeLeft(.3, 2000);
         stop(250);
 
-        strafeRight(.15, 500);
+        strafeLeft(.11, 1000);
         stop(250);
 
         carousel.setPower(-.3);
-        sleep(3300);
+        sleep(5000);
         stop(250);
 
-        strafeLeft(.4, 600);
-        stop(250);
-
-        forward(.4, 650);
-        stop(250);
-
-
-        turnRight(.4, 800);
-        stop(250);
-
-
-
-        forward(.4, 500);
+        backward(.4, 650);
         stop(250);
 
         claw.setPosition(1);

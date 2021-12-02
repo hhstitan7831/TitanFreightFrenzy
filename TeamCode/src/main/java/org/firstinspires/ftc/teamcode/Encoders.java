@@ -76,7 +76,7 @@ public class Encoders extends LinearOpMode {
         waitForStart();
 
         // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
+        // Note: Reverse movement is obtained by setting a negative distance (not speed)(good note, 10/10)
         encoderDrive(DRIVE_SPEED,  24,  24, 5.0);
 
         encoderDrive(TURN_SPEED,   12, -12, 4.0);

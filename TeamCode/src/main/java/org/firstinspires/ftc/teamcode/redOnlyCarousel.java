@@ -28,11 +28,16 @@ public class redOnlyCarousel extends LinearOpMode {
         carousel = hardwareMap.dcMotor.get("carousel");
         arm = hardwareMap.dcMotor.get("arm");
         claw = hardwareMap.servo.get("claw");
-        strafeRight(.3, 2000);
+
+        waitForStart();
+        strafeLeft(.3, 2000);
         stop(0,250);
 
-        carousel.setPower(-.3);
-        sleep(3000);
+        carousel.setPower(1);
+        sleep(3300);
+        stop(0, 250);
+
+        /*sleep(3000);
         stop(0,250);
 
         strafeLeft(.4, 600);
@@ -43,7 +48,7 @@ public class redOnlyCarousel extends LinearOpMode {
 
 
         strafeRight(.4, 600);
-        stop(0,250);
+        stop(0,250);*/
 
 
 

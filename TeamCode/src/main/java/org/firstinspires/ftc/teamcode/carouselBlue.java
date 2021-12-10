@@ -35,14 +35,15 @@ public class carouselBlue extends LinearOpMode {
         strafeLeft(.3, 2000);
         stop(250);
 
-        strafeLeft(.11, 1000);
-        stop(250);
+        //strafeLeft(.11, 1000);
+        //stop(250);
 
         carousel.setPower(-.3);
         sleep(5000);
         stop(250);
 
-        backward(.4, 650);
+
+        backward(.4, 660);
         stop(250);
 
         claw.setPosition(1);
@@ -58,7 +59,7 @@ public class carouselBlue extends LinearOpMode {
         sleep(time);
     }
 
-    public void forward(double speed, long time) {
+    public void Tforward(double speed, long time) {
         frontLeft.setPower(-speed);
         frontRight.setPower(speed);
         backLeft.setPower(-speed);
@@ -69,7 +70,7 @@ public class carouselBlue extends LinearOpMode {
     public void strafeRight(double speed, long time) {
         frontLeft.setPower(-speed);
         frontRight.setPower(-speed);
-        backLeft.setPower(speed);
+         backLeft.setPower(speed);
         backRight.setPower(speed);
         sleep(time);
     }

@@ -30,34 +30,34 @@ public class redOnlyCarousel extends LinearOpMode {
         claw = hardwareMap.servo.get("claw");
 
         waitForStart();
-        claw.setPosition(.7);
+       claw.setPosition(.7);
+
+
         stop(250);
 
-        strafeLeft(.3, 2000);
+       strafeLeft(.3, 2000);
         stop(250);
 
-        strafeLeft(.10, 1000);
+        forward(.2, 250);
+
+        stop(250);
+
+        turnLeft(.3 , 600);
         stop(250);
 
         carousel.setPower(.4);
         sleep(4000);
         stop(250);
 
-        //strafeLeft(.4, 650);
-        stop(250);
 
-        backward(.4, 630);
+        forward(.4, 720);
         stop(450);
 
-        claw.setPosition(1);
-
-
-
-
-
+        //claw.setPosition(1);
 
 
     }
+
     public void backward(double speed, long time) {
         //Code here
         frontLeft.setPower(speed);
@@ -91,19 +91,20 @@ public class redOnlyCarousel extends LinearOpMode {
         sleep(time);
     }
 
+    public void turnLeft (double speed, long time) {
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
+
     public void turnRight(double speed, long time) {
         frontLeft.setPower(-speed);
         frontRight.setPower(-speed);
         backLeft.setPower(-speed);
         backRight.setPower(-speed);
-        sleep(time);
-    }
-
-    public void turnLeft(double speed, long time) {
-        frontLeft.setPower(speed);
-        frontRight.setPower(speed);
-        backLeft.setPower(speed);
-
+         sleep(time);
     }
 
     public void stop(long time) {
@@ -113,9 +114,8 @@ public class redOnlyCarousel extends LinearOpMode {
         backRight.setPower(0);
         carousel.setPower(0);
         sleep(time);
-        }
     }
-
+}
 
 
 

@@ -8,26 +8,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name = "mainTeleop")
 public class teleop extends OpMode {
 
-
-    //Movement
-    DcMotor frontLeft, frontRight, backLeft, backRight;
-    //Game-Related
-    DcMotor carousel, arm;
-    Servo claw;
-
+    T_Minus70 robot = new T_Minus70();
 
     @Override
     public void init() {
-        frontLeft = hardwareMap.dcMotor.get("frontLeft");
-        frontRight = hardwareMap.dcMotor.get("frontRight");
-        backLeft = hardwareMap.dcMotor.get("backLeft");
-        backRight = hardwareMap.dcMotor.get("backRight");
 
-        carousel = hardwareMap.dcMotor.get("carousel");
-        arm = hardwareMap.dcMotor.get("arm");
-       // arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        claw = hardwareMap.servo.get("claw");
+        robot.init(hardwareMap);
 
     }
 
@@ -35,57 +21,60 @@ public class teleop extends OpMode {
     public void loop() {
         //Movement (P1)
         if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1) {
-            frontLeft.setPower(gamepad1.left_stick_y);
-            backLeft.setPower(gamepad1.left_stick_y);
-            frontRight.setPower(-gamepad1.right_stick_y);
-            backRight.setPower(-gamepad1.right_stick_y);
+            robot.frontLeft.setPower(gamepad1.left_stick_y);
+            robot.backLeft.setPower(gamepad1.left_stick_y);
+            robot.frontRight.setPower(-gamepad1.right_stick_y);
+            robot.backRight.setPower(-gamepad1.right_stick_y);
         } else if (gamepad1.left_trigger > .1) {
-            frontLeft.setPower(gamepad1.left_trigger);
-            backLeft.setPower(-gamepad1.left_trigger);
-            frontRight.setPower(gamepad1.left_trigger);
-            backRight.setPower(-gamepad1.left_trigger);
+            robot.frontLeft.setPower(gamepad1.left_trigger);
+            robot.backLeft.setPower(-gamepad1.left_trigger);
+            robot.frontRight.setPower(gamepad1.left_trigger);
+            robot.backRight.setPower(-gamepad1.left_trigger);
         } else if (gamepad1.right_trigger> .1) {
-            frontLeft.setPower(-gamepad1.right_trigger);
-            backLeft.setPower(gamepad1.right_trigger);
-            frontRight.setPower(-gamepad1.right_trigger);
-            backRight.setPower(gamepad1.right_trigger);
+            robot.frontLeft.setPower(-gamepad1.right_trigger);
+            robot.backLeft.setPower(gamepad1.right_trigger);
+            robot.frontRight.setPower(-gamepad1.right_trigger);
+            robot.backRight.setPower(gamepad1.right_trigger);
         } else {
-            frontLeft.setPower(0);
-            backLeft.setPower(0);
-            frontRight.setPower(0);
-            backRight.setPower(0);
+            robot.frontLeft.setPower(0);
+            robot.backLeft.setPower(0);
+            robot.frontRight.setPower(0);
+            robot.backRight.setPower(0);
         }
 
         //Game Related (P2)
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            arm.setPower(gamepad2.left_trigger);
+            robot.arm.setPower(gamepad2.left_trigger);
         } else if (Math.abs(gamepad2.right_trigger) > .1){
-            arm.setPower(-gamepad2.right_trigger);
+            robot.arm.setPower(-gamepad2.right_trigger);
         } else {
-            arm.setPower(0);
+            robot.arm.setPower(0);
         }
 
         if (gamepad2.b) {
-            carousel.setPower(1);
+            robot.carousel.setPower(.9);
         } else if (gamepad2.x) {
-            carousel.setPower(-1);
+            robot.carousel.setPower(-.9);
+
+        } else if (gamepad2.x) {
+            robot.carousel.setPower(-.3);
         } else {
-            carousel.setPower(0);
+            robot.carousel.setPower(0);
         }
         if (gamepad2.right_bumper) {
-            claw.setPosition(1)
+            robot.claw.setPosition(.3)
             ;
         } else if (gamepad2.left_bumper) {
-            claw.setPosition(.7);
+            robot.claw.setPosition(0);
         }
 
 
         telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
         telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
-        telemetry.addData("fL", frontLeft.getPower());
-        telemetry.addData("fR", frontRight.getPower());
-        telemetry.addData("bL", backLeft.getPower());
-        telemetry.addData("bR", backRight.getPower());
+        telemetry.addData("fL", robot.frontLeft.getPower());
+        telemetry.addData("fR", robot.frontRight.getPower());
+        telemetry.addData("bL", robot.backLeft.getPower());
+        telemetry.addData("bR", robot.backRight.getPower());
         telemetry.update();
     }
 }

@@ -84,7 +84,7 @@ public class blueParking extends LinearOpMode {
         frontLeft.setPower(speed);
         frontRight.setPower(speed);
         backLeft.setPower(speed);
-
+        backRight.setPower(speed);
     }
 
     public void stop(long time) {

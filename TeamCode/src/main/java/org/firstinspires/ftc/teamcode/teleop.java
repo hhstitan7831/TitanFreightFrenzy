@@ -52,17 +52,20 @@ public class teleop extends OpMode {
         }
 
         if (gamepad2.b) {
-            robot.carousel.setPower(.3);
+            robot.carousel.setPower(.9);
+        } else if (gamepad2.x) {
+            robot.carousel.setPower(-.9);
+
         } else if (gamepad2.x) {
             robot.carousel.setPower(-.3);
         } else {
             robot.carousel.setPower(0);
         }
         if (gamepad2.right_bumper) {
-            robot.claw.setPosition(1)
+            robot.claw.setPosition(.3)
             ;
         } else if (gamepad2.left_bumper) {
-            robot.claw.setPosition(.7);
+            robot.claw.setPosition(0);
         }
 
 

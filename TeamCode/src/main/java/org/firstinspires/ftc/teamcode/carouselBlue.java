@@ -29,12 +29,24 @@ public class carouselBlue extends LinearOpMode {
         claw = hardwareMap.servo.get("claw");
 
         waitForStart();
-        strafeLeft(.3, 2000);
+        claw.setPosition(0);
         stop(250);
 
-        carousel.setPower(-1);
+        strafeLeft(.3, 500);
+        stop(250);
+
+        carousel.setPower(-.7);
         sleep(3300);
         stop(250);
+
+        backward(.3,2500);
+        stop( 250 );
+
+       claw.setPosition(.3);
+       stop(250);
+
+       backward(.3, 500);
+       stop(250);
 
         /*strafeLeft(.4, 600);
 

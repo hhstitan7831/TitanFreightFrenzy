@@ -34,11 +34,17 @@ public class redOnlyCarousel extends LinearOpMode {
         forward(.2, 500);
         stop(250);
 
-        carousel.setPower(.8);
+        forward(.1,500 );
+        stop(250);
+
+        carousel.setPower(-.8);
         sleep(3300);
         stop(250);
 
-        strafeRight(.3, 3000);
+        strafeRight(.3, 2500);
+        stop(250);
+
+        forward(.1, 500);
         stop(250);
 
         /*sleep(3000);

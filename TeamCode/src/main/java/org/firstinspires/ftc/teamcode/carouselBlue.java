@@ -35,7 +35,7 @@ public class carouselBlue extends LinearOpMode {
         strafeLeft(.3, 500);
         stop(250);
 
-        carousel.setPower(-.7);
+        carousel.setPower(.7);
         sleep(3300);
         stop(250);
 

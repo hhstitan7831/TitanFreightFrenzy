@@ -81,11 +81,12 @@ public class Encoders extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)(good note, 10/10)
-        encoderDrive(DRIVE_SPEED,  24,  24, 5.0);
 
-        encoderDrive(TURN_SPEED,   12, -12, 4.0);
-        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);
-        encoderDriveStrafe(DRIVE_SPEED, 24,24,5.0);
+        //Go Forward
+        encoderDrive(DRIVE_SPEED,  24,  24, 5.0);
+        //Go Backward
+        //Turn Right
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

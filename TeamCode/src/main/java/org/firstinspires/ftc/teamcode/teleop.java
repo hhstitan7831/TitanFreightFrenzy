@@ -44,7 +44,7 @@ public class teleop extends OpMode {
 
         //Game Related (P2)
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            robot.arm.setPower(gamepad2.left_trigger * .9);
+            robot.arm.setPower(gamepad2.left_trigger * .8);
         } else if (Math.abs(gamepad2.right_trigger) > .1){
             robot.arm.setPower(-gamepad2.right_trigger);
         } else {

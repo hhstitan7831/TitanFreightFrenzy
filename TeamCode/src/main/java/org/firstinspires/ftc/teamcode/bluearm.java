@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "armmm")
-public class armmm extends LinearOpMode {
+@Autonomous (name = "bluearm")
+public class bluearm extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
@@ -32,7 +32,7 @@ public class armmm extends LinearOpMode {
         forward(.2, 1000);
         stop(250);
 
-        arm.setPower(.5);
+        arm.setPower(.45);
 
         forward(.1, 2700);
         stop(250);
@@ -43,7 +43,7 @@ public class armmm extends LinearOpMode {
         backward(.2, 500);
         stop(250);
 
-        turnLeft(.3,1200);
+        turnRight(.3,1200);
         stop(250);
 
         backward(.8, 1700);
@@ -79,12 +79,15 @@ public class armmm extends LinearOpMode {
         sleep(time);
     }
 
-    public void turnLeft (double speed, long time) {
-        frontLeft.setPower(speed);
-        frontRight.setPower(speed);
-        backLeft.setPower(speed);
-        backRight.setPower(speed);
+
+    public void turnRight(double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(-speed);
         sleep(time);
     }
 }
+
+
 

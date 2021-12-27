@@ -22,7 +22,7 @@ public class Encoders extends LinearOpMode {
 
 
 
-    static final double     COUNTS_PER_MOTOR_REV    = 2150.8;    // eg: TETRIX Motor Encoder
+    static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
     static final double     DRIVE_GEAR_REDUCTION    = 1;        // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 3.77953;     // For figuring circumference
 

@@ -34,9 +34,9 @@ public class testencoder extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        frontLeft = hardwareMap.dcMotor.get("frontLeft");
+        //frontLeft = hardwareMap.dcMotor.get("frontLeft");
         //frontRight = hardwareMap.dcMotor.get("frontRight");
-       // backLeft = hardwareMap.dcMotor.get("backLeft");
+        backLeft = hardwareMap.dcMotor.get("backLeft");
         //backRight = hardwareMap.dcMotor.get("backRight");
 
         carousel = hardwareMap.dcMotor.get("carousel");
@@ -45,12 +45,12 @@ public class testencoder extends LinearOpMode {
 
         claw = hardwareMap.servo.get("claw");
 
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        //backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        //frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Send telemetry message to signify robot waiting;
@@ -58,23 +58,23 @@ public class testencoder extends LinearOpMode {
         telemetry.update();
 
 
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-       // backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0",  "Starting at %7d ",
-                frontLeft.getCurrentPosition());
+               //frontLeft.getCurrentPosition();
                // frontRight.getCurrentPosition(),
-               // backLeft.getCurrentPosition(),
+               backLeft.getCurrentPosition(),
                // backRight.getCurrentPosition())
-        telemetry.update();
+        telemetry.update());
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -103,37 +103,38 @@ public class testencoder extends LinearOpMode {
     public void encoderDrive(double speed,
                              double leftInches, double rightInches,
                              double timeoutS) {
-        int newFrontLeftTarget;
-       // int newBackLeftTarget;
+        //int newFrontLeftTarget;
+        int newBackLeftTarget;
       //  int newFrontRightTarget;
       //  int newBackRightTarget;
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
-            frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
            // frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-           // backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
            // backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             // Determine new target position, and pass to motor controller
-            newFrontLeftTarget = frontLeft.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-           // newBackLeftTarget = backLeft.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            //newFrontLeftTarget = frontLeft.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            newBackLeftTarget = backLeft.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
            // newFrontRightTarget = frontRight.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
            // newBackRightTarget = backRight.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-            frontLeft.setTargetPosition(newFrontLeftTarget);
-          //  backLeft.setTargetPosition(newBackLeftTarget);
+            //frontLeft.setTargetPosition(newFrontLeftTarget);
+
+            backLeft.setTargetPosition(newBackLeftTarget);
           //  frontRight.setTargetPosition(newFrontRightTarget);
           //  backRight.setTargetPosition(newBackRightTarget);
             // Turn On RUN_TO_POSITION
-            frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-           // backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
            // frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
            // backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             // reset the timeout time and start motion.
             runtime.reset();
-            frontLeft.setPower(Math.abs(speed));
-           // backLeft.setPower(Math.abs(speed));
+           // frontLeft.setPower(Math.abs(speed));
+            backLeft.setPower(Math.abs(speed));
           //  frontRight.setPower(Math.abs(speed));
           //  backRight.setPower(Math.abs(speed));
 
@@ -148,24 +149,24 @@ public class testencoder extends LinearOpMode {
                     (frontLeft.isBusy())) {// frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d ", newFrontLeftTarget);//newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
+                telemetry.addData("Path1", "Running to %7d ", newBackLeftTarget);//newFrontLeftTarget, newFrontRightTarget, newBackRightTarget);
                 telemetry.addData("Path2", "Running at %7d  ",
-                        frontLeft.getCurrentPosition());
-                       // backLeft.getCurrentPosition(),
+                       //frontLeft.getCurrentPosition());
+                        backLeft.getCurrentPosition(),
                        // frontRight.getCurrentPosition(),
                       //  backRight.getCurrentPosition());
-                telemetry.update();
+                telemetry.update());
             }
 
             // Stop all motion;
-            frontLeft.setPower(0);
-            //backLeft.setPower(0);
+            //frontLeft.setPower(0);
+            backLeft.setPower(0);
            // frontRight.setPower(0);
            // backRight.setPower(0);
 
             // Turn off RUN_TO_POSITION
-            frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-           // backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+           backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
            // frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
            // backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 

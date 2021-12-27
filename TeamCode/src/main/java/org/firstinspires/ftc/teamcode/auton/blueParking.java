@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "bluearm")
-public class bluearm extends LinearOpMode {
+@Autonomous (name = "parkingBlue")
+public class blueParking extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
@@ -14,6 +14,7 @@ public class bluearm extends LinearOpMode {
     DcMotor carousel;
     Servo claw;
     DcMotor arm;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,29 +27,25 @@ public class bluearm extends LinearOpMode {
         claw = hardwareMap.servo.get("claw");
 
         waitForStart();
-        claw.setPosition(0);
-        stop(250);
 
-        forward(.2, 1000);
-        stop(250);
+        forward(.4,500);
+        stop(150);
 
-        arm.setPower(.45);
+        turnRight(.5,600);
+        stop(150);
 
-        forward(.1, 2700);
-        stop(250);
-
-        claw.setPosition(.3);
-        stop(250);
-
-        backward(.2, 500);
-        stop(250);
-
-        turnRight(.3,1200);
-        stop(250);
-
-        backward(.8, 1700);
+        backward(1,1000);
+        stop(150);
 
 
+    }
+    public void backward(double speed, long time) {
+        //Code here
+        frontLeft.setPower(speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(speed);
+        backRight.setPower(-speed);
+        sleep(time);
     }
 
     public void forward(double speed, long time) {
@@ -59,26 +56,21 @@ public class bluearm extends LinearOpMode {
         sleep(time);
     }
 
-    public void stop(long time) {
-        frontLeft.setPower(0);
-        frontRight.setPower(0);
-        backLeft.setPower(0);
-        backRight.setPower(0);
-        carousel.setPower(0);
-        arm.setPower(0);
-        sleep(time);
-
-    }
-
-    public void backward(double speed, long time) {
-        //Code here
-        frontLeft.setPower(speed);
+    public void strafeRight(double speed, long time) {
+        frontLeft.setPower(-speed);
         frontRight.setPower(-speed);
         backLeft.setPower(speed);
+        backRight.setPower(speed);
+        sleep(time);
+    }
+
+    public void strafeLeft(double speed, long time) {
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(-speed);
         backRight.setPower(-speed);
         sleep(time);
     }
-
 
     public void turnRight(double speed, long time) {
         frontLeft.setPower(-speed);
@@ -87,7 +79,20 @@ public class bluearm extends LinearOpMode {
         backRight.setPower(-speed);
         sleep(time);
     }
+
+    public void turnLeft(double speed, long time) {
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+    }
+
+    public void stop(long time) {
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+        carousel.setPower(0);
+        sleep(time);
+    }
 }
-
-
-

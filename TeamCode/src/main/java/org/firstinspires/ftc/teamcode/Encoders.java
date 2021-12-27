@@ -27,7 +27,7 @@ public class Encoders extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 3.77953;     // For figuring circumference
 
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 0.6;
+    static final double     DRIVE_SPEED             = 0.2;
     static final double     TURN_SPEED              = 0.5;
 
 
@@ -69,7 +69,7 @@ public class Encoders extends LinearOpMode {
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
+        telemetry.addData("Path0",  "Starting at %7d :%7d : %7d: %7d ",
                 frontLeft.getCurrentPosition(),
                 frontRight.getCurrentPosition(),
                 backLeft.getCurrentPosition(),
@@ -148,8 +148,8 @@ public class Encoders extends LinearOpMode {
                     (frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d", newFrontLeftTarget, newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
-                telemetry.addData("Path2", "Running at %7d :%7d",
+                telemetry.addData("Path1", "Running to %7d :%7d : %7d: %7d ", newFrontLeftTarget, newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
+                telemetry.addData("Path2", "Running at %7d :%7d : %7d: %7d ",
                         frontLeft.getCurrentPosition(),
                         backLeft.getCurrentPosition(),
                         frontRight.getCurrentPosition(),

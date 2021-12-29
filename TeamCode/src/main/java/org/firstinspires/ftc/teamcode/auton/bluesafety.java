@@ -1,12 +1,14 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.auton;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 //Start --> Pinch box --> Go to Carousel --> Spin Carousel --> park in warehouse and release box
 @Autonomous (name = "bluesafety")
@@ -94,7 +96,7 @@ public class bluesafety extends LinearOpMode {
         // Carousel Spin
         carousel.setPower(-.7);
         sleep(3300);
-        stop(250);
+
         /*
 
         */
@@ -105,7 +107,7 @@ public class bluesafety extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, -12,-12,5.0);
         // Release Block
         claw.setPosition(.3);
-        stop(250);
+        sleep(250);
         // Backward (2)
         encoderDrive(DRIVE_SPEED,-1,-1,5.0);
         //encoderDrive(DRIVE_SPEED,-24,24,5.0);

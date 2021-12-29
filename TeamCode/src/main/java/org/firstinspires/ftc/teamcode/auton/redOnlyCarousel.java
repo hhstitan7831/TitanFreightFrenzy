@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.auton;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 //Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
 @Autonomous (name = "Red Only Carousel Auto")
+@Disabled
 public class redOnlyCarousel extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;

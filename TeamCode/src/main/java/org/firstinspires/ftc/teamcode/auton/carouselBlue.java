@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 //Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
 @Autonomous (name = "Blue Only Carousel Auto")
+@Disabled
 public class carouselBlue extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;

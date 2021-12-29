@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -36,7 +36,7 @@ public class armEncoder extends LinearOpMode {
 
     static final double     ARM_PER_INCH         = (COUNTS_PER_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double     LVL_1_INCHES         = 5.0;
-    static final double     LVL_2_INCHES         = 11.0;
+    static final double     LVL_2_INCHES         = 10.0;
     static final double     LVL_3_INCHES         = 19.0;
 
 
@@ -98,15 +98,62 @@ public class armEncoder extends LinearOpMode {
         //Go Forward
         telemetry.addData("Running", "Encoder Test...");
         telemetry.update();
-        claw.setPosition(0);
+        // level 3 code
+        // close claw
+        /*claw.setPosition(0);
         sleep(250);
+        //lift arm
         armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  30.0);
-        encoderDrive(DRIVE_SPEED,2,2,5.0);
-    
+        // go foward
+        encoderDrive(.7,4,4,5.0);
+        // release block
         claw.setPosition(.3);
         sleep(250);
-        encoderDrive(.5, -2, -2, 5.0) 
+        //backward
+        encoderDrive(DRIVE_SPEED, -3, -3, 5.0);
+        //lift arm again to not tip
+        armEncoderDrive(DRIVE_SPEED, 6, 5.0);
+        // backward to l e a v e
+        encoderDrive(1.0, -4, -4, 5.0);
        // armEncoderDrive(.1,  -5,  30.0);
+       */
+        // Level 2 Code
+
+       // close claw
+       /*claw.setPosition(0);
+       // lift arm
+        armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES, 30.0);
+        // go foward
+        encoderDrive(.7, 4, 4, 5.0);
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        // backward
+        encoderDrive(DRIVE_SPEED, -3, -3,5.0);
+        // backward to l e a v e
+        encoderDrive(1.0, -4, -4,5.0);
+
+        */
+
+        // Level 1 Code
+        // close claw
+        claw.setPosition(0);
+        // lift arm
+        armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES, 30.0);
+        // go foward
+        encoderDrive(.7, 4, 4, 5.0);
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        // backward
+        encoderDrive(DRIVE_SPEED, -3, -3,5.0);
+        // backward to l e a v e
+        encoderDrive(1.0, -4, -4,5.0);
+
+
+
+
+
 
         //Go Backward
         //Turn Right

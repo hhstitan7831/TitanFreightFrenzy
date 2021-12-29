@@ -102,8 +102,10 @@ public class armEncoder extends LinearOpMode {
         sleep(250);
         armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  30.0);
         encoderDrive(DRIVE_SPEED,2,2,5.0);
+    
         claw.setPosition(.3);
         sleep(250);
+        encoderDrive(.5, -2, -2, 5.0) 
        // armEncoderDrive(.1,  -5,  30.0);
 
         //Go Backward

@@ -10,6 +10,7 @@ public class T_Minus70 {
     //Game-Related
     public DcMotor carousel = null, arm = null;
     public Servo claw = null;
+    public static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
 
@@ -43,4 +44,11 @@ public class T_Minus70 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-}
+
+
+    public void armEncoderDrive(double speed,
+                                double inches,
+                                double timeoutS) {
+        double x = speed+inches+timeoutS;
+        }
+    }

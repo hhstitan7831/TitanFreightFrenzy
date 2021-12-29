@@ -140,7 +140,7 @@ public class TorqueNADOArmEncoders extends LinearOpMode {
         // close claw
         claw.setPosition(0);
         // lift arm
-        armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES, 30.0);
+        armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES, 30.0);
         // go foward
         encoderDrive(.7, 4, 4, 5.0);
         // release block

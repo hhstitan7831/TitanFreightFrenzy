@@ -42,6 +42,8 @@ public class teleop extends OpMode {
             robot.backLeft.setPower(0);
             robot.frontRight.setPower(0);
             robot.backRight.setPower(0);
+          //int x = (int) robot.COUNTS_PER_MOTOR_REV;
+            //robot.armEncoderDrive();
         }
 
         //Game Related (P2)

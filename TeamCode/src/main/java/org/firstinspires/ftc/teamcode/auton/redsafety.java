@@ -83,11 +83,13 @@ public class redsafety extends LinearOpMode {
         telemetry.update();
         claw.setPosition(0);
         telemetry.addLine("Closed Claw");
+        telemetry.update();
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)(good note, 10/10)
 
-        //Go Foward
-        
+        //Go Forward
+        telemetry.addLine("2nd: Going Forward...");
+        telemetry.update();
         encoderDrive(DRIVE_SPEED,  10,  10, 5.0);
         // Carousel Spin
         carousel.setPower(-.8);

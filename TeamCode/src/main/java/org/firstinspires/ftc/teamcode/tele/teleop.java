@@ -1,9 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.tele;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.robot.T_Minus70;
 
 @TeleOp(name = "mainTeleop")
 public class teleop extends OpMode {
@@ -40,11 +42,13 @@ public class teleop extends OpMode {
             robot.backLeft.setPower(0);
             robot.frontRight.setPower(0);
             robot.backRight.setPower(0);
+          //int x = (int) robot.COUNTS_PER_MOTOR_REV;
+            //robot.armEncoderDrive();
         }
 
         //Game Related (P2)
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            robot.arm.setPower(gamepad2.left_trigger * .8);
+            robot.arm.setPower(gamepad2.left_trigger );
         } else if (Math.abs(gamepad2.right_trigger) > .1){
             robot.arm.setPower(-gamepad2.right_trigger);
         } else {

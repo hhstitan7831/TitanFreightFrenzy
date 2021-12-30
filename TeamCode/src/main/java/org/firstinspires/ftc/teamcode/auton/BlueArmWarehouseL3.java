@@ -8,9 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "armEncoder")
-@Disabled
-public class armEncoder extends LinearOpMode {
+@Autonomous(name = "BlueArmWarehouseL3")
+public class BlueArmWarehouseL3 extends LinearOpMode {
 
     /* Declare OpMode members. */
     //Movement
@@ -22,7 +21,7 @@ public class armEncoder extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
 
-// values for base
+    // values for base
     static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
     static final double     DRIVE_GEAR_REDUCTION    = 1;        // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 3.77953;     // For figuring circumference
@@ -32,10 +31,11 @@ public class armEncoder extends LinearOpMode {
 
 
     //values for arm
+    static final double     COUNTS_PER_ARM_MOTOR_REV    = 1440.0;  // eg: TETRIX Motor Encoder //2150.8
     static final double     ARM_GEAR_REDUCTION    = 0.3;        // This is < 1.0 if geared UP
     static final double     SPROCKET_DIAMETER_INCHES   = 3.0;     // For figuring circumference
 
-    static final double     ARM_PER_INCH         = (COUNTS_PER_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
+    static final double     ARM_PER_INCH         = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double     LVL_1_INCHES         = 5.0;
     static final double     LVL_2_INCHES         = 10.0;
     static final double     LVL_3_INCHES         = 19.0;
@@ -85,10 +85,10 @@ public class armEncoder extends LinearOpMode {
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0",  "Starting at %7d ",
                 arm.getCurrentPosition(),
-         frontRight.getCurrentPosition(),
-         backLeft.getCurrentPosition(),
-         backRight.getCurrentPosition());
-         telemetry.update();
+                frontRight.getCurrentPosition(),
+                backLeft.getCurrentPosition(),
+                backRight.getCurrentPosition());
+        telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -118,9 +118,34 @@ public class armEncoder extends LinearOpMode {
         encoderDrive(1.0, -4, -4, 5.0);
        // armEncoderDrive(.1,  -5,  30.0);
        */
+        // actual autono
+        //close claw to pinch block
+        claw.setPosition(0);
+        sleep(250);
+        //foward
+        encoderDrive(DRIVE_SPEED, 24, 24, 10.0);
+        // lift arm
+        armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  30.0);
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        //backward
+        encoderDrive(DRIVE_SPEED, -3, -3, 5.0);
+        // backward to l e a v e
+        encoderDrive(1.0, -4, -4, 5.0);
+        // turn right
+        encoderDrive(DRIVE_SPEED,-24,24,24.0);
+        //backward and r a m into warehouse
+        encoderDrive(.8, -36, -36, 36.0);
+
+
+
+
+
+
         // Level 2 Code
 
-       // close claw
+        // close claw
        /*claw.setPosition(0);
        // lift arm
         armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES, 30.0);
@@ -138,7 +163,7 @@ public class armEncoder extends LinearOpMode {
 
         // Level 1 Code
         // close claw
-        claw.setPosition(0);
+        /*claw.setPosition(0);
         // lift arm
         armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES, 30.0);
         // go foward
@@ -150,6 +175,8 @@ public class armEncoder extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, -3, -3,5.0);
         // backward to l e a v e
         encoderDrive(1.0, -4, -4,5.0);
+
+         */
 
 
 
@@ -173,8 +200,8 @@ public class armEncoder extends LinearOpMode {
      *  3) Driver stops the opmode running.
      */
     public void armEncoderDrive(double speed,
-                             double inches,
-                             double timeoutS) {
+                                double inches,
+                                double timeoutS) {
         int newarmTarget;
         // int newBackLeftTarget;
         //  int newFrontRightTarget;

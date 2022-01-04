@@ -21,13 +21,15 @@ public class teleop extends OpMode {
 
     @Override
     public void loop() {
-        //Movement (P1)
+        //Movement (P1) - Going Backwards / Forwards / Turning
         if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1) {
             robot.frontLeft.setPower(gamepad1.left_stick_y);
             robot.backLeft.setPower(gamepad1.left_stick_y);
             robot.frontRight.setPower(-gamepad1.right_stick_y);
             robot.backRight.setPower(-gamepad1.right_stick_y);
-        } else if (gamepad1.left_trigger > .1) {
+        }
+        //Strafing
+        else if (gamepad1.left_trigger > .1) {
             robot.frontLeft.setPower(gamepad1.left_trigger);
             robot.backLeft.setPower(-gamepad1.left_trigger);
             robot.frontRight.setPower(gamepad1.left_trigger);
@@ -37,6 +39,28 @@ public class teleop extends OpMode {
             robot.backLeft.setPower(gamepad1.right_trigger);
             robot.frontRight.setPower(-gamepad1.right_trigger);
             robot.backRight.setPower(gamepad1.right_trigger);
+        }
+        //D-Pad Controls
+        else if (gamepad1.dpad_left) {
+            robot.frontLeft.setPower(.25);
+            robot.backLeft.setPower(-.25);
+            robot.frontRight.setPower(.25);
+            robot.backRight.setPower(-.25);
+        } else if (gamepad1.dpad_right) {
+            robot.frontLeft.setPower(-.25);
+            robot.backLeft.setPower(.25);
+            robot.frontRight.setPower(-.25);
+            robot.backRight.setPower(.25);
+        } else if (gamepad1.dpad_up) {
+            robot.frontLeft.setPower(.25);
+            robot.backLeft.setPower(.25);
+            robot.frontRight.setPower(-.25);
+            robot.backRight.setPower(-.25);
+        } else if (gamepad1.dpad_down) {
+            robot.frontLeft.setPower(-.25);
+            robot.backLeft.setPower(-.25);
+            robot.frontRight.setPower(.25);
+            robot.backRight.setPower(.25);
         } else {
             robot.frontLeft.setPower(0);
             robot.backLeft.setPower(0);

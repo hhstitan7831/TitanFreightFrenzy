@@ -344,6 +344,141 @@ public class TensorFlowPractice extends LinearOpMode {
             }*/
             
         }
+        // directions and measurements are based off red alliance side, placed near carousel
+        if (opModeIsActive()) {
+            while (opModeIsActive()) {
+                 // close claw to pinch block 
+                 claw.setPosition(0);
+                 sleep(250); 
+                //Move Forward
+                encoderDrive(DRIVE_SPEED, 12, 12, 5.0);
+                sleep(250); 
+            
+                //DUCK WYA
+                if(isDuckOrCubeDetected() == true){ //If Duck is in middle marker (Level 2)
+                    //Set lift height => 2
+                    liftHeight = LVL_2_INCHES;
+                    telemetry.addData("Changed lift height to" , liftHeight);
+                    telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
+                    telemetry.update();
+                    //Strafe left to shipping hub
+                    encoderDriveStrafe(DRIVE_SPEED, 24, 24, 12.0);
+                  
+                }
+                }
+                else{ //Duck is NOT detected in Level 2
+                    //Strafe right to Level 3
+                    encoderDriveStrafe(DRIVE_SPEED, -3, -3, 3.0);
+                    //Sleep 1s
+                    sleep(1000);
+                    if(isDuckOrCubeDetected() == true){ //If Duck is in LEVEL 3
+                         //Set lift height => 3
+                         liftHeight = LVL_3_INCHES; 
+                         telemetry.addData("Changed lift height to" , liftHeight);
+                         telemetry.addLine("Duck Detected @ LVL 3, Strafing now");
+                         telemetry.update();
+                        //Strafe right to shipping hub (different distance)
+                        encoderDriveStrafe(DRIVE_SPEED, -20, -20, 12.0);
+
+                                           
+
+                    }
+                    else{ //If not in LEVEL 2 AND LEVEL 3
+                        //Set lift height to 1 (assuming duck is at 1 since not detected at 2 or 3)
+                        liftHeight = LVL_1_INCHES; 
+                        telemetry.addData("Changed lift height to" , liftHeight);
+                        telemetry.addLine("Duck assumed @ LVL 1, Strafing now");
+                        telemetry.update();
+                        //Strafe right to shipping hub (same distance as Level 3)
+                        encoderDriveStrafe(DRIVE_SPEED, -20, -20, 12.0);                   
+
+                    }
+                }
+                //Rest of auton
+               /* armEncoderDrive(liftHeight);
+                 // go foward
+                 encoderDrive(.7, 4, 4, 5.0);
+                // release block
+                claw.setPosition(.3);
+                sleep(250);
+                // backward
+                encoderDrive(DRIVE_SPEED, -3, -3,5.0);
+               // backward to l e a v e
+                encoderDrive(1.0, -4, -4,5.0);
+                // turn left
+               encoderDrive(DRIVE_SPEED,24,-24,24.0);
+               //backward and r a m into warehouse
+               encoderDrive(.8, -36, -36, 36.0);
+                }
+            }*/
+
+        // directions and measurements are based off blue alliance side, placed near carousel
+        if (opModeIsActive()) {
+            while (opModeIsActive()) {
+                 // close claw to pinch block 
+                 claw.setPosition(0);
+                 sleep(250); 
+                //Move Forward
+                encoderDrive(DRIVE_SPEED, 12, 12, 5.0);
+                sleep(250); 
+            
+                //DUCK WYA
+                if(isDuckOrCubeDetected() == true){ //If Duck is in middle marker (Level 2)
+                    //Set lift height => 2
+                    liftHeight = LVL_2_INCHES;
+                    telemetry.addData("Changed lift height to" , liftHeight);
+                    telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
+                    telemetry.update();
+                    //Strafe left to shipping hub
+                    encoderDriveStrafe(DRIVE_SPEED, 24, 24, 12.0);
+                  
+                }
+                }
+                else{ //Duck is NOT detected in Level 2
+                    //Strafe left to Level 3
+                    encoderDriveStrafe(DRIVE_SPEED, 3, 3, 3.0);
+                    //Sleep 1s
+                    sleep(1000);
+                    if(isDuckOrCubeDetected() == true){ //If Duck is in LEVEL 3
+                         //Set lift height => 3
+                         liftHeight = LVL_3_INCHES; 
+                         telemetry.addData("Changed lift height to" , liftHeight);
+                         telemetry.addLine("Duck Detected @ LVL 3, Strafing now");
+                         telemetry.update();
+                        //Strafe left to shipping hub (different distance)
+                        encoderDriveStrafe(DRIVE_SPEED, 20, 20, 12.0);
+
+                                           
+
+                    }
+                    else{ //If not in LEVEL 2 AND LEVEL 3
+                        //Set lift height to 1 (assuming duck is at 1 since not detected at 2 or 3)
+                        liftHeight = LVL_1_INCHES; 
+                        telemetry.addData("Changed lift height to" , liftHeight);
+                        telemetry.addLine("Duck assumed @ LVL 1, Strafing now");
+                        telemetry.update();
+                        //Strafe left to shipping hub (same distance as Level 3)
+                        encoderDriveStrafe(DRIVE_SPEED, 20, 20, 12.0);                   
+
+                    }
+                }
+                //Rest of auton
+               /* armEncoderDrive(liftHeight);
+                 // go foward
+                 encoderDrive(.7, 4, 4, 5.0);
+                // release block
+                claw.setPosition(.3);
+                sleep(250);
+                // backward
+                encoderDrive(DRIVE_SPEED, -3, -3,5.0);
+               // backward to l e a v e
+                encoderDrive(1.0, -4, -4,5.0);
+                // turn left
+               encoderDrive(DRIVE_SPEED,24,-24,24.0);
+               //backward and r a m into warehouse
+               encoderDrive(.8, -36, -36, 36.0);
+                }
+            }*/
     }
 
     /**

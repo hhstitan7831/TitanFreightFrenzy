@@ -27,8 +27,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@Autonomous(name = "Practice2 (Red)", group = "Testing")
-public class TensorFlowPractice extends LinearOpMode {
+@Autonomous(name = "(Blue) Left Warehouse", group = "Testing")
+public class blueLeftWarehouse extends LinearOpMode {
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
      *  0: Ball,
@@ -180,69 +180,68 @@ public class TensorFlowPractice extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-            // close claw to pinch block
-            claw.setPosition(0);
-            sleep(250);
-            //Move Forward
-            encoderDrive(DRIVE_SPEED, 15, 15, 5.0);
-            sleep(1000);
-            telemetry.addLine("detecting ducks");
-            telemetry.update();
+        // close claw to pinch block
+        claw.setPosition(0);
+        sleep(250);
+        //Move Forward
+        encoderDrive(DRIVE_SPEED, 15, 15, 5.0);
+        sleep(1000);
+        telemetry.addLine("detecting ducks");
+        telemetry.update();
 
-            //DUCK WYA
-            if (isDuckOrCubeDetected() == true) { //If Duck is in middle marker (Level 2)
-                //Set lift height => 2
-                liftHeight = LVL_2_INCHES;
+        //DUCK WYA
+        if (isDuckOrCubeDetected() == true) { //If Duck is in middle marker (Level 2)
+            //Set lift height => 2
+            liftHeight = LVL_2_INCHES;
+            telemetry.addData("Changed lift height to", liftHeight);
+            telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
+            telemetry.update();
+            //Strafe left to shipping hub
+            encoderDriveStrafe(DRIVE_SPEED, -24, -24, 12.0);
+            sleep(500);
+
+        } else { //Duck is NOT detected in Level 2
+            //Strafe left to Level 1
+            encoderDriveStrafe(DRIVE_SPEED, -8, -8, 3.0);
+            encoderDrive(DRIVE_SPEED, 2,2,1.5);
+            //Sleep 1s
+            sleep(1000);
+            if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 1
+                //Set lift height => 1
+                liftHeight = LVL_1_INCHES;
                 telemetry.addData("Changed lift height to", liftHeight);
-                telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
+                telemetry.addLine("Duck Detected @ LVL 1, Strafing now");
                 telemetry.update();
-                //Strafe left to shipping hub
-                encoderDriveStrafe(DRIVE_SPEED, 24, 24, 12.0);
+                //Strafe left to shipping hub (different distance)
+                encoderDriveStrafe(DRIVE_SPEED, -18, -18, 12.0);
+                sleep(1000);
+            } else { //If not in LEVEL 1 AND LEVEL 2
+                //Set lift height to 3 (assuming duck is at 3 since not detected at 1 or 2)
+                liftHeight = LVL_3_INCHES;
+                telemetry.addData("Changed lift height to", liftHeight);
+                telemetry.addLine("Duck assumed @ LVL 3, Strafing now");
+                telemetry.update();
+                //Strafe left to shipping hub (same distance as Level 1)
+                encoderDriveStrafe(DRIVE_SPEED, -15, -15, 8.0);
                 sleep(500);
 
-            } else { //Duck is NOT detected in Level 2
-                //Strafe left to Level 1
-                encoderDriveStrafe(DRIVE_SPEED, 8, 8, 3.0);
-                encoderDrive(DRIVE_SPEED, 2,2,1.5);
-                //Sleep 1s
-                sleep(1000);
-                if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 1
-                    //Set lift height => 1
-                    liftHeight = LVL_1_INCHES;
-                    telemetry.addData("Changed lift height to", liftHeight);
-                    telemetry.addLine("Duck Detected @ LVL 1, Strafing now");
-                    telemetry.update();
-                    //Strafe left to shipping hub (different distance)
-                    encoderDriveStrafe(DRIVE_SPEED, 18, 18, 12.0);
-                    sleep(1000);
-                } else { //If not in LEVEL 1 AND LEVEL 2
-                    //Set lift height to 3 (assuming duck is at 3 since not detected at 1 or 2)
-                    liftHeight = LVL_3_INCHES;
-                    telemetry.addData("Changed lift height to", liftHeight);
-                    telemetry.addLine("Duck assumed @ LVL 3, Strafing now");
-                    telemetry.update();
-                    //Strafe left to shipping hub (same distance as Level 1)
-                    encoderDriveStrafe(DRIVE_SPEED, 15, 15, 8.0);
-                    sleep(500);
-
-                }
             }
+        }
 
 
         //Rest of auton
-            armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
-            encoderDrive(DRIVE_SPEED,8,8,5.0);
-
-                 // go foward
-                  // release block
-                claw.setPosition(.3);
-                sleep(250);
-                // backward
-                encoderDrive(DRIVE_SPEED, -8, -8,5.0);
+        armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
+        encoderDrive(DRIVE_SPEED,8,8,5.0);
+        // go foward
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        // backward
+        encoderDrive(DRIVE_SPEED, -8, -8,5.0);
 //                // turn right
-               encoderDrive(DRIVE_SPEED,-19,19,10.0);
+        encoderDrive(DRIVE_SPEED,19,-19,10.0);
 //               //backward and r a m into warehouse
-               encoderDrive(1, -64, -64, 10.0);
+        encoderDrive(1, -64, -64, 10.0);
 //
 
     }
@@ -511,7 +510,7 @@ public class TensorFlowPractice extends LinearOpMode {
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
-               // telemetry.addData("# Object Detected", updatedRecognitions.size());
+                // telemetry.addData("# Object Detected", updatedRecognitions.size());
                 // step through the list of recognitions and display boundary info.
                 int i = 0;
 
@@ -524,7 +523,7 @@ public class TensorFlowPractice extends LinearOpMode {
                     i++;
                     // check label to see if the camera now sees a Duck         ** ADDED **
                     if (recognition.getLabel().equals("Duck") || recognition.getLabel().equals("Cube") ) {
-                       // telemetry.addData("Object Detected!!!", "Duck");
+                        // telemetry.addData("Object Detected!!!", "Duck");
                         isDetected = true ;
 
                     } else {

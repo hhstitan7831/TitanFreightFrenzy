@@ -135,10 +135,10 @@ public class TorqueNADOArmEncoders extends LinearOpMode {
         encoderDrive(1.0, -4, -4,5.0);
 
         */
-
+        armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES, 5.0);
         // Level 1 Code
         // close claw
-        claw.setPosition(0);
+        /*claw.setPosition(0);
         // lift arm
         armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES, 30.0);
         // go foward
@@ -150,7 +150,7 @@ public class TorqueNADOArmEncoders extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, -3, -3,5.0);
         // backward to l e a v e
         encoderDrive(1.0, -4, -4,5.0);
-
+        */
 
 
 

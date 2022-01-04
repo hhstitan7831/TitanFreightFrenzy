@@ -118,11 +118,11 @@ public class BlueArmWarehouseL3 extends LinearOpMode {
         encoderDrive(1.0, -4, -4, 5.0);
        // armEncoderDrive(.1,  -5,  30.0);
        */
-        // actual autono
+        // actual auto
         //close claw to pinch block
         claw.setPosition(0);
         sleep(250);
-        //foward
+        //forward
         encoderDrive(DRIVE_SPEED, 24, 24, 10.0);
         // lift arm
         armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  30.0);

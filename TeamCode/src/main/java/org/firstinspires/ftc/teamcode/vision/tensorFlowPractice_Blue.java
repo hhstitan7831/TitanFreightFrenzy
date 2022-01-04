@@ -27,7 +27,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@Autonomous(name = "Practice2 (Red)", group = "Testing")
+@Autonomous(name = "Practice2 (Blue)", group = "Testing")
 public class tensorFlowPractice_Blue extends LinearOpMode {
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
@@ -232,7 +232,6 @@ public class tensorFlowPractice_Blue extends LinearOpMode {
         //Rest of auton
         armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
         encoderDrive(DRIVE_SPEED,8,8,5.0);
-
         // go foward
         // release block
         claw.setPosition(.3);

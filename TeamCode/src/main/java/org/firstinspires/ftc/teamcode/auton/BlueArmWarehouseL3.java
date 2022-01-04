@@ -100,43 +100,22 @@ public class BlueArmWarehouseL3 extends LinearOpMode {
         telemetry.addData("Running", "Encoder Test...");
         telemetry.update();
         // level 3 code
-        // close claw
-        /*claw.setPosition(0);
-        sleep(250);
-        //lift arm
-        armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  30.0);
-        // go foward
-        encoderDrive(.7,4,4,5.0);
-        // release block
-        claw.setPosition(.3);
-        sleep(250);
-        //backward
-        encoderDrive(DRIVE_SPEED, -3, -3, 5.0);
-        //lift arm again to not tip
-        armEncoderDrive(DRIVE_SPEED, 6, 5.0);
-        // backward to l e a v e
-        encoderDrive(1.0, -4, -4, 5.0);
-       // armEncoderDrive(.1,  -5,  30.0);
-       */
-        // actual auto
         //close claw to pinch block
         claw.setPosition(0);
         sleep(250);
         //forward
-        encoderDrive(DRIVE_SPEED, 24, 24, 10.0);
+        encoderDrive(DRIVE_SPEED, 15, 15, 5.0);
         // lift arm
-        armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  30.0);
+        armEncoderDrive(DRIVE_SPEED,  LVL_3_INCHES,  5.0);
         // release block
         claw.setPosition(.3);
         sleep(250);
         //backward
-        encoderDrive(DRIVE_SPEED, -3, -3, 5.0);
-        // backward to l e a v e
-        encoderDrive(1.0, -4, -4, 5.0);
-        // turn right
-        encoderDrive(DRIVE_SPEED,-24,24,24.0);
+        encoderDrive(DRIVE_SPEED, -8, -8, 5.0);
+        // turn left
+        encoderDrive(DRIVE_SPEED,-19,19,6.0);
         //backward and r a m into warehouse
-        encoderDrive(.8, -36, -36, 36.0);
+        encoderDrive(1, -64, -64, 15.0);
 
 
 

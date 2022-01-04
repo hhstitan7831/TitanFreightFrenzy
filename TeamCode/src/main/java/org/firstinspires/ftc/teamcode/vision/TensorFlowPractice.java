@@ -1,34 +1,8 @@
-/* Copyright (c) 2019 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 
 package org.firstinspires.ftc.teamcode.vision;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -53,7 +27,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@Autonomous(name = "TensorFlowPractice", group = "Testing")
+@Autonomous(name = "Practice2", group = "Testing")
 public class TensorFlowPractice extends LinearOpMode {
     /* Note: This sample uses the all-objects Tensor Flow model (FreightFrenzy_BCDM.tflite), which contains
      * the following 4 detectable objects
@@ -74,29 +48,28 @@ public class TensorFlowPractice extends LinearOpMode {
     DcMotor carousel, arm;
     Servo claw;
 
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
 
     // values for base
-    static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
-    static final double     DRIVE_GEAR_REDUCTION    = 1;        // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 3.77953;     // For figuring circumference
+    static final double COUNTS_PER_MOTOR_REV = 537.7;    // eg: TETRIX Motor Encoder //2150.8
+    static final double DRIVE_GEAR_REDUCTION = 1;        // This is < 1.0 if geared UP
+    static final double WHEEL_DIAMETER_INCHES = 3.77953;     // For figuring circumference
 
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 0.2;
-    static final double     TURN_SPEED              = 0.5;
-
+    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double DRIVE_SPEED = 0.2;
+    static final double TURN_SPEED = 0.5;
 
 
     //values for arm
-    static final double     COUNTS_PER_ARM_MOTOR_REV    = 1440.0;  // eg: TETRIX Motor Encoder //2150.8
-    static final double     ARM_GEAR_REDUCTION    = 0.3;        // This is < 1.0 if geared UP
-    static final double     SPROCKET_DIAMETER_INCHES   = 3.0;     // For figuring circumference
+    static final double COUNTS_PER_ARM_MOTOR_REV = 1440.0;  // eg: TETRIX Motor Encoder //2150.8
+    static final double ARM_GEAR_REDUCTION = 0.3;        // This is < 1.0 if geared UP
+    static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
-    static final double     ARM_PER_INCH         = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double     LVL_1_INCHES         = 5.0;
-    static final double     LVL_2_INCHES         = 10.0;
-    static final double     LVL_3_INCHES         = 19.0;
+    static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
+    static final double LVL_1_INCHES = 5.0;
+    static final double LVL_2_INCHES = 10.0;
+    static final double LVL_3_INCHES = 19.0;
 
     public static double liftHeight = 0.0;
 
@@ -134,7 +107,7 @@ public class TensorFlowPractice extends LinearOpMode {
      * {@link #tfod} is the variable we will use to store our instance of the TensorFlow Object
      * Detection engine.
      */
-    private TFObjectDetector tfod;
+    private static TFObjectDetector tfod;
 
     @Override
     public void runOpMode() {
@@ -179,7 +152,7 @@ public class TensorFlowPractice extends LinearOpMode {
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d : %7d: %7d ",
+        telemetry.addData("Path0", "Starting at %7d :%7d : %7d: %7d ",
                 frontLeft.getCurrentPosition(),
                 frontRight.getCurrentPosition(),
                 backLeft.getCurrentPosition(),
@@ -199,7 +172,7 @@ public class TensorFlowPractice extends LinearOpMode {
             // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
             // should be set to the value of the images used to create the TensorFlow Object Detection model
             // (typically 16/9).
-            tfod.setZoom(2.5, 16.0/9.0);
+            tfod.setZoom(2.5, 16.0 / 9.0);
         }
 
         /** Wait for the game to begin */
@@ -207,57 +180,59 @@ public class TensorFlowPractice extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-        if (opModeIsActive()) {
-            while (opModeIsActive()) {
                 // close claw to pinch block
                 claw.setPosition(0);
                 sleep(250);
                 //Move Forward
-                encoderDrive(DRIVE_SPEED, 12, 12, 5.0);
-                sleep(250);
+                encoderDrive(DRIVE_SPEED, 15, 15, 5.0);
+                sleep(5000);
+                telemetry.addLine("detecting ducks");
+                telemetry.update();
 
                 //DUCK WYA
-                if(isDuckOrCubeDetected() == true){ //If Duck is in middle marker (Level 2)
+                if (isDuckOrCubeDetected() == true) { //If Duck is in middle marker (Level 2)
                     //Set lift height => 2
                     liftHeight = LVL_2_INCHES;
-                    telemetry.addData("Changed lift height to" , liftHeight);
+                    telemetry.addData("Changed lift height to", liftHeight);
                     telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
                     telemetry.update();
                     //Strafe left to shipping hub
                     encoderDriveStrafe(DRIVE_SPEED, 24, 24, 12.0);
+                    sleep(2000);
 
+//                } else { //Duck is NOT detected in Level 2
+//                    //Strafe left to Level 1
+//                    encoderDriveStrafe(DRIVE_SPEED, 3, 3, 3.0);
+//                    //Sleep 1s
+//                    sleep(1000);
+//                    if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 1
+//                        //Set lift height => 1
+//                        liftHeight = LVL_1_INCHES;
+//                        telemetry.addData("Changed lift height to", liftHeight);
+//                        telemetry.addLine("Duck Detected @ LVL 1, Strafing now");
+//                        telemetry.update();
+//                        //Strafe left to shipping hub (different distance)
+//                        encoderDriveStrafe(DRIVE_SPEED, 20, 20, 12.0);
+//                        sleep(2000);
+//
+//
+//                    } else { //If not in LEVEL 1 AND LEVEL 2
+//                        //Set lift height to 3 (assuming duck is at 3 since not detected at 1 or 2)
+//                        liftHeight = LVL_3_INCHES;
+//                        telemetry.addData("Changed lift height to", liftHeight);
+//                        telemetry.addLine("Duck assumed @ LVL 3, Strafing now");
+//                        telemetry.update();
+//                        //Strafe left to shipping hub (same distance as Level 1)
+//                        encoderDriveStrafe(DRIVE_SPEED, 20, 20, 12.0);
+//                        sleep(2000);
+//
+//                    }
                 }
-            }
-                else{ //Duck is NOT detected in Level 2
-                //Strafe left to Level 1
-                encoderDriveStrafe(DRIVE_SPEED, 3, 3, 3.0);
-                //Sleep 1s
-                sleep(1000);
-                if(isDuckOrCubeDetected() == true){ //If Duck is in LEVEL 1
-                    //Set lift height => 1
-                    liftHeight = LVL_1_INCHES;
-                    telemetry.addData("Changed lift height to" , liftHeight);
-                    telemetry.addLine("Duck Detected @ LVL 1, Strafing now");
-                    telemetry.update();
-                    //Strafe left to shipping hub (different distance)
-                    encoderDriveStrafe(DRIVE_SPEED, 20, 20, 12.0);
 
 
-
-                }
-                else{ //If not in LEVEL 1 AND LEVEL 2
-                    //Set lift height to 3 (assuming duck is at 3 since not detected at 1 or 2)
-                    liftHeight = LVL_3_INCHES;
-                    telemetry.addData("Changed lift height to" , liftHeight);
-                    telemetry.addLine("Duck assumed @ LVL 3, Strafing now");
-                    telemetry.update();
-                    //Strafe left to shipping hub (same distance as Level 1)
-                    encoderDriveStrafe(DRIVE_SPEED, 20, 20, 12.0);
-
-                }
-            }
-            //Rest of auton
-               /* armEncoderDrive(liftHeight);
+        //Rest of auton
+                armEncoderDrive(DRIVE_SPEED, liftHeight,5.0);
+               /*
                  // go foward
                  encoderDrive(.7, 4, 4, 5.0);
                 // release block
@@ -273,8 +248,12 @@ public class TensorFlowPractice extends LinearOpMode {
                encoderDrive(.8, -36, -36, 36.0);
                 }
             }*/
-        }
     }
+
+
+
+
+
 
     /**
      * Initialize the Vuforia localization engine.
@@ -292,21 +271,6 @@ public class TensorFlowPractice extends LinearOpMode {
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
         // Loading trackables is not necessary for the TensorFlow Object Detection engine.
-    }
-
-    /**
-     * Initialize the TensorFlow Object Detection engine.
-     */
-    private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.8f;
-        tfodParameters.isModelTensorFlow2 = true;
-        tfodParameters.inputSize = 320;
-        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.load
-        ModelFromAsset(TFOD_MODEL_ASSET, LABELS);
     }
     /*
      *  Method to perform a relative move, based on encoder counts.
@@ -459,6 +423,22 @@ public class TensorFlowPractice extends LinearOpMode {
             sleep(250);   // optional pause after each move
         }
     }
+
+    /**
+     * Initialize the TensorFlow Object Detection engine.
+     */
+    private void initTfod() {
+        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfodParameters.minResultConfidence = 0.8f;
+        tfodParameters.isModelTensorFlow2 = true;
+        tfodParameters.inputSize = 320;
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
+    }
+
+
     public void armEncoderDrive(double speed, double inches, double timeoutS) {
         int newarmTarget;
         // int newBackLeftTarget
@@ -528,36 +508,37 @@ public class TensorFlowPractice extends LinearOpMode {
         }
     }
     public static boolean isDuckOrCubeDetected(){
+        boolean isDetected = false;
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
-                telemetry.addData("# Object Detected", updatedRecognitions.size());
+               // telemetry.addData("# Object Detected", updatedRecognitions.size());
                 // step through the list of recognitions and display boundary info.
                 int i = 0;
 
                 for (Recognition recognition : updatedRecognitions) {
-                    telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                    telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                            recognition.getLeft(), recognition.getTop());
-                    telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                            recognition.getRight(), recognition.getBottom());
+                  //  telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                  //  telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                            //recognition.getLeft(), recognition.getTop());
+                 //   telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                            //recognition.getRight(), recognition.getBottom());
                     i++;
                     // check label to see if the camera now sees a Duck         ** ADDED **
                     if (recognition.getLabel().equals("Duck") || recognition.getLabel().equals("Cube") ) {
-                        telemetry.addData("Object Detected!!!", "Duck");
-                        return true;
+                       // telemetry.addData("Object Detected!!!", "Duck");
+                        isDetected=  true;
 
                     } else {
-                        telemetry.addData("Object Not Detected!!!", "Not DUCK OR CUBE");
-                        return false;
+                       // telemetry.addData("Object Not Detected!!!", "Not DUCK OR CUBE");
+                        isDetected= false;
                     }
                 }
-                telemetry.update();
+               // telemetry.update();
             }
         }
-        //
 
+        return isDetected;
     }
 }

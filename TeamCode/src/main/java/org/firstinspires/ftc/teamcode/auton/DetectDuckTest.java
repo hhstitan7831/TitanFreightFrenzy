@@ -88,7 +88,7 @@ public class TensorFlowPractice extends LinearOpMode {
  
 
 
- //values for arm
+ //values for arm!!!!!!
      static final double     COUNTS_PER_ARM_MOTOR_REV    = 1440.0;  // eg: TETRIX Motor Encoder //2150.8
      static final double     ARM_GEAR_REDUCTION    = 0.3;        // This is < 1.0 if geared UP
      static final double     SPROCKET_DIAMETER_INCHES   = 3.0;     // For figuring circumference

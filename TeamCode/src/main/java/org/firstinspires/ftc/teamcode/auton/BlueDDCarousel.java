@@ -248,18 +248,13 @@ public class BlueDDCarousel extends LinearOpMode {
                   // release block
                 claw.setPosition(.3);
                 sleep(250);
-                // backward to wall, head to carousel 
-                encoderDrive(DRIVE_SPEED, -20, -20,5.0);
-                // strafe right to carousel 
-                encoderDriveStrafe(DRIVE_SPEED, -42, -42, 5.0);
-                // spinning duck, duck go brrr 
-                carousel.setPower(-.8); 
-                sleep(250); 
-                // foward to park in storage unit 
-                encoderDrive(DRIVE_SPEED, 12, 12, 5.0);
-                // possible strafe left if on tape ? 
-                //encoderDriveStrafe(DRIVE_SPEED, 3, 3, 5.0);
-            
+                // backward
+        encoderDrive(DRIVE_SPEED, -8, -8,5.0);
+                        // turn right
+                encoderDrive(DRIVE_SPEED,19,-19,10.0);
+                       //backward and r a m into warehouse
+                encoderDrive(1, -64, -64, 10.0);
+        
 
     }
 

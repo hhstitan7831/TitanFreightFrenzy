@@ -4,13 +4,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 public class T_Minus70 {
     //Movement / Base Motors
     public DcMotor frontLeft = null, frontRight = null, backLeft = null, backRight;
     //Game-Related
     public DcMotor carousel = null, arm = null;
     public Servo claw = null;
-    public static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
 
@@ -44,6 +44,7 @@ public class T_Minus70 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+<<<<<<< Updated upstream
 
 
     public void armEncoderDrive(double speed,
@@ -52,3 +53,6 @@ public class T_Minus70 {
         double x = speed+inches+timeoutS;
         }
     }
+=======
+}
+>>>>>>> Stashed changes

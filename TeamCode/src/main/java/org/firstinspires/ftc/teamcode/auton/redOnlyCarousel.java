@@ -8,9 +8,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.vision.blueLeftWarehouse;
+
 //Start --> Go to Carousel --> Spin Carousel enough times to launch off duck --> park in warehouse
 @Autonomous (name = "Red Only Carousel Auto")
 @Disabled
+
 public class redOnlyCarousel extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;

@@ -4,15 +4,19 @@ package org.firstinspires.ftc.teamcode.auton;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.vision.blueLeftWarehouse;
+
 //Start --> Pinch box --> Go to Carousel --> Spin Carousel --> park in warehouse and release box
 @Autonomous (name = "bluesafety")
-public class bluesafety extends LinearOpMode { 
+
+public class bluesafety extends LinearOpMode {
     /* Declare OpMode members. */
     //Movement
     DcMotor frontLeft, frontRight, backLeft, backRight;
@@ -20,6 +24,8 @@ public class bluesafety extends LinearOpMode {
     DcMotor carousel, arm;
     Servo claw;
 
+
+    ;
     private ElapsedTime     runtime = new ElapsedTime();
 
 

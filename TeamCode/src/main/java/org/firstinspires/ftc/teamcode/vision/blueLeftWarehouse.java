@@ -185,7 +185,7 @@ public class blueLeftWarehouse extends LinearOpMode {
         sleep(250);
         //Move Forward
         encoderDrive(DRIVE_SPEED, 15, 15, 5.0);
-        sleep(1000);
+        sleep(500);
         telemetry.addLine("detecting ducks");
         telemetry.update();
 
@@ -193,7 +193,7 @@ public class blueLeftWarehouse extends LinearOpMode {
         if (isDuckOrCubeDetected() == true) { //If Duck is in middle marker (Level 2)
             //Set lift height => 2
             liftHeight = LVL_2_INCHES;
-            telemetry.addData("Changed lift height to", liftHeight);
+            telemetry.addData("Changed lift height to ", liftHeight);
             telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
             telemetry.update();
             //Strafe left to shipping hub
@@ -510,7 +510,8 @@ public class blueLeftWarehouse extends LinearOpMode {
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
-                // telemetry.addData("# Object Detected", updatedRecognitions.size());
+                //If this stops working 1/7/21 comment out line below!!!
+                telemetry.addData("# Object Detected", updatedRecognitions.size());
                 // step through the list of recognitions and display boundary info.
                 int i = 0;
 
@@ -523,8 +524,8 @@ public class blueLeftWarehouse extends LinearOpMode {
                     i++;
                     // check label to see if the camera now sees a Duck         ** ADDED **
                     if (recognition.getLabel().equals("Duck") || recognition.getLabel().equals("Cube") ) {
-                        // telemetry.addData("Object Detected!!!", "Duck");
-                        isDetected = true ;
+                        telemetry.addData("Object Detected!!!", "Duck");
+                        isDetected = true;
 
                     } else {
                         telemetry.addData("Object Not Detected!!!", "Not DUCK OR CUBE");

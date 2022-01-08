@@ -50,3 +50,13 @@ public class T_Minus70 {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+    public void armEncoderDrive(double speed,
+                                double inches,
+                                double timeoutS) {
+        double x = speed+inches+timeoutS;
+        }
+    }
+>>>>>>> parent of 5eba2de (Rearranged & Organized Classes)

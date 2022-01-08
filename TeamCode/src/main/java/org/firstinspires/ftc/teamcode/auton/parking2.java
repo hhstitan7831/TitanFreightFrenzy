@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous (name = "parking2")
 @Disabled
-@Disabled
 public class parking2 extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;

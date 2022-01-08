@@ -244,7 +244,7 @@ public class BlueDDCarousel extends LinearOpMode {
         // make sure arm is down
         armEncoderDrive(DRIVE_SPEED, -5, 5.0);
         // strafe right to carousel
-        encoderDriveStrafe(.5, -43, -43, 5.0);
+        encoderDriveStrafe(.5, -46, -46, 5.0);
         encoderDrive(DRIVE_SPEED, 2, 2, 5.0);
 
         // make turn

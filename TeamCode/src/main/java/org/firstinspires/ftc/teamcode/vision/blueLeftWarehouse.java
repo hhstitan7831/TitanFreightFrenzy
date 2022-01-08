@@ -45,7 +45,7 @@ public class blueLeftWarehouse extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
-    DcMotor carousel, arm;
+    DcMotor carousel, carouselRight, arm;
     Servo claw;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -121,6 +121,7 @@ public class blueLeftWarehouse extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
 
         carousel = hardwareMap.dcMotor.get("carousel");
+        carouselRight = hardwareMap.dcMotor.get("carouselRight");
         arm = hardwareMap.dcMotor.get("arm");
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 

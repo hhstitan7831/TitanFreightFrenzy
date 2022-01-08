@@ -77,6 +77,7 @@ public class teleop extends OpMode {
             robot.arm.setPower(0);
         }
 
+        //Two Simultaneous Carousels
         if (gamepad2.b) {
             robot.carousel.setPower(.7);
             robot.carouselRight.setPower(.7);

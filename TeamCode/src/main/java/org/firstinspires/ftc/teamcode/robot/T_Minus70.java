@@ -8,7 +8,7 @@ public class T_Minus70 {
     //Movement / Base Motors
     public DcMotor frontLeft = null, frontRight = null, backLeft = null, backRight;
     //Game-Related
-    public DcMotor carousel = null, arm = null;
+    public DcMotor carousel = null, carouselRight = null, arm = null;
     public Servo claw = null;
     public static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
 
@@ -35,6 +35,7 @@ public class T_Minus70 {
 
         //Game Elements
         carousel  = hwMap.get(DcMotor.class, "carousel");
+        carouselRight  = hwMap.get(DcMotor.class, "carouselRight");
         arm = hwMap.get(DcMotor.class, "arm");
         claw = hwMap.get(Servo.class, "claw");
 
@@ -45,7 +46,7 @@ public class T_Minus70 {
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
+    /*public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newFrontLeftTarget;
         int newBackLeftTarget;
         int newFrontRightTarget;
@@ -117,7 +118,7 @@ public class T_Minus70 {
         }
     }
 
-    public void encoderDriveStrafe(double speed, double leftInches, double rightInches, double timeoutS) {
+   /* public void encoderDriveStrafe(double speed, double leftInches, double rightInches, double timeoutS) {
 
         int newFrontLeftTarget;
         int newBackLeftTarget;
@@ -188,6 +189,8 @@ public class T_Minus70 {
             sleep(250);   // optional pause after each move
         }
     }
+
+    */
 
 
     }

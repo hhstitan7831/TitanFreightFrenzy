@@ -1,6 +1,6 @@
 
 
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -45,7 +45,7 @@ public class RedDDCarousel extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
-    DcMotor carousel, arm;
+    DcMotor carousel, carouselRight, arm;
     Servo claw;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -121,6 +121,7 @@ public class RedDDCarousel extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
 
         carousel = hardwareMap.dcMotor.get("carousel");
+        carouselRight = hardwareMap.dcMotor.get("carouselRight"); 
         arm = hardwareMap.dcMotor.get("arm");
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -204,7 +205,7 @@ public class RedDDCarousel extends LinearOpMode {
             } else { //Duck is NOT detected in Level 2
                 //Strafe right to Level 3
                 encoderDriveStrafe(DRIVE_SPEED, -8, -8, 3.0);
-                encoderDrive(DRIVE_SPEED, 2,2,1.5);
+                encoderDrive(DRIVE_SPEED, 1,1,1.5);
                 //Sleep 1s
                 sleep(1000);
                 if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 3
@@ -234,19 +235,31 @@ public class RedDDCarousel extends LinearOpMode {
             armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
             encoderDrive(DRIVE_SPEED,8,8,5.0);
 
-                 // go foward
+                 // go forward
                   // release block
                 claw.setPosition(.3);
                 sleep(250);
                 // backward to wall, head to carousel 
-                encoderDrive(DRIVE_SPEED, -20, -20,5.0);
-                // strafe right to carousel 
-                encoderDriveStrafe(DRIVE_SPEED, -42, -42, 5.0);
-                // spinning duck, duck go brrr 
-                carousel.setPower(-.8); 
-                sleep(250); 
-                // foward to park in storage unit 
-                encoderDrive(DRIVE_SPEED, 12, 12, 5.0);
+                encoderDrive(DRIVE_SPEED, -28, -28,5.0);
+                // strafe left to carousel
+                encoderDriveStrafe(.5, 43, 43, 5.0);
+                encoderDrive(DRIVE_SPEED, 2, 2,5.0);
+
+        // make turn
+                encoderDrive(DRIVE_SPEED, -20, 20, 5.0);
+                encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
+
+
+        // spinning duck, duck go brrr
+                carousel.setPower(-.8);
+                sleep(2000);
+                // turn for strafe
+                encoderDrive(DRIVE_SPEED,2, -2,5.0);
+                // strafe right
+                encoderDriveStrafe(0.5, -25, -25, 5.0);
+                //encoderDrive(DRIVE_SPEED, -28, 28, 5.0);
+                // forward to park in storage unit
+               // encoderDrive(DRIVE_SPEED, 26, 26, 5.0);
                 // possible strafe left if on tape ? 
                 //encoderDriveStrafe(DRIVE_SPEED, 3, 3, 5.0);
             

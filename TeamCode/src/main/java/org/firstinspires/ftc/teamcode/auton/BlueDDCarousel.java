@@ -1,6 +1,6 @@
 
 
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -45,7 +45,7 @@ public class BlueDDCarousel extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
-    DcMotor carousel, arm;
+    DcMotor carousel, carouselRight, arm;
     Servo claw;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -121,6 +121,7 @@ public class BlueDDCarousel extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
 
         carousel = hardwareMap.dcMotor.get("carousel");
+        carouselRight = hardwareMap.dcMotor.get("carouselRight");
         arm = hardwareMap.dcMotor.get("arm");
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -183,8 +184,8 @@ public class BlueDDCarousel extends LinearOpMode {
             // close claw to pinch block
             claw.setPosition(0);
             sleep(250);
-            // strafe right to carousel 
-            encoderDriveStrafe(DRIVE_SPEED, -3, -3, 5.0);
+            // strafe to carousel
+            encoderDriveStrafe(DRIVE_SPEED, 7, 7, 10.0);
             // spin carousel, duck go brrr
             carousel.setPower(.8); 
             // strafe right to make space for turn that should help position for duck detection 

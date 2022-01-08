@@ -6,11 +6,16 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class T_Minus70 {
     //Movement / Base Motors
-    public DcMotor frontLeft = null, frontRight = null, backLeft = null, backRight;
+    public DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
-    public DcMotor carousel = null, carouselRight = null, arm = null;
+<<<<<<< Updated upstream
+    public DcMotor carousel = null, arm = null;
     public Servo claw = null;
     public static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
+=======
+    public DcMotor carousel, arm;
+    public Servo claw;
+>>>>>>> Stashed changes
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
 
@@ -34,10 +39,10 @@ public class T_Minus70 {
         backRight = hwMap.get(DcMotor.class, "backRight");
 
         //Game Elements
-        carousel  = hwMap.get(DcMotor.class, "carousel");
-        carouselRight  = hwMap.get(DcMotor.class, "carouselRight");
+        carousel = hwMap.get(DcMotor.class,"carousel");
         arm = hwMap.get(DcMotor.class, "arm");
         claw = hwMap.get(Servo.class, "claw");
+
 
         //Set Behaviors
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -45,8 +50,9 @@ public class T_Minus70 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+<<<<<<< Updated upstream
 
-    /*public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
+    public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newFrontLeftTarget;
         int newBackLeftTarget;
         int newFrontRightTarget;
@@ -118,7 +124,7 @@ public class T_Minus70 {
         }
     }
 
-   /* public void encoderDriveStrafe(double speed, double leftInches, double rightInches, double timeoutS) {
+    public void encoderDriveStrafe(double speed, double leftInches, double rightInches, double timeoutS) {
 
         int newFrontLeftTarget;
         int newBackLeftTarget;
@@ -190,7 +196,9 @@ public class T_Minus70 {
         }
     }
 
-    */
-
 
     }
+=======
+
+}
+>>>>>>> Stashed changes

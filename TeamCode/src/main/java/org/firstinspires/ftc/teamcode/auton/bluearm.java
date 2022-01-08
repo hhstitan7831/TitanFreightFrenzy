@@ -6,18 +6,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "parking2")
-public class parking2 extends LinearOpMode {
+@Autonomous (name = "bluearm")
+@Disabled
+public class bluearm extends LinearOpMode {
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;
     DcMotor backRight;
     DcMotor carousel;
-    DcMotor carouselRight;
     Servo claw;
     DcMotor arm;
-
-
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,15 +24,32 @@ public class parking2 extends LinearOpMode {
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
         carousel = hardwareMap.dcMotor.get("carousel");
-        carouselRight = hardwareMap.dcMotor.get("carouselRight");
         arm = hardwareMap.dcMotor.get("arm");
         claw = hardwareMap.servo.get("claw");
 
         waitForStart();
-        stop(20000);
-        backward (.4, 8000);
-        forward(.4, 2000);
+        claw.setPosition(0);
         stop(250);
+
+        forward(.2, 1000);
+        stop(250);
+
+        arm.setPower(.45);
+
+        forward(.1, 2700);
+        stop(250);
+
+        claw.setPosition(.3);
+        stop(250);
+
+        backward(.2, 500);
+        stop(250);
+
+        turnRight(.3,1200);
+        stop(250);
+
+        backward(.8, 1700);
+
 
     }
 
@@ -52,16 +67,29 @@ public class parking2 extends LinearOpMode {
         backLeft.setPower(0);
         backRight.setPower(0);
         carousel.setPower(0);
+        arm.setPower(0);
         sleep(time);
 
     }
-    public void backward (double speed, long time) {
+
+    public void backward(double speed, long time) {
+        //Code here
         frontLeft.setPower(speed);
         frontRight.setPower(-speed);
         backLeft.setPower(speed);
         backRight.setPower(-speed);
         sleep(time);
     }
+
+
+    public void turnRight(double speed, long time) {
+        frontLeft.setPower(-speed);
+        frontRight.setPower(-speed);
+        backLeft.setPower(-speed);
+        backRight.setPower(-speed);
+        sleep(time);
+    }
 }
+
 
 

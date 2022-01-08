@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "Blue Carousel Autonomous (Encoders)")
-public class blueCarousel extends LinearOpMode {
+public class Encoders extends LinearOpMode {
 
     /* Declare OpMode members. */
     //Movement!!!

@@ -1,6 +1,3 @@
-
-
-
 package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -18,13 +15,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.robot.ContourPipeline;
 import org.opencv.core.Scalar;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -55,10 +47,6 @@ public class RedDDCarousel extends LinearOpMode {
      *  FreightFrenzy_DM.tflite  0: Duck,  1: Marker
      */
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
-
-
-
-
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related

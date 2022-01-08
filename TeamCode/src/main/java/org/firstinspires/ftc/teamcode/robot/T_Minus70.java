@@ -11,7 +11,7 @@ public class T_Minus70 {
     public DcMotor carousel, carouselRight, arm;
     public Servo claw;
 
-    public static final double     COUNTS_PER_MOTOR_REV    = 537.7;    // eg: TETRIX Motor Encoder //2150.8
+    public static final double COUNTS_PER_MOTOR_REV = 537.7;    // eg: TETRIX Motor Encoder //2150.8
 
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
@@ -25,7 +25,7 @@ public class T_Minus70 {
 
     }
 
-    public void init (HardwareMap ahwMap) {
+    public void init(HardwareMap ahwMap) {
 
         hwMap = ahwMap;
 
@@ -36,7 +36,7 @@ public class T_Minus70 {
         backRight = hwMap.get(DcMotor.class, "backRight");
 
         //Game Elements
-        carousel = hwMap.get(DcMotor.class,"carousel");
+        carousel = hwMap.get(DcMotor.class, "carousel");
         carouselRight = hwMap.get(DcMotor.class, "carouselRight");
         arm = hwMap.get(DcMotor.class, "arm");
         claw = hwMap.get(Servo.class, "claw");
@@ -48,15 +48,9 @@ public class T_Minus70 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-}
-
-<<<<<<< HEAD
-=======
-
     public void armEncoderDrive(double speed,
                                 double inches,
                                 double timeoutS) {
         double x = speed+inches+timeoutS;
         }
     }
->>>>>>> parent of 5eba2de (Rearranged & Organized Classes)

@@ -198,13 +198,13 @@ public class BlueDDCarousel extends LinearOpMode {
             telemetry.addData("Changed lift height to", liftHeight);
             telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
             telemetry.update();
-            //Strafe right to shipping hub
-            encoderDriveStrafe(DRIVE_SPEED, -24, -24, 12.0);
+            //Strafe left to shipping hub
+            encoderDriveStrafe(DRIVE_SPEED, 24, 24, 12.0);
             sleep(500);
 
         } else { //Duck is NOT detected in Level 2
-            //Strafe right to Level 3
-            encoderDriveStrafe(DRIVE_SPEED, -8, -8, 3.0);
+            //Strafe left to Level 3
+            encoderDriveStrafe(DRIVE_SPEED, 8, 8, 3.0);
             encoderDrive(DRIVE_SPEED, 1, 1, 1.5);
             //Sleep 1s
             sleep(1000);
@@ -214,8 +214,8 @@ public class BlueDDCarousel extends LinearOpMode {
                 telemetry.addData("Changed lift height to", liftHeight);
                 telemetry.addLine("Duck Detected @ LVL 3, Strafing now");
                 telemetry.update();
-                //Strafe right to shipping hub (different distance)
-                encoderDriveStrafe(DRIVE_SPEED, -18, -18, 12.0);
+                //Strafe left to shipping hub (different distance)
+                encoderDriveStrafe(DRIVE_SPEED, 18, 18, 12.0);
                 sleep(1000);
             } else { //If not in LEVEL 2 AND LEVEL 3
                 //Set lift height to 1 (assuming duck is at 1 since not detected at 2 or 3)
@@ -223,8 +223,8 @@ public class BlueDDCarousel extends LinearOpMode {
                 telemetry.addData("Changed lift height to", liftHeight);
                 telemetry.addLine("Duck assumed @ LVL 1, Strafing now");
                 telemetry.update();
-                //Strafe right to shipping hub (same distance as Level 3)
-                encoderDriveStrafe(DRIVE_SPEED, -15, -15, 8.0);
+                //Strafe left to shipping hub (same distance as Level 3)
+                encoderDriveStrafe(DRIVE_SPEED, 15, 15, 8.0);
                 sleep(500);
 
             }

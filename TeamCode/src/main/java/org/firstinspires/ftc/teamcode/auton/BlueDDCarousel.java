@@ -181,81 +181,84 @@ public class BlueDDCarousel extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-            // close claw to pinch block
-            claw.setPosition(0);
-            sleep(250);
-            // strafe to carousel
-            encoderDriveStrafe(DRIVE_SPEED, 7, 7, 10.0);
-            // spin carousel, duck go brrr
-            carousel.setPower(.8); 
-            // strafe right to make space for turn that should help position for duck detection 
-            encoderDriveStrafe(DRIVE_SPEED, -10, -10, 5.0);
-            // make point turn to position robot correctly (right turn?)
-            encoderDrive(DRIVE_SPEED, -19, 19, 5.0);
-            // strafe left to level 2 and start detection 
-            encoderDriveStrafe(DRIVE_SPEED, 12, 12, 5.0);
-            // probably going to need to move foward, need to test first 
-            // encoderDrive(DRIVE_SPEED, 6, 6, 5.0);
+        // close claw to pinch block
+        claw.setPosition(0);
+        sleep(250);
 
-        
-            telemetry.addLine("detecting ducks");
+        //Move Forward
+        encoderDrive(DRIVE_SPEED, 15, 15, 5.0);
+        sleep(1000);
+        telemetry.addLine("detecting ducks");
+        telemetry.update();
+
+        //DUCK WYA
+        if (isDuckOrCubeDetected() == true) { //If Duck is in middle marker (Level 2)
+            //Set lift height => 2
+            liftHeight = LVL_2_INCHES;
+            telemetry.addData("Changed lift height to", liftHeight);
+            telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
             telemetry.update();
+            //Strafe right to shipping hub
+            encoderDriveStrafe(DRIVE_SPEED, -24, -24, 12.0);
+            sleep(500);
 
-            //DUCK WYA
-            if (isDuckOrCubeDetected() == true) { //If Duck is in middle marker (Level 2)
-                //Set lift height => 2
-                liftHeight = LVL_2_INCHES;
+        } else { //Duck is NOT detected in Level 2
+            //Strafe right to Level 3
+            encoderDriveStrafe(DRIVE_SPEED, -8, -8, 3.0);
+            encoderDrive(DRIVE_SPEED, 1, 1, 1.5);
+            //Sleep 1s
+            sleep(1000);
+            if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 3
+                //Set lift height => 3
+                liftHeight = LVL_3_INCHES;
                 telemetry.addData("Changed lift height to", liftHeight);
-                telemetry.addLine("Duck Detected @ LVL 2, Strafing now");
+                telemetry.addLine("Duck Detected @ LVL 3, Strafing now");
                 telemetry.update();
-                //Strafe left to shipping hub
-                encoderDriveStrafe(DRIVE_SPEED, 24, 24, 12.0);
+                //Strafe right to shipping hub (different distance)
+                encoderDriveStrafe(DRIVE_SPEED, -18, -18, 12.0);
+                sleep(1000);
+            } else { //If not in LEVEL 2 AND LEVEL 3
+                //Set lift height to 1 (assuming duck is at 1 since not detected at 2 or 3)
+                liftHeight = LVL_1_INCHES;
+                telemetry.addData("Changed lift height to", liftHeight);
+                telemetry.addLine("Duck assumed @ LVL 1, Strafing now");
+                telemetry.update();
+                //Strafe right to shipping hub (same distance as Level 3)
+                encoderDriveStrafe(DRIVE_SPEED, -15, -15, 8.0);
                 sleep(500);
 
-            } else { //Duck is NOT detected in Level 2
-                //Strafe left to Level 3
-                encoderDriveStrafe(DRIVE_SPEED, 8, 8, 3.0);
-                encoderDrive(DRIVE_SPEED, 2,2,1.5);
-                //Sleep 1s
-                sleep(1000);
-                if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 3
-                    //Set lift height => 3
-                    liftHeight = LVL_3_INCHES;
-                    telemetry.addData("Changed lift height to", liftHeight);
-                    telemetry.addLine("Duck Detected @ LVL 3, Strafing now");
-                    telemetry.update();
-                    //Strafe left to shipping hub (different distance)
-                    encoderDriveStrafe(DRIVE_SPEED, 18, 18, 12.0);
-                    sleep(1000);
-                } else { //If not in LEVEL 2 AND LEVEL 3
-                    //Set lift height to 1 (assuming duck is at 1 since not detected at 2 or 3)
-                    liftHeight = LVL_1_INCHES;
-                    telemetry.addData("Changed lift height to", liftHeight);
-                    telemetry.addLine("Duck assumed @ LVL 1, Strafing now");
-                    telemetry.update();
-                    //Strafe left to shipping hub (same distance as Level 3)
-                    encoderDriveStrafe(DRIVE_SPEED, 15, 15, 8.0);
-                    sleep(500);
-
-                }
             }
+        }
 
 
         //Rest of auton
-            armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
-            encoderDrive(DRIVE_SPEED,8,8,5.0);
+        armEncoderDrive(DRIVE_SPEED, liftHeight, 2.0);
+        encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
 
-                 // go foward
-                  // release block
-                claw.setPosition(.3);
-                sleep(250);
-                // backward
-        encoderDrive(DRIVE_SPEED, -8, -8,5.0);
-                        // turn right
-                encoderDrive(DRIVE_SPEED,19,-19,10.0);
-                       //backward and r a m into warehouse
-                encoderDrive(1, -64, -64, 10.0);
-        
+        // go forward
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        // backward to wall, head to carousel
+        encoderDrive(0.5, -28, -28, 5.0);
+        // make sure arm is down
+        armEncoderDrive(DRIVE_SPEED, -5, 5.0);
+        // strafe right to carousel
+        encoderDriveStrafe(.5, -43, -43, 5.0);
+        encoderDrive(DRIVE_SPEED, 2, 2, 5.0);
+
+        // make turn
+        encoderDrive(DRIVE_SPEED, 20, -20, 5.0);
+        encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
+
+
+        // spinning duck, duck go brrr
+        carouselRight.setPower(.8);
+        sleep(2000);
+        // turn for strafe
+        encoderDrive(DRIVE_SPEED, -2, 2, 5.0);
+        // strafe right
+        encoderDriveStrafe(0.5, 25, 25, 5.0);
 
     }
 

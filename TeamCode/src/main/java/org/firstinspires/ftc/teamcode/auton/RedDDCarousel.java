@@ -121,7 +121,7 @@ public class RedDDCarousel extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
 
         carousel = hardwareMap.dcMotor.get("carousel");
-        carouselRight = hardwareMap.dcMotor.get("carouselRight"); 
+        carouselRight = hardwareMap.dcMotor.get("carouselRight");
         arm = hardwareMap.dcMotor.get("arm");
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -240,7 +240,9 @@ public class RedDDCarousel extends LinearOpMode {
                 claw.setPosition(.3);
                 sleep(250);
                 // backward to wall, head to carousel 
-                encoderDrive(DRIVE_SPEED, -28, -28,5.0);
+                encoderDrive(0.5, -28, -28,5.0);
+                // make sure arm is down
+                armEncoderDrive(DRIVE_SPEED,-5, 5.0);
                 // strafe left to carousel
                 encoderDriveStrafe(.5, 43, 43, 5.0);
                 encoderDrive(DRIVE_SPEED, 2, 2,5.0);

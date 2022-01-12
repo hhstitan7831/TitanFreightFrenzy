@@ -248,7 +248,7 @@ public class BlueDDCarousel extends LinearOpMode {
 
         // make turn
         encoderDrive(DRIVE_SPEED, 20, -20, 5.0);
-        encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
+        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);
 
 
         // spinning duck, duck go brrr

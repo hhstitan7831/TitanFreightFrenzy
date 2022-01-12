@@ -23,7 +23,7 @@ public class ContourPipeline extends OpenCvPipeline {
     Scalar Titan_Red =  new Scalar(196, 23, 112);
 
     // Red                     Y      Cr     Cb    (Do not change Y)
-    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 130.0, 0.0);
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 150.0, 0.0);
     public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
 
     // Green                                             Y      Cr     Cb

@@ -205,7 +205,7 @@ public class RedDDCarousel extends LinearOpMode {
                 encoderDriveStrafe(DRIVE_SPEED, -8, -8, 3.0);
                 encoderDrive(DRIVE_SPEED, 1,1,1.5);
                 //Sleep 1s
-                sleep(1000);
+                sleep(500);
                 if (isDuckOrCubeDetected() == true) { //If Duck is in LEVEL 3
                     //Set lift height => 3
                     liftHeight = LVL_3_INCHES;
@@ -214,7 +214,7 @@ public class RedDDCarousel extends LinearOpMode {
                     telemetry.update();
                     //Strafe right to shipping hub (different distance)
                     encoderDriveStrafe(DRIVE_SPEED, -18, -18, 12.0);
-                    sleep(1000);
+                    sleep(500);
                 } else { //If not in LEVEL 2 AND LEVEL 3
                     //Set lift height to 1 (assuming duck is at 1 since not detected at 2 or 3)
                     liftHeight = LVL_1_INCHES;
@@ -240,7 +240,7 @@ public class RedDDCarousel extends LinearOpMode {
                 // backward to wall, head to carousel 
                 encoderDrive(0.5, -28, -28,5.0);
                 // make sure arm is down
-                armEncoderDrive(DRIVE_SPEED,-5, 5.0);
+                armEncoderDrive(DRIVE_SPEED,-20, 5.0);
                 // strafe left to carousel
                 encoderDriveStrafe(.5, 43, 43, 5.0);
                 encoderDrive(DRIVE_SPEED, 2, 2,5.0);
@@ -252,7 +252,7 @@ public class RedDDCarousel extends LinearOpMode {
 
         // spinning duck, duck go brrr
                 carousel.setPower(-.8);
-                sleep(2000);
+                sleep(750);
                 // turn for strafe
                 encoderDrive(DRIVE_SPEED,2, -2,5.0);
                 // strafe right

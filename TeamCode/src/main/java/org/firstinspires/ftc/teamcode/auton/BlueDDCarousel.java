@@ -234,7 +234,6 @@ public class BlueDDCarousel extends LinearOpMode {
         //Rest of auton
         armEncoderDrive(DRIVE_SPEED, liftHeight, 2.0);
         encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
-
         // go forward
         // release block
         claw.setPosition(.3);
@@ -242,7 +241,7 @@ public class BlueDDCarousel extends LinearOpMode {
         // backward to wall, head to carousel
         encoderDrive(0.5, -28, -28, 5.0);
         // make sure arm is down
-        armEncoderDrive(DRIVE_SPEED, -5, 5.0);
+        armEncoderDrive(DRIVE_SPEED, -20, 5.0);
         // strafe right to carousel
         encoderDriveStrafe(.5, -46, -46, 5.0);
         encoderDrive(DRIVE_SPEED, 2, 2, 5.0);

@@ -44,7 +44,7 @@ public class T_Minus70 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-<<<<<<< Updated upstream
+
 
 
     public void armEncoderDrive(double speed,
@@ -53,6 +53,3 @@ public class T_Minus70 {
         double x = speed+inches+timeoutS;
         }
     }
-=======
-}
->>>>>>> Stashed changes

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.robot;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -8,11 +9,16 @@ public class T_Minus70 {
     //Movement / Base Motors
     public DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
+<<<<<<< Updated upstream
     public DcMotor carousel, carouselRight, arm;
     public Servo claw;
 
     public static final double COUNTS_PER_MOTOR_REV = 537.7;    // eg: TETRIX Motor Encoder //2150.8
 
+=======
+    public DcMotor carousel = null, arm = null;
+    public CRServo claw = null;
+>>>>>>> Stashed changes
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
 
@@ -39,7 +45,7 @@ public class T_Minus70 {
         carousel = hwMap.get(DcMotor.class, "carousel");
         carouselRight = hwMap.get(DcMotor.class, "carouselRight");
         arm = hwMap.get(DcMotor.class, "arm");
-        claw = hwMap.get(Servo.class, "claw");
+        claw = hwMap.get(CRServo.class, "claw");
 
 
         //Set Behaviors
@@ -48,4 +54,16 @@ public class T_Minus70 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
+<<<<<<< Updated upstream
 }
+=======
+
+
+    public void armEncoderDrive(double speed,
+                                double inches,
+                                double timeoutS) {
+        double x = speed+inches+timeoutS;
+        }
+    }
+
+>>>>>>> Stashed changes

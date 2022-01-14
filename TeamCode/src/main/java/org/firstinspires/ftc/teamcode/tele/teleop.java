@@ -89,11 +89,12 @@ public class teleop extends OpMode {
             robot.carouselRight.setPower(0);
         }
         if (gamepad2.right_bumper) {
-            robot.claw.setPosition(.3)
+            robot.claw.setPower(.05)
             ;
         } else if (gamepad2.left_bumper) {
-            robot.claw.setPosition(0);
+            robot.claw.setPower(-.1);
         }
+
 
 
         telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);

@@ -63,7 +63,7 @@ public class CVTest extends LinearOpMode {
     private double upperRuntime = 0;
 
     // Red Range                                      Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 130.0, 0.0);
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
     public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
 
     @Override
@@ -74,7 +74,7 @@ public class CVTest extends LinearOpMode {
          webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
          //OpenCV Pipeline
  
-         pipeline = new ContourPipeline(0.2, 0.2, 0.2, 0.2);
+         pipeline = new ContourPipeline(0.0, 0.0, 0.0, 0.0);
  
          pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
          pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);

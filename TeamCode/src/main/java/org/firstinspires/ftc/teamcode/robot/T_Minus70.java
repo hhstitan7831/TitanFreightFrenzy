@@ -11,7 +11,7 @@ public class T_Minus70 {
     //Game-Related
 
     public DcMotor carousel, carouselRight, arm;
-    public CRServo claw;
+    public Servo claw;
 
     public static final double COUNTS_PER_MOTOR_REV = 537.7;    // eg: TETRIX Motor Encoder //2150.8
 
@@ -41,7 +41,7 @@ public class T_Minus70 {
         carousel = hwMap.get(DcMotor.class, "carousel");
         carouselRight = hwMap.get(DcMotor.class, "carouselRight");
         arm = hwMap.get(DcMotor.class, "arm");
-        claw = hwMap.get(CRServo.class, "claw");
+        claw = hwMap.get(Servo.class, "claw");
 
 
         //Set Behaviors

@@ -89,10 +89,10 @@ public class teleop extends OpMode {
             robot.carouselRight.setPower(0);
         }
         if (gamepad2.right_bumper) {
-            robot.claw.setPower(.05)
+            robot.claw.setPosition(.3)
             ;
         } else if (gamepad2.left_bumper) {
-            robot.claw.setPower(-.1);
+            robot.claw.setPosition(0);
         }
 
 

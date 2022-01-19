@@ -62,6 +62,7 @@ public class CVLift extends LinearOpMode {
 
     private double lowerRuntime = 0;
     private double upperRuntime = 0;
+    static final double WEBCAM_WIDTH = 640;
 
     // Red Range                                      Y      Cr     Cb
     public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
@@ -162,12 +163,12 @@ public class CVLift extends LinearOpMode {
             //Check to see if the rectangle has a large enough area to be a marker.
             if(rectangleArea > minRectangleArea){
                 //Then check the location of the rectangle to see which barcode it is in.
-                if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * pipeline.getRectWidth()){
+                if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
                     telemetry.addData("Barcode Position", "Right");
                     BP = 1;
                     liftHeight = LVL_1_INCHES;
                 }
-                else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * pipeline.getRectWidth()){
+                else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
                     telemetry.addData("Barcode Position", "Left");
                     BP = 2;
                     liftHeight = LVL_2_INCHES;

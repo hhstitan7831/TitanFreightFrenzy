@@ -49,7 +49,7 @@ public class CVLift extends LinearOpMode {
     static final double LVL_3_INCHES = 19.5;
 
     public static double liftHeight = 0.0;
-
+    public static int BP = 0;
 
 
     private OpenCvCamera webcam;
@@ -146,10 +146,9 @@ public class CVLift extends LinearOpMode {
 
         waitForStart();
 
-        if(isStopRequested()) return;
+        //if(isStopRequested()) return;
 
-        while (opModeIsActive())
-        {
+
             if(pipeline.error){
                 telemetry.addData("Exception: ", pipeline.debug.getStackTrace());
             }
@@ -165,17 +164,29 @@ public class CVLift extends LinearOpMode {
                 //Then check the location of the rectangle to see which barcode it is in.
                 if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * pipeline.getRectWidth()){
                     telemetry.addData("Barcode Position", "Right");
+                    BP = 1;
+                    liftHeight = LVL_1_INCHES;
                 }
                 else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * pipeline.getRectWidth()){
                     telemetry.addData("Barcode Position", "Left");
+                    BP = 2;
+                    liftHeight = LVL_2_INCHES;
                 }
                 else {
                     telemetry.addData("Barcode Position", "Center");
+                    BP = 3;
+                    liftHeight = LVL_3_INCHES;
+
                 }
             }
-
+            telemetry.addData("BP", BP);
             telemetry.update();
-        }
+            sleep(10000);
+            // rest of auton
+            armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
+
+
+
     }
 
     public double inValues(double value, double min, double max){

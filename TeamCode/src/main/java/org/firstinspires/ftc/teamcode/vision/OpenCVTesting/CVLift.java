@@ -16,9 +16,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="OpenCV_Test", group="Tutorials")
+@Autonomous(name="CVLift", group="Tutorials")
 
-public class CVTest extends LinearOpMode {
+public class CVLift extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
@@ -48,9 +48,8 @@ public class CVTest extends LinearOpMode {
     static final double LVL_2_INCHES = 14;
     static final double LVL_3_INCHES = 19.5;
 
-    static final double WEBCAM_WIDTH = 640;
-
     public static double liftHeight = 0.0;
+
 
 
     private OpenCvCamera webcam;
@@ -70,17 +69,17 @@ public class CVTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException
-    { 
-         // OpenCV webcam
-         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-         //OpenCV Pipeline
- 
-         pipeline = new ContourPipeline(0.0, 0.0, 0.0, 0.0);
- 
-         pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
-         pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);
- 
+    {
+        // OpenCV webcam
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        //OpenCV Pipeline
+
+        pipeline = new ContourPipeline(0.0, 0.0, 0.0, 0.0);
+
+        pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
+        pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);
+
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
         backLeft = hardwareMap.dcMotor.get("backLeft");
@@ -125,7 +124,7 @@ public class CVTest extends LinearOpMode {
                 backRight.getCurrentPosition());
         telemetry.update();
 
-      
+
         pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
         pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);
 
@@ -160,15 +159,14 @@ public class CVTest extends LinearOpMode {
 
             //Print out the area of the rectangle that is found.
             telemetry.addData("Rectangle Area", rectangleArea);
-            telemetry.addData("XY: ",  pipeline.getRectMidpointXY());
 
             //Check to see if the rectangle has a large enough area to be a marker.
             if(rectangleArea > minRectangleArea){
                 //Then check the location of the rectangle to see which barcode it is in.
-                if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
+                if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * pipeline.getRectWidth()){
                     telemetry.addData("Barcode Position", "Right");
                 }
-                else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
+                else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * pipeline.getRectWidth()){
                     telemetry.addData("Barcode Position", "Left");
                 }
                 else {
@@ -334,26 +332,26 @@ public class CVTest extends LinearOpMode {
 
     public void armEncoderDrive(double speed, double inches, double timeoutS) {
         int newarmTarget;
-        
+
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
             arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-          
+
 
             // Determine new target position, and pass to motor controller
             newarmTarget = arm.getCurrentPosition() + (int) (inches * ARM_PER_INCH);
-             
+
             arm.setTargetPosition(newarmTarget);
-           
+
             // Turn On RUN_TO_POSITION
             arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            
+
             // reset the timeout time and start motion.
             runtime.reset();
             arm.setPower(Math.abs(speed));
-           
+
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
@@ -367,18 +365,18 @@ public class CVTest extends LinearOpMode {
                 telemetry.addData("Path1", "Running to %7d ", newarmTarget);//newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
                 telemetry.addData("Path2", "Running at %7d  ",
                         arm.getCurrentPosition());
-                
+
                 telemetry.update();
             }
 
             // Stop all motion;
             arm.setPower(0);
-            
+
 
             // Turn off RUN_TO_POSITION
             arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-           
-            
+
+
 
             sleep(250);   // optional pause after each move
         }

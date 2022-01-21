@@ -58,7 +58,7 @@ public class CVLift extends LinearOpMode {
 
     private int minRectangleArea = 2000;
     private double leftBarcodeRangeBoundary = 0.3; //i.e 30% of the way across the frame from the left
-    private double rightBarcodeRangeBoundary = 0.6; //i.e 60% of the way across the frame from the left
+    private double rightBarcodeRangeBoundary = 0.7; //i.e 60% of the way across the frame from the left
 
     private double lowerRuntime = 0;
     private double upperRuntime = 0;
@@ -163,20 +163,20 @@ public class CVLift extends LinearOpMode {
             //Check to see if the rectangle has a large enough area to be a marker.
             if(rectangleArea > minRectangleArea){
                 //Then check the location of the rectangle to see which barcode it is in.
-                if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
+                if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
+                    telemetry.addData("Barcode Position", "Left");
+                    BP = 3;
+                    liftHeight = LVL_3_INCHES;
+                }
+                else if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
                     telemetry.addData("Barcode Position", "Right");
                     BP = 1;
                     liftHeight = LVL_1_INCHES;
                 }
-                else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
-                    telemetry.addData("Barcode Position", "Left");
-                    BP = 2;
-                    liftHeight = LVL_2_INCHES;
-                }
                 else {
                     telemetry.addData("Barcode Position", "Center");
-                    BP = 3;
-                    liftHeight = LVL_3_INCHES;
+                    BP = 2;
+                    liftHeight = LVL_2_INCHES;
 
                 }
             }

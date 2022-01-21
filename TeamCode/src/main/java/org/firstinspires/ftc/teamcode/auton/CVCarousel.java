@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.vision.OpenCVTesting;
+package org.firstinspires.ftc.teamcode.auton;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -16,9 +16,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="OpenCV_Test", group="Tutorials")
+@Autonomous(name="CVCarousel", group="Tutorials")
 
-public class CVTest extends LinearOpMode {
+public class CVCarousel extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
@@ -45,12 +45,11 @@ public class CVTest extends LinearOpMode {
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double LVL_1_INCHES = 7;
-    static final double LVL_2_INCHES = 14;
+    static final double LVL_2_INCHES = 16;
     static final double LVL_3_INCHES = 19.5;
 
-    static final double WEBCAM_WIDTH = 640;
-
     public static double liftHeight = 0.0;
+    public static int BP = 0;
 
 
     private OpenCvCamera webcam;
@@ -63,6 +62,7 @@ public class CVTest extends LinearOpMode {
 
     private double lowerRuntime = 0;
     private double upperRuntime = 0;
+    static final double WEBCAM_WIDTH = 640;
 
     // Red Range                                      Y      Cr     Cb
     public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
@@ -70,17 +70,17 @@ public class CVTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException
-    { 
-         // OpenCV webcam
-         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-         //OpenCV Pipeline
- 
-         pipeline = new ContourPipeline(0.0, 0.0, 0.0, 0.0);
- 
-         pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
-         pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);
- 
+    {
+        // OpenCV webcam
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        //OpenCV Pipeline
+
+        pipeline = new ContourPipeline(0.0, 0.0, 0.0, 0.0);
+
+        pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
+        pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);
+
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
         backLeft = hardwareMap.dcMotor.get("backLeft");
@@ -125,7 +125,7 @@ public class CVTest extends LinearOpMode {
                 backRight.getCurrentPosition());
         telemetry.update();
 
-      
+
         pipeline.configureScalarLower(scalarLowerYCrCb.val[0],scalarLowerYCrCb.val[1],scalarLowerYCrCb.val[2]);
         pipeline.configureScalarUpper(scalarUpperYCrCb.val[0],scalarUpperYCrCb.val[1],scalarUpperYCrCb.val[2]);
 
@@ -147,37 +147,67 @@ public class CVTest extends LinearOpMode {
 
         waitForStart();
 
-        if(isStopRequested()) return;
+        claw.setPosition(0);
+        sleep(250);
 
-        while (opModeIsActive())
-        {
-            if(pipeline.error){
-                telemetry.addData("Exception: ", pipeline.debug.getStackTrace());
-            }
+        //if(isStopRequested()) return;
 
 
-            double rectangleArea = pipeline.getRectArea();
-
-            //Print out the area of the rectangle that is found.
-            telemetry.addData("Rectangle Area", rectangleArea);
-            telemetry.addData("XY: ",  pipeline.getRectMidpointXY());
-
-            //Check to see if the rectangle has a large enough area to be a marker.
-            if(rectangleArea > minRectangleArea){
-                //Then check the location of the rectangle to see which barcode it is in.
-                if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
-                    telemetry.addData("Barcode Position", "Right");
-                }
-                else if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
-                    telemetry.addData("Barcode Position", "Left");
-                }
-                else {
-                    telemetry.addData("Barcode Position", "Center");
-                }
-            }
-
-            telemetry.update();
+        if(pipeline.error){
+            telemetry.addData("Exception: ", pipeline.debug.getStackTrace());
         }
+
+
+        double rectangleArea = pipeline.getRectArea();
+
+        //Print out the area of the rectangle that is found.
+        telemetry.addData("Rectangle Area", rectangleArea);
+
+        //Check to see if the rectangle has a large enough area to be a marker.
+        if(rectangleArea > minRectangleArea){
+            //Then check the location of the rectangle to see which barcode it is in.
+            if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
+                telemetry.addData("Barcode Position", "Left");
+                BP = 3;
+                liftHeight = LVL_3_INCHES;
+            }
+            else if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
+                telemetry.addData("Barcode Position", "Right");
+                BP = 1;
+                liftHeight = LVL_1_INCHES;
+            }
+            else {
+                telemetry.addData("Barcode Position", "Center");
+                BP = 2;
+                liftHeight = LVL_2_INCHES;
+
+            }
+        }
+        telemetry.addData("BP", BP);
+        telemetry.update();
+        sleep(1000);
+        // rest of auton
+        // strafe left to carousel
+        encoderDriveStrafe(DRIVE_SPEED, 28, 28, 4.0);
+        // forward
+        encoderDrive(DRIVE_SPEED, 10, 10,2.0);
+        // lift arm
+        armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
+        // forward to shipping hub
+        encoderDrive(DRIVE_SPEED, 15, 15, 4.0);
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        // backward
+        encoderDrive(DRIVE_SPEED, -10, -10, 3.0);
+        // point turn
+        encoderDrive(DRIVE_SPEED, 20, -20, 5.0);
+        // backward
+        encoderDrive(1.0, -63, -63, 4.0);
+
+
+
+
     }
 
     public double inValues(double value, double min, double max){
@@ -334,26 +364,26 @@ public class CVTest extends LinearOpMode {
 
     public void armEncoderDrive(double speed, double inches, double timeoutS) {
         int newarmTarget;
-        
+
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
             arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-          
+
 
             // Determine new target position, and pass to motor controller
             newarmTarget = arm.getCurrentPosition() + (int) (inches * ARM_PER_INCH);
-             
+
             arm.setTargetPosition(newarmTarget);
-           
+
             // Turn On RUN_TO_POSITION
             arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            
+
             // reset the timeout time and start motion.
             runtime.reset();
             arm.setPower(Math.abs(speed));
-           
+
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
@@ -367,18 +397,18 @@ public class CVTest extends LinearOpMode {
                 telemetry.addData("Path1", "Running to %7d ", newarmTarget);//newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
                 telemetry.addData("Path2", "Running at %7d  ",
                         arm.getCurrentPosition());
-                
+
                 telemetry.update();
             }
 
             // Stop all motion;
             arm.setPower(0);
-            
+
 
             // Turn off RUN_TO_POSITION
             arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-           
-            
+
+
 
             sleep(250);   // optional pause after each move
         }

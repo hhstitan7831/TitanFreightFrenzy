@@ -45,7 +45,7 @@ public class CVRC extends LinearOpMode {
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double LVL_1_INCHES = 7;
-    static final double LVL_2_INCHES = 13.5;
+    static final double LVL_2_INCHES = 12;
     static final double LVL_3_INCHES = 18;
 
     public static double liftHeight = 0.0;
@@ -193,14 +193,14 @@ public class CVRC extends LinearOpMode {
         encoderDrive(0.5, 2, 2,5.0);
 
         // make turn
-        encoderDrive(DRIVE_SPEED, -17, 17, 5.0);
+        encoderDrive(0.5, -17, 17, 5.0);
         // forward to carousel
         encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
         // spinning duck, duck go brrr
         carousel.setPower(-.8);
         sleep(2000);
         // turn
-        encoderDrive(DRIVE_SPEED, 2, -2, 4.0);
+        encoderDrive(0.3, 2, -2, 4.0);
         // strafe right
         encoderDriveStrafe(0.5, -30, -30, 4.0);
         // turn
@@ -210,12 +210,14 @@ public class CVRC extends LinearOpMode {
         // arm lift
         armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
         // forward
-        encoderDrive(DRIVE_SPEED, 16, 16, 3.0);
+        encoderDrive(DRIVE_SPEED, 10, 10, 3.0);
         // release block
         claw.setPosition(.3);
         sleep(250);
         // backwards
-        encoderDrive(0.4, -20, -20, 3.0);
+        encoderDrive(0.7, -29, -29, 3.0);
+        // strafe right
+        encoderDriveStrafe(0.4, -2, -2, 2.0);
 
 
         // forward

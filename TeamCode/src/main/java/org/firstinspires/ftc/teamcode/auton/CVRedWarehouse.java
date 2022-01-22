@@ -16,9 +16,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="CVWarehouseBlue", group="Tutorials")
+@Autonomous(name="CVRedWarehouse", group="Tutorials")
 
-public class CVWarehouseBlue extends LinearOpMode {
+public class CVRedWarehouse extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
@@ -46,7 +46,7 @@ public class CVWarehouseBlue extends LinearOpMode {
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double LVL_1_INCHES = 7;
     static final double LVL_2_INCHES = 15;
-    static final double LVL_3_INCHES = 19.5;
+    static final double LVL_3_INCHES = 18.5;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -168,13 +168,13 @@ public class CVWarehouseBlue extends LinearOpMode {
             //Then check the location of the rectangle to see which barcode it is in.
             if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
                 telemetry.addData("Barcode Position", "Left");
-                BP = 3;
-                liftHeight = LVL_3_INCHES;
+                BP = 1;
+                liftHeight = LVL_1_INCHES;
             }
             else if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
                 telemetry.addData("Barcode Position", "Right");
-                BP = 1;
-                liftHeight = LVL_1_INCHES;
+                BP = 3;
+                liftHeight = LVL_3_INCHES;
             }
             else {
                 telemetry.addData("Barcode Position", "Center");
@@ -187,8 +187,8 @@ public class CVWarehouseBlue extends LinearOpMode {
         telemetry.update();
         sleep(1000);
         // rest of auton
-        // strafe right to shipping hub
-        encoderDriveStrafe(DRIVE_SPEED, -26, -26, 4.0);
+        // strafe left to shipping hub
+        encoderDriveStrafe(DRIVE_SPEED, 26, 26, 4.0);
         // forward
         encoderDrive(DRIVE_SPEED, 10, 10,2.0);
         // lift arm
@@ -201,9 +201,11 @@ public class CVWarehouseBlue extends LinearOpMode {
         // backward
         encoderDrive(DRIVE_SPEED, -10, -10, 3.0);
         // point turn
-        encoderDrive(DRIVE_SPEED, 20, -20, 5.0);
+        encoderDrive(DRIVE_SPEED, -20, 20, 5.0);
+        // backward slowly
+        encoderDrive(DRIVE_SPEED,-40, -40,4.0);
         // backward
-        encoderDrive(1.0, -63, -63, 4.0);
+        encoderDrive(1.0, -23, -23, 4.0);
 
 
 

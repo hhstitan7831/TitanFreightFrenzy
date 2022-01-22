@@ -9,7 +9,7 @@ public class T_Minus70 {
     //Movement / Base Motors
     public DcMotor frontLeft = null, frontRight = null, backLeft = null, backRight;
     //Game-Related
-    public DcMotor carousel = null, arm = null;
+    public DcMotor carousel = null, carouselRight = null,  arm = null;
     public Servo claw = null;
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
@@ -35,6 +35,7 @@ public class T_Minus70 {
 
         //Game Elements
         carousel  = hwMap.get(DcMotor.class, "carousel");
+        carouselRight  = hwMap.get(DcMotor.class, "carouselRight");
         arm = hwMap.get(DcMotor.class, "arm");
         claw = hwMap.get(Servo.class, "claw");
 

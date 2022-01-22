@@ -22,7 +22,7 @@ public class CVRC extends LinearOpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight;
     //Game-Related
-    DcMotor carousel, arm;
+    DcMotor carousel, carouselRight, arm;
     Servo claw;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -87,6 +87,7 @@ public class CVRC extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
 
         carousel = hardwareMap.dcMotor.get("carousel");
+        carouselRight = hardwareMap.dcMotor.get("carouselRight");
         arm = hardwareMap.dcMotor.get("arm");
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -216,8 +217,10 @@ public class CVRC extends LinearOpMode {
         sleep(250);
         // backwards
         encoderDrive(0.7, -29, -29, 3.0);
+        // arm d o w n
+        armEncoderDrive(DRIVE_SPEED, -liftHeight, 3.0);
         // strafe right
-        encoderDriveStrafe(0.4, -4, -4, 2.0);
+        encoderDriveStrafe(0.4, -5, -5, 2.0);
 
 
         // forward

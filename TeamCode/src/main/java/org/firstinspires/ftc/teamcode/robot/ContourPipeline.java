@@ -19,12 +19,16 @@ import java.util.List;
 // Credits to team 7303 RoboAvatars, adjusted by team 3954 Pink to the Future
 
 public class ContourPipeline extends OpenCvPipeline {
-    //new Scalar(196, 200, 70) (Red?);
+
     Scalar Titan_Red =  new Scalar(196, 23, 112);
 
     // Red                     Y      Cr     Cb    (Do not change Y)
-    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
-    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+   // public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
+   // public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+
+    // Green                                           Y      Cr     Cb    (Do not change Y)
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 120.0, 128.0);
 
     // Green                                             Y      Cr     Cb
     // public static Scalar scalarLowerYCrCb = new Scalar(  0.0, 0.0, 0.0);

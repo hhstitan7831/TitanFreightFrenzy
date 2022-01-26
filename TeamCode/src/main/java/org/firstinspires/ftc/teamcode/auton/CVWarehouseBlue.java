@@ -65,8 +65,12 @@ public class CVWarehouseBlue extends LinearOpMode {
     static final double WEBCAM_WIDTH = 640;
 
     // Red Range                                      Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
-    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+   // public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
+  //  public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+
+    // Green Range                                      Y      Cr     Cb
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 120.0, 128.0);
 
     @Override
     public void runOpMode() throws InterruptedException

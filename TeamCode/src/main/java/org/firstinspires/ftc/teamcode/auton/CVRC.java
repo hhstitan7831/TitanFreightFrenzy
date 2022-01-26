@@ -45,8 +45,8 @@ public class CVRC extends LinearOpMode {
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double LVL_1_INCHES = 7;
-    static final double LVL_2_INCHES = 12;
-    static final double LVL_3_INCHES = 18;
+    static final double LVL_2_INCHES = 13;
+    static final double LVL_3_INCHES = 17;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -148,6 +148,8 @@ public class CVRC extends LinearOpMode {
 
         waitForStart();
 
+        liftHeight = LVL_3_INCHES;
+
         claw.setPosition(0);
         sleep(250);
 
@@ -207,7 +209,7 @@ public class CVRC extends LinearOpMode {
         // turn
         encoderDrive(DRIVE_SPEED, 37, -37, 4.0);
         // forward to shipping hub
-        encoderDrive(0.4, 18, 18, 4.0);
+        encoderDrive(0.4, 20, 20, 4.0);
         // arm lift
         armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
         // forward

@@ -45,8 +45,8 @@ public class CVWarehouseBlue extends LinearOpMode {
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double LVL_1_INCHES = 7;
-    static final double LVL_2_INCHES = 15;
-    static final double LVL_3_INCHES = 19.5;
+    static final double LVL_2_INCHES = 13;
+    static final double LVL_3_INCHES = 17;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -148,6 +148,8 @@ public class CVWarehouseBlue extends LinearOpMode {
 
         waitForStart();
 
+       // liftHeight = LVL_3_INCHES;
+
         claw.setPosition(0);
         sleep(250);
 
@@ -169,13 +171,13 @@ public class CVWarehouseBlue extends LinearOpMode {
             //Then check the location of the rectangle to see which barcode it is in.
             if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
                 telemetry.addData("Barcode Position", "Left");
-                BP = 3;
-                liftHeight = LVL_3_INCHES;
+                BP = 1;
+                liftHeight = LVL_1_INCHES;
             }
             else if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
                 telemetry.addData("Barcode Position", "Right");
-                BP = 1;
-                liftHeight = LVL_1_INCHES;
+                BP = 3;
+                liftHeight = LVL_3_INCHES;
             }
             else {
                 telemetry.addData("Barcode Position", "Center");

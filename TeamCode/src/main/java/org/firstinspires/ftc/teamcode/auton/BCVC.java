@@ -175,13 +175,13 @@ public class BCVC extends LinearOpMode {
             //Then check the location of the rectangle to see which barcode it is in.
             if(pipeline.getRectMidpointX() < leftBarcodeRangeBoundary * WEBCAM_WIDTH){
                 telemetry.addData("Barcode Position", "Left");
-                BP = 3;
-                liftHeight = LVL_3_INCHES;
+                BP = 1;
+                liftHeight = LVL_1_INCHES;
             }
             else if(pipeline.getRectMidpointX() > rightBarcodeRangeBoundary * WEBCAM_WIDTH){
                 telemetry.addData("Barcode Position", "Right");
-                BP = 1;
-                liftHeight = LVL_1_INCHES;
+                BP = 3;
+                liftHeight = LVL_3_INCHES;
             }
             else {
                 telemetry.addData("Barcode Position", "Center");

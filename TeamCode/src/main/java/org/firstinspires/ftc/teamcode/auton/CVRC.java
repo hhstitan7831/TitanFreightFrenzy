@@ -226,7 +226,7 @@ public class CVRC extends LinearOpMode {
         // arm d o w n
         armEncoderDrive(DRIVE_SPEED, -liftHeight, 3.0);
         // strafe right
-        encoderDriveStrafe(0.4, -5, -5, 2.0);
+        encoderDriveStrafe(0.4, -6.5, -6.5, 2.0);
 
 
         // forward

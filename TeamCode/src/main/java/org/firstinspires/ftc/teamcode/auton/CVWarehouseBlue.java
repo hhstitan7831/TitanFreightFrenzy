@@ -46,7 +46,7 @@ public class CVWarehouseBlue extends LinearOpMode {
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
     static final double LVL_1_INCHES = 9;
     static final double LVL_2_INCHES = 13;
-    static final double LVL_3_INCHES = 17;
+    static final double LVL_3_INCHES = 19;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;

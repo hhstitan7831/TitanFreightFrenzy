@@ -44,9 +44,9 @@ public class CVWarehouseBlue extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 9;
-    static final double LVL_2_INCHES = 13;
-    static final double LVL_3_INCHES = 19;
+    static final double LVL_1_INCHES = 5;
+    static final double LVL_2_INCHES = 12;
+    static final double LVL_3_INCHES = 17;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -191,11 +191,12 @@ public class CVWarehouseBlue extends LinearOpMode {
             }
         }
         telemetry.addData("BP", BP);
+        telemetry.addData("LH", liftHeight);
         telemetry.update();
         sleep(1000);
         // rest of auton
         // strafe right to shipping hub
-        encoderDriveStrafe(DRIVE_SPEED, -26, -26, 4.0);
+        encoderDriveStrafe(0.5, -26, -26, 4.0);
         // forward
         encoderDrive(DRIVE_SPEED, 10, 10,2.0);
         // lift arm
@@ -209,8 +210,13 @@ public class CVWarehouseBlue extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, -10, -10, 3.0);
         // point turn
         encoderDrive(DRIVE_SPEED, 20, -20, 5.0);
+        // arm down
+        armEncoderDrive(DRIVE_SPEED, -liftHeight, 2.0);
+        // backward slowly
+        encoderDrive(0.5,-40, -40,4.0);
         // backward
-        encoderDrive(1.0, -63, -63, 4.0);
+        encoderDrive(1.0, -30, -30, 4.0);
+
 
 
 

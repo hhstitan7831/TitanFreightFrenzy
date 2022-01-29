@@ -44,9 +44,9 @@ public class CVLift extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 7;
-    static final double LVL_2_INCHES = 14;
-    static final double LVL_3_INCHES = 19.5;
+    static final double LVL_1_INCHES = 5;
+    static final double LVL_2_INCHES = 13;
+    static final double LVL_3_INCHES = 19;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -65,8 +65,12 @@ public class CVLift extends LinearOpMode {
     static final double WEBCAM_WIDTH = 640;
 
     // Red Range                                      Y      Cr     Cb
-    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
-    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+    //public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
+   // public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+
+    // Green Range                                      Y      Cr     Cb
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 120.0, 128.0);
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -184,6 +188,7 @@ public class CVLift extends LinearOpMode {
                 }
             }
             telemetry.addData("BP", BP);
+            telemetry.addData("LH", liftHeight);
             telemetry.update();
             sleep(4000);
             // rest of auton

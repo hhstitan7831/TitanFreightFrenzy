@@ -191,6 +191,7 @@ public class CVRC extends LinearOpMode {
             }
         }
         telemetry.addData("BP", BP);
+        telemetry.addData("LH", liftHeight);
         telemetry.update();
         sleep(1000);
         // rest of auton
@@ -206,10 +207,11 @@ public class CVRC extends LinearOpMode {
         // spinning duck, duck go brrr
         carousel.setPower(-.8);
         sleep(2000);
+        carousel.setPower(0);
         // turn
         encoderDrive(0.3, 2, -2, 4.0);
         // strafe right
-        encoderDriveStrafe(0.5, -36, -36, 4.0);
+        encoderDriveStrafe(0.5, -41, -41, 4.0);
         // turn
         encoderDrive(DRIVE_SPEED, 37, -37, 4.0);
         // forward to shipping hub
@@ -222,11 +224,11 @@ public class CVRC extends LinearOpMode {
         claw.setPosition(.3);
         sleep(250);
         // backwards
-        encoderDrive(0.7, -29, -29, 3.0);
+        encoderDrive(0.7, -34, -34, 3.0);
         // arm d o w n
         armEncoderDrive(DRIVE_SPEED, -liftHeight, 3.0);
         // strafe right
-        encoderDriveStrafe(0.4, -6.5, -6.5, 2.0);
+        encoderDriveStrafe(0.4, -13.5, -13.5, 2.0);
 
 
         // forward

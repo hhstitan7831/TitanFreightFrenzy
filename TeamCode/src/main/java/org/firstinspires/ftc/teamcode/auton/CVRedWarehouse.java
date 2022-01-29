@@ -152,7 +152,7 @@ public class CVRedWarehouse extends LinearOpMode {
 
         waitForStart();
 
-        liftHeight = LVL_3_INCHES;
+        //liftHeight = LVL_3_INCHES;
 
         claw.setPosition(0);
         sleep(250);
@@ -212,7 +212,7 @@ public class CVRedWarehouse extends LinearOpMode {
         // backward slowly
         encoderDrive(DRIVE_SPEED,-40, -40,4.0);
         // backward
-        encoderDrive(1.0, -23, -23, 4.0);
+        encoderDrive(1.0, -26, -26, 4.0);
 
 
 

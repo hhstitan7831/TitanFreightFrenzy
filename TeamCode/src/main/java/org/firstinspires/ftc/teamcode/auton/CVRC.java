@@ -213,7 +213,7 @@ public class CVRC extends LinearOpMode {
         // strafe right
         encoderDriveStrafe(0.5, -40, -40, 4.0);
         // turn
-        encoderDrive(DRIVE_SPEED, 37, -37, 4.0);
+        encoderDrive(DRIVE_SPEED, 38, -38, 4.0);
         // forward to shipping hub
         encoderDrive(0.4, 20, 20, 4.0);
         // arm lift

@@ -44,9 +44,9 @@ public class CVRC extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 9;
-    static final double LVL_2_INCHES = 13;
-    static final double LVL_3_INCHES = 19;
+    static final double LVL_1_INCHES = 11;
+    static final double LVL_2_INCHES = 15;
+    static final double LVL_3_INCHES = 21;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -211,7 +211,7 @@ public class CVRC extends LinearOpMode {
         // turn
         encoderDrive(0.3, 2, -2, 4.0);
         // strafe right
-        encoderDriveStrafe(0.5, -41, -41, 4.0);
+        encoderDriveStrafe(0.5, -40, -40, 4.0);
         // turn
         encoderDrive(DRIVE_SPEED, 37, -37, 4.0);
         // forward to shipping hub

@@ -205,8 +205,8 @@ public class CVRC extends LinearOpMode {
         // forward to carousel
         encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
         // spinning duck, duck go brrr
-        carousel.setPower(-.8);
-        sleep(2000);
+        carousel.setPower(-.7);
+        sleep(2200);
         carousel.setPower(0);
         // turn
         encoderDrive(0.3, 2, -2, 4.0);

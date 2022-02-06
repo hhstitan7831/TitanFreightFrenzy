@@ -207,8 +207,8 @@ public class BCVC extends LinearOpMode {
         // forward to carousel
         encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
         // spinning duck, duck go brrr
-        carouselRight.setPower(.8);
-        sleep(2000);
+        carouselRight.setPower(.7);
+        sleep(2200);
         // turn
         encoderDrive(0.3, -2, 2, 4.0);
         // strafe right

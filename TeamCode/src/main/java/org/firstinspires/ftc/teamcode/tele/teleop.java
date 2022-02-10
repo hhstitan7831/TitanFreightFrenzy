@@ -4,8 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.T_Minus70;
+
+import java.util.concurrent.TimeUnit;
 
 @TeleOp(name = "mainTeleop")
 public class teleop extends OpMode {
@@ -85,6 +88,13 @@ public class teleop extends OpMode {
         } else if (gamepad2.x) {
             robot.carousel.setPower(-.7);
             robot.carouselRight.setPower(.7);
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            robot.carouselRight.setPower(1);
+
         } else {
             robot.carousel.setPower(0);
             robot.carouselRight.setPower(0);

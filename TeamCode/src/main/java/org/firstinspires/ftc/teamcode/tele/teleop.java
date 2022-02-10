@@ -14,11 +14,18 @@ import java.util.concurrent.TimeUnit;
 public class teleop extends OpMode {
 
     T_Minus70 robot = new T_Minus70();
+    ElapsedTime time;
 
     @Override
     public void init() {
 
         robot.init(hardwareMap);
+        time = new ElapsedTime();
+    }
+    @Override
+    public void init_loop() {
+
+        time.reset();
 
     }
 
@@ -37,7 +44,7 @@ public class teleop extends OpMode {
             robot.backLeft.setPower(-gamepad1.left_trigger);
             robot.frontRight.setPower(gamepad1.left_trigger);
             robot.backRight.setPower(-gamepad1.left_trigger);
-        } else if (gamepad1.right_trigger> .1) {
+        } else if (gamepad1.right_trigger > .1 ) {
             robot.frontLeft.setPower(-gamepad1.right_trigger);
             robot.backLeft.setPower(gamepad1.right_trigger);
             robot.frontRight.setPower(-gamepad1.right_trigger);
@@ -76,32 +83,36 @@ public class teleop extends OpMode {
         //Game Related (P2)
         if (Math.abs(gamepad2.left_trigger) > .1) {
             robot.arm.setPower(gamepad2.left_trigger );
-        } else if (Math.abs(gamepad2.right_trigger) > .1){
+        } else if (Math.abs(gamepad2.right_trigger) > .1) {
             robot.arm.setPower(-gamepad2.right_trigger);
         } else {
             robot.arm.setPower(0);
         }
 
         if (gamepad2.b) {
-            robot.carousel.setPower(.7);
-            robot.carouselRight.setPower(-.7);
-        } else if (gamepad2.x) {
+            double spinPower = .6;
+            double startSpin = time.milliseconds();
+            while (time.milliseconds() < startSpin + 1400) {
+                if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+                if (spinPower > 1) spinPower = 1.0;
+                robot.carousel.setPower(spinPower);
+                robot.carouselRight.setPower(-spinPower);
+            }
+            robot.carousel.setPower(0);
+            robot.carouselRight.setPower(0);
+        }
+        
+
+
+        else if (gamepad2.x) {
             robot.carousel.setPower(-.7);
             robot.carouselRight.setPower(.7);
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            robot.carouselRight.setPower(1);
-
         } else {
             robot.carousel.setPower(0);
             robot.carouselRight.setPower(0);
         }
         if (gamepad2.right_bumper) {
-            robot.claw.setPosition(.3)
-            ;
+            robot.claw.setPosition(.3);
         } else if (gamepad2.left_bumper) {
             robot.claw.setPosition(0);
         }

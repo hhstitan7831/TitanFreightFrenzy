@@ -15,6 +15,8 @@ public class teleop extends OpMode {
 
     T_Minus70 robot = new T_Minus70();
     ElapsedTime time;
+    boolean bToggle = false;
+    boolean xToggle = false;
 
     @Override
     public void init() {
@@ -90,27 +92,40 @@ public class teleop extends OpMode {
         }
 
         if (gamepad2.b) {
-            double spinPower = .6;
-            double startSpin = time.milliseconds();
-            while (time.milliseconds() < startSpin + 1400) {
-                if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-                if (spinPower > 1) spinPower = 1.0;
-                robot.carousel.setPower(spinPower);
-                robot.carouselRight.setPower(-spinPower);
+            bToggle = !bToggle;
+            if (bToggle == true) {
+                double spinPower = .6;
+                double startSpin = time.milliseconds();
+                while (time.milliseconds() < startSpin + 1400) {
+                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+                    if (spinPower > 1) spinPower = 1.0;
+                    robot.carousel.setPower(spinPower);
+                    robot.carouselRight.setPower(-spinPower);
+                }
+            }   else {
+                robot.carousel.setPower(0);
+                robot.carouselRight.setPower(0);
             }
-            robot.carousel.setPower(0);
-            robot.carouselRight.setPower(0);
         }
         
 
 
         else if (gamepad2.x) {
-            robot.carousel.setPower(-.7);
-            robot.carouselRight.setPower(.7);
-        } else {
-            robot.carousel.setPower(0);
-            robot.carouselRight.setPower(0);
-        }
+            xToggle = !xToggle;
+            if (xToggle == true) {
+                double spinPower = .6;
+                double startSpin = time.milliseconds();
+                while (time.milliseconds() < startSpin + 1400) {
+                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+                    if (spinPower > 1) spinPower = 1.0;
+                    robot.carousel.setPower(-spinPower);
+                    robot.carouselRight.setPower(spinPower);
+                }
+            }   else {
+                robot.carousel.setPower(0);
+                robot.carouselRight.setPower(0);
+            }
+
         if (gamepad2.right_bumper) {
             robot.claw.setPosition(.3);
         } else if (gamepad2.left_bumper) {
@@ -125,5 +140,6 @@ public class teleop extends OpMode {
         telemetry.addData("bL", robot.backLeft.getPower());
         telemetry.addData("bR", robot.backRight.getPower());
         telemetry.update();
+        }
     }
 }

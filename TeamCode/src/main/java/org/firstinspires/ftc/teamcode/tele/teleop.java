@@ -46,7 +46,7 @@ public class teleop extends OpMode {
             robot.backLeft.setPower(-gamepad1.left_trigger);
             robot.frontRight.setPower(gamepad1.left_trigger);
             robot.backRight.setPower(-gamepad1.left_trigger);
-        } else if (gamepad1.right_trigger > .1 ) {
+        } else if (gamepad1.right_trigger > .1) {
             robot.frontLeft.setPower(-gamepad1.right_trigger);
             robot.backLeft.setPower(gamepad1.right_trigger);
             robot.frontRight.setPower(-gamepad1.right_trigger);
@@ -78,13 +78,13 @@ public class teleop extends OpMode {
             robot.backLeft.setPower(0);
             robot.frontRight.setPower(0);
             robot.backRight.setPower(0);
-          //int x = (int) robot.COUNTS_PER_MOTOR_REV;
+            //int x = (int) robot.COUNTS_PER_MOTOR_REV;
             //robot.armEncoderDrive();
         }
 
         //Game Related (P2)
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            robot.arm.setPower(gamepad2.left_trigger );
+            robot.arm.setPower(gamepad2.left_trigger);
         } else if (Math.abs(gamepad2.right_trigger) > .1) {
             robot.arm.setPower(-gamepad2.right_trigger);
         } else {
@@ -92,40 +92,35 @@ public class teleop extends OpMode {
         }
 
         if (gamepad2.b) {
-            bToggle = !bToggle;
-            if (bToggle == true) {
-                double spinPower = .6;
-                double startSpin = time.milliseconds();
-                while (time.milliseconds() < startSpin + 1400) {
-                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-                    if (spinPower > 1) spinPower = 1.0;
-                    robot.carousel.setPower(spinPower);
-                    robot.carouselRight.setPower(-spinPower);
-                }
-            }   else {
-                robot.carousel.setPower(0);
-                robot.carouselRight.setPower(0);
-            }
+//            bToggle = !bToggle;
+//            if (bToggle == true) {
+//                double spinPower = .6;
+//                double startSpin = time.milliseconds();
+//                while (time.milliseconds() < startSpin + 1400) {
+//                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+//                    if (spinPower > 1) spinPower = 1.0;
+//                    robot.carousel.setPower(spinPower);
+//                    robot.carouselRight.setPower(-spinPower);
+//                }
+            robot.carousel.setPower(.7);
+            robot.carouselRight.setPower(-.7);
+        } else if (gamepad2.x) {
+//            xToggle = !xToggle;
+//            if (xToggle == true) {
+//                double spinPower = .6;
+//                double startSpin = time.milliseconds();
+//                while (time.milliseconds() < startSpin + 1400) {
+//                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+//                    if (spinPower > 1) spinPower = 1.0;
+//                    robot.carousel.setPower(-spinPower);
+//                    robot.carouselRight.setPower(spinPower);
+//                }
+            robot.carousel.setPower(-.7);
+            robot.carouselRight.setPower(.7);
+        } else {
+            robot.carousel.setPower(0);
+            robot.carouselRight.setPower(0);
         }
-        
-
-
-        else if (gamepad2.x) {
-            xToggle = !xToggle;
-            if (xToggle == true) {
-                double spinPower = .6;
-                double startSpin = time.milliseconds();
-                while (time.milliseconds() < startSpin + 1400) {
-                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-                    if (spinPower > 1) spinPower = 1.0;
-                    robot.carousel.setPower(-spinPower);
-                    robot.carouselRight.setPower(spinPower);
-                }
-            }   else {
-                robot.carousel.setPower(0);
-                robot.carouselRight.setPower(0);
-            }
-
         if (gamepad2.right_bumper) {
             robot.claw.setPosition(0);
         } else if (gamepad2.left_bumper) {
@@ -142,4 +137,4 @@ public class teleop extends OpMode {
         telemetry.update();
         }
     }
-}
+

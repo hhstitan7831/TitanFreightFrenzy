@@ -2,21 +2,21 @@ package org.firstinspires.ftc.teamcode.tele;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import java.util.ArrayList;
 
 import org.firstinspires.ftc.teamcode.robot.T_Minus70;
-
-import java.util.concurrent.TimeUnit;
 
 @TeleOp(name = "mainTeleop")
 public class teleop extends OpMode {
 
+    //Define Robot & its Mechanisms
     T_Minus70 robot = new T_Minus70();
     ElapsedTime time;
-    boolean bToggle = false;
-    boolean xToggle = false;
+
+    //Important Variables
+    ArrayList<Boolean> booleanArray = new ArrayList<Boolean>();
+    int booleanIncrementer = 0;
 
     @Override
     public void init() {
@@ -24,6 +24,7 @@ public class teleop extends OpMode {
         robot.init(hardwareMap);
         time = new ElapsedTime();
     }
+
     @Override
     public void init_loop() {
 
@@ -91,50 +92,70 @@ public class teleop extends OpMode {
             robot.arm.setPower(0);
         }
 
-        if (gamepad2.b) {
-//            bToggle = !bToggle;
-//            if (bToggle == true) {
-//                double spinPower = .6;
-//                double startSpin = time.milliseconds();
-//                while (time.milliseconds() < startSpin + 1400) {
-//                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-//                    if (spinPower > 1) spinPower = 1.0;
-//                    robot.carousel.setPower(spinPower);
-//                    robot.carouselRight.setPower(-spinPower);
-//                }
-            robot.carousel.setPower(.7);
-            robot.carouselRight.setPower(-.7);
-        } else if (gamepad2.x) {
-//            xToggle = !xToggle;
-//            if (xToggle == true) {
-//                double spinPower = .6;
-//                double startSpin = time.milliseconds();
-//                while (time.milliseconds() < startSpin + 1400) {
-//                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-//                    if (spinPower > 1) spinPower = 1.0;
-//                    robot.carousel.setPower(-spinPower);
-//                    robot.carouselRight.setPower(spinPower);
-//                }
-            robot.carousel.setPower(-.7);
-            robot.carouselRight.setPower(.7);
-        } else {
-            robot.carousel.setPower(0);
-            robot.carouselRight.setPower(0);
-        }
-        if (gamepad2.right_bumper) {
-            robot.claw.setPosition(0);
-        } else if (gamepad2.left_bumper) {
-            robot.claw.setPosition(.2);
-        }
+        //Getting Toggle Button for Carousel Ready
+        boolean G2b = gamepad2.b;
+        boolean G2x = gamepad2.x;
+        boolean G2bPressed = ifPressed(G2b);
+        boolean G2xPressed = ifPressed(G2x);
 
+        if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
+            double spinPower = .6;
+            double startSpin = time.milliseconds();
+            while (time.milliseconds() < startSpin + 1400) {
+                if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+                if (spinPower > 1) spinPower = 1.0;
+                robot.carousel.setPower(spinPower);
+                robot.carouselRight.setPower(-spinPower);
+                //Failsafe
+//            robot.carousel.setPower(.7);
+//            robot.carouselRight.setPower(-.7);
+                }
+            } else if (G2xPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
+                double spinPower = .6;
+                double startSpin = time.milliseconds();
+                while (time.milliseconds() < startSpin + 1400) {
+                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+                    if (spinPower > 1) spinPower = 1.0;
+                    robot.carousel.setPower(-spinPower);
+                    robot.carouselRight.setPower(spinPower);
+                    }
+                    //Failsafe
+//            robot.carousel.setPower(-.7);
+//            robot.carouselRight.setPower(.7);
+                    } else {
+                        robot.carousel.setPower(0);
+                        robot.carouselRight.setPower(0);
+                    }
+                    if (gamepad2.right_bumper) {
+                        robot.claw.setPosition(0);
+                    } else if (gamepad2.left_bumper) {
+                        robot.claw.setPosition(.2);
+                    }
 
-        telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
-        telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
-        telemetry.addData("fL", robot.frontLeft.getPower());
-        telemetry.addData("fR", robot.frontRight.getPower());
-        telemetry.addData("bL", robot.backLeft.getPower());
-        telemetry.addData("bR", robot.backRight.getPower());
-        telemetry.update();
-        }
+                    booleanIncrementer = 0;
+                    telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
+                    telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
+                    telemetry.addData("fL", robot.frontLeft.getPower());
+                    telemetry.addData("fR", robot.frontRight.getPower());
+                    telemetry.addData("bL", robot.backLeft.getPower());
+                    telemetry.addData("bR", robot.backRight.getPower());
+                    telemetry.addData("carousel", robot.carousel.getPower());
+                    telemetry.addData("carouselRight", robot.carouselRight.getPower());
+                    telemetry.update();
+                }
+
+        private boolean ifPressed (boolean button){
+            boolean output = false;
+            if (booleanArray.size() == booleanIncrementer) {
+                booleanArray.add(false);
+            }
+            boolean buttonWas = booleanArray.get(booleanIncrementer);
+            if (button != buttonWas && button == true) {
+                output = true;
+            }
+            booleanArray.set(booleanIncrementer, button);
+            booleanIncrementer = booleanIncrementer + 1;
+
+            return output;
+           }
     }
-

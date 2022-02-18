@@ -92,11 +92,49 @@ public class teleop extends OpMode {
             robot.arm.setPower(0);
         }
 
+
         //Getting Toggle Button for Carousel Ready
         boolean G2b = gamepad2.b;
         boolean G2x = gamepad2.x;
         boolean G2bPressed = ifPressed(G2b);
         boolean G2xPressed = ifPressed(G2x);
+
+        if (gamepad2.b) {
+//            bToggle = !bToggle;
+//            if (bToggle == true) {
+//                double spinPower = .6;
+//                double startSpin = time.milliseconds();
+//                while (time.milliseconds() < startSpin + 1400) {
+//                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+//                    if (spinPower > 1) spinPower = 1.0;
+//                    robot.carousel.setPower(spinPower);
+//                    robot.carouselRight.setPower(-spinPower);
+//                }
+            robot.carousel.setPower(.7);
+            robot.carouselRight.setPower(-.7);
+        } else if (gamepad2.x) {
+//            xToggle = !xToggle;
+//            if (xToggle == true) {
+//                double spinPower = .6;
+//                double startSpin = time.milliseconds();
+//                while (time.milliseconds() < startSpin + 1400) {
+//                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
+//                    if (spinPower > 1) spinPower = 1.0;
+//                    robot.carousel.setPower(-spinPower);
+//                    robot.carouselRight.setPower(spinPower);
+//                }
+            robot.carousel.setPower(-.7);
+            robot.carouselRight.setPower(.7);
+        } else {
+            robot.carousel.setPower(0);
+            robot.carouselRight.setPower(0);
+        }
+        if (gamepad2.right_bumper) {
+            robot.claw.setPosition(.1);
+        } else if (gamepad2.left_bumper) {
+            robot.claw.setPosition(0);
+        }
+
 
         if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
             double spinPower = .6;
@@ -129,7 +167,7 @@ public class teleop extends OpMode {
                     if (gamepad2.right_bumper) {
                         robot.claw.setPosition(0);
                     } else if (gamepad2.left_bumper) {
-                        robot.claw.setPosition(.2);
+                        robot.claw.setPosition(.1);
                     }
 
                     booleanIncrementer = 0;

@@ -222,7 +222,7 @@ public class BCVC extends LinearOpMode {
         // forward
         encoderDrive(DRIVE_SPEED, 10, 10, 3.0);
         // release block
-        claw.setPosition(.3);
+        claw.setPosition(.1);
         sleep(250);
         // backwards
         encoderDrive(0.7, -34, -34, 3.0);

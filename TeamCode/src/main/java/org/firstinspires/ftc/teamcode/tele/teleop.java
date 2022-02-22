@@ -19,7 +19,7 @@ public class teleop extends OpMode {
     ArrayList<Boolean> booleanArray = new ArrayList<Boolean>();
     int booleanIncrementer = 0;
 
-    static final double DRIVE_SPEED = 0.4;
+    static final double DRIVE_SPEED = 0.2;
     static final double COUNTS_PER_ARM_MOTOR_REV = 1440.0;  // eg: TETRIX Motor Encoder //2150.8
     static final double ARM_GEAR_REDUCTION = 0.3;        // This is < 1.0 if geared UP
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
@@ -96,14 +96,24 @@ public class teleop extends OpMode {
 
         //Game Related (P2)
         if (gamepad2.dpad_down) {
-            armEncoderDrive(DRIVE_SPEED,LVL_1_INCHES,3.0);
+            double startArm = time.milliseconds();
+            armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES,3.0);
         } else if (gamepad2.dpad_left) {
-            armEncoderDrive(DRIVE_SPEED,LVL_2_INCHES,3.0);
+            double startArm = time.milliseconds();
+            armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES,3.0);
         } else if (gamepad2.dpad_up) {
-            armEncoderDrive(DRIVE_SPEED,LVL_3_INCHES,3.0);
+            double startArm = time.milliseconds();
+            armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES,3.0);
+        } else if (gamepad2.right_trigger > .1) {
+            double startArm = time.milliseconds();
+            robot.arm.setPower(-gamepad2.right_trigger);
+        } else if (gamepad2.left_trigger > .1) {
+            double startArm = time.milliseconds();
+            robot.arm.setPower(gamepad2.left_trigger);
         } else {
             robot.arm.setPower(0);
         }
+
 
         //Getting Toggle Button for Carousel Ready
         boolean G2b = gamepad2.b;

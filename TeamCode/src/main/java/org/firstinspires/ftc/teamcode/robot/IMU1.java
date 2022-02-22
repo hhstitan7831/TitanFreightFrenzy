@@ -51,8 +51,8 @@ import java.util.Locale;
  *
  * @see <a href="http://www.adafruit.com/products/2472">Adafruit IMU</a>
  */
-@TeleOp(name = "Sensor: BNO055 IMU", group = "Sensor")
-@Disabled                            // Comment this out to add to the opmode list
+@TeleOp(name = "IMU Test", group = "Sensor")
+// Comment this out to add to the opmode list
 public class IMU1 extends LinearOpMode
 {
     //----------------------------------------------------------------------------------------------
@@ -61,6 +61,8 @@ public class IMU1 extends LinearOpMode
 
     // The IMU sensor object
     BNO055IMU imu;
+
+    T_Minus70 robot = new T_Minus70();
 
     // State used for updating telemetry
     Orientation angles;

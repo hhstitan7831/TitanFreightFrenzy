@@ -34,6 +34,8 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -62,6 +64,15 @@ public class IMU1 extends LinearOpMode
     // The IMU sensor object
     BNO055IMU imu;
 
+    //Variables & Robot
+    double integralSum = 0;
+    double Kp = 0;
+    double Ki = 0;
+    double Kd = 0;
+
+    ElapsedTime timer = new ElapsedTime();
+    private double lastError = 0;
+
     T_Minus70 robot = new T_Minus70();
 
     // State used for updating telemetry
@@ -77,13 +88,18 @@ public class IMU1 extends LinearOpMode
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually
         // provide positional information.
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json";
-        parameters.loggingEnabled      = true;
-        parameters.loggingTag          = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        robot.init(hardwareMap);
+//        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+//        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//        parameters.calibrationDataFile = "BNO055IMUCalibration.json";
+//        parameters.loggingEnabled      = true;
+//        parameters.loggingTag          = "IMU";
+//        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        parameters.mode = BNO055IMU.SensorMode.IMU;
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+
 
         // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
         // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
@@ -101,7 +117,15 @@ public class IMU1 extends LinearOpMode
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
         // Loop and update the dashboard
+        double referenceAngle = Math.toRadians(90);
+
         while (opModeIsActive()) {
+            double power = PIDControl(referenceAngle, imu.getAngularOrientation().firstAngle);
+            robot.frontLeft.setPower(power);
+            robot.backLeft.setPower(power);
+            robot.frontRight.setPower(-power);
+            robot.backRight.setPower(-power);
+
             telemetry.update();
         }
     }
@@ -109,6 +133,28 @@ public class IMU1 extends LinearOpMode
     //----------------------------------------------------------------------------------------------
     // Telemetry Configuration
     //----------------------------------------------------------------------------------------------
+
+    public double PIDControl (double reference, double state) {
+        double error = angleWrap(reference - state);
+        integralSum += error * timer.seconds();
+        double derivative = (error - lastError) / timer.seconds();
+        lastError = error;
+
+        timer.reset();
+
+        double output = (error * Kp) + (derivative * Kd) + (integralSum * Ki);
+        return output;
+    }
+
+    public double angleWrap (double radians) {
+        while (radians > Math.PI) {
+            radians -= 2 * Math.PI;
+        }
+        while (radians < -Math.PI) {
+            radians += 2 * Math.PI;
+        }
+        return radians;
+    }
 
     void composeTelemetry() {
 

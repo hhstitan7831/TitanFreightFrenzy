@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.tele;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.ArrayList;
 
@@ -17,6 +18,16 @@ public class teleop extends OpMode {
     //Important Variables
     ArrayList<Boolean> booleanArray = new ArrayList<Boolean>();
     int booleanIncrementer = 0;
+
+    static final double DRIVE_SPEED = 0.2;
+    static final double COUNTS_PER_ARM_MOTOR_REV = 1440.0;  // eg: TETRIX Motor Encoder //2150.8
+    static final double ARM_GEAR_REDUCTION = 0.3;        // This is < 1.0 if geared UP
+    static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
+
+    static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
+    static final double LVL_1_INCHES = 11;
+    static final double LVL_2_INCHES = 15;
+    static final double LVL_3_INCHES = 21;
 
     @Override
     public void init() {
@@ -84,10 +95,21 @@ public class teleop extends OpMode {
         }
 
         //Game Related (P2)
-        if (Math.abs(gamepad2.left_trigger) > .1) {
-            robot.arm.setPower(gamepad2.left_trigger);
-        } else if (Math.abs(gamepad2.right_trigger) > .1) {
+        if (gamepad2.dpad_down) {
+            double startArm = time.milliseconds();
+            armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES,3.0);
+        } else if (gamepad2.dpad_left) {
+            double startArm = time.milliseconds();
+            armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES,3.0);
+        } else if (gamepad2.dpad_up) {
+            double startArm = time.milliseconds();
+            armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES,3.0);
+        } else if (gamepad2.right_trigger > .1) {
+            double startArm = time.milliseconds();
             robot.arm.setPower(-gamepad2.right_trigger);
+        } else if (gamepad2.left_trigger > .1) {
+            double startArm = time.milliseconds();
+            robot.arm.setPower(gamepad2.left_trigger);
         } else {
             robot.arm.setPower(0);
         }
@@ -98,6 +120,7 @@ public class teleop extends OpMode {
         boolean G2x = gamepad2.x;
         boolean G2bPressed = ifPressed(G2b);
         boolean G2xPressed = ifPressed(G2x);
+
 
         if (gamepad2.b) {
 //            bToggle = !bToggle;
@@ -133,15 +156,20 @@ public class teleop extends OpMode {
             robot.claw.setPosition(.2);
         } else if (gamepad2.left_bumper) {
             robot.claw.setPosition(0);
+
+        if (gamepad2.left_bumper) {
+            robot.claw.setPosition(0);
+        } else if (gamepad2.right_bumper) {
+            robot.claw.setPosition(.2);
         }
 
 
         if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
-            double spinPower = .6;
+            double spinPower = .1;
             double startSpin = time.milliseconds();
-            while (time.milliseconds() < startSpin + 1400) {
-                if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-                if (spinPower > 1) spinPower = 1.0;
+            while (time.milliseconds() < startSpin + 1600) {
+                if (time.milliseconds() % 250 > 150) spinPower *= 1.15;
+                else if (spinPower > 1) spinPower = 1.0;
                 robot.carousel.setPower(spinPower);
                 robot.carouselRight.setPower(-spinPower);
                 //Failsafe
@@ -149,11 +177,11 @@ public class teleop extends OpMode {
 //            robot.carouselRight.setPower(-.7);
                 }
             } else if (G2xPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
-                double spinPower = .6;
+                double spinPower = .1;
                 double startSpin = time.milliseconds();
-                while (time.milliseconds() < startSpin + 1400) {
-                    if (time.milliseconds() % 250 > 150) spinPower *= 1.04;
-                    if (spinPower > 1) spinPower = 1.0;
+                while (time.milliseconds() < startSpin + 1600) {
+                    if (time.milliseconds() % 200 > 150) spinPower *= 1.15;
+                    else if (spinPower > 1) spinPower = 1.0;
                     robot.carousel.setPower(-spinPower);
                     robot.carouselRight.setPower(spinPower);
                     }
@@ -163,11 +191,6 @@ public class teleop extends OpMode {
                     } else {
                         robot.carousel.setPower(0);
                         robot.carouselRight.setPower(0);
-                    }
-                    if (gamepad2.right_bumper) {
-                        robot.claw.setPosition(0);
-                    } else if (gamepad2.left_bumper) {
-                        robot.claw.setPosition(.1);
                     }
 
                     booleanIncrementer = 0;
@@ -196,4 +219,49 @@ public class teleop extends OpMode {
 
             return output;
            }
+
+    public void armEncoderDrive(double speed, double inches, double timeoutS) {
+        int newarmTarget;
+
+
+        // Ensure that the opmode is still active
+            robot.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+            // Determine new target position, and pass to motor controller
+            newarmTarget = robot.arm.getCurrentPosition() + (int) (inches * ARM_PER_INCH);
+
+            robot.arm.setTargetPosition(newarmTarget);
+
+            // Turn On RUN_TO_POSITION
+            robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            time.reset();
+            robot.arm.setPower(Math.abs(speed));
+
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+            // its target position, the motion will stop.  This is "safer" in the event that the robot will
+            // always end the motion as soon as possible.
+            // However, if you require that BOTH motors have finished their moves before the robot continues
+            // onto the next step, use (isBusy() || isBusy()) in the loop test.
+            while ((time.seconds() < timeoutS) && (robot.arm.isBusy())) {// frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy())) {
+
+                // Display it for the driver.
+                telemetry.addData("Path1", "Running to %7d ", newarmTarget);//newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
+                telemetry.addData("Path2", "Running at %7d  ",
+                        robot.arm.getCurrentPosition());
+
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            robot.arm.setPower(0);
+
+
+            // Turn off RUN_TO_POSITION
+            robot.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
     }

@@ -97,13 +97,13 @@ public class teleop extends OpMode {
         //Game Related (P2)
         if (gamepad2.dpad_down) {
             double startArm = time.milliseconds();
-            armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES,3.0);
+            armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES, 3.0);
         } else if (gamepad2.dpad_left) {
             double startArm = time.milliseconds();
-            armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES,3.0);
+            armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES, 3.0);
         } else if (gamepad2.dpad_up) {
             double startArm = time.milliseconds();
-            armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES,3.0);
+            armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES, 3.0);
         } else if (gamepad2.right_trigger > .1) {
             double startArm = time.milliseconds();
             robot.arm.setPower(-gamepad2.right_trigger);
@@ -157,22 +157,22 @@ public class teleop extends OpMode {
         } else if (gamepad2.left_bumper) {
             robot.claw.setPosition(0);
 
-        if (gamepad2.left_bumper) {
-            robot.claw.setPosition(0);
-        } else if (gamepad2.right_bumper) {
-            robot.claw.setPosition(.2);
-        }
+            if (gamepad2.left_bumper) {
+                robot.claw.setPosition(0);
+            } else if (gamepad2.right_bumper) {
+                robot.claw.setPosition(.2);
+            }
 
 
-        if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
-            double spinPower = .1;
-            double startSpin = time.milliseconds();
-            while (time.milliseconds() < startSpin + 1600) {
-                if (time.milliseconds() % 250 > 150) spinPower *= 1.15;
-                else if (spinPower > 1) spinPower = 1.0;
-                robot.carousel.setPower(spinPower);
-                robot.carouselRight.setPower(-spinPower);
-                //Failsafe
+            if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
+                double spinPower = .1;
+                double startSpin = time.milliseconds();
+                while (time.milliseconds() < startSpin + 1600) {
+                    if (time.milliseconds() % 250 > 150) spinPower *= 1.15;
+                    else if (spinPower > 1) spinPower = 1.0;
+                    robot.carousel.setPower(spinPower);
+                    robot.carouselRight.setPower(-spinPower);
+                    //Failsafe
 //            robot.carousel.setPower(.7);
 //            robot.carouselRight.setPower(-.7);
                 }
@@ -184,27 +184,27 @@ public class teleop extends OpMode {
                     else if (spinPower > 1) spinPower = 1.0;
                     robot.carousel.setPower(-spinPower);
                     robot.carouselRight.setPower(spinPower);
-                    }
-                    //Failsafe
+                }
+                //Failsafe
 //            robot.carousel.setPower(-.7);
 //            robot.carouselRight.setPower(.7);
-                    } else {
-                        robot.carousel.setPower(0);
-                        robot.carouselRight.setPower(0);
-                    }
+            } else {
+                robot.carousel.setPower(0);
+                robot.carouselRight.setPower(0);
+            }
 
-                    booleanIncrementer = 0;
-                    telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
-                    telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
-                    telemetry.addData("fL", robot.frontLeft.getPower());
-                    telemetry.addData("fR", robot.frontRight.getPower());
-                    telemetry.addData("bL", robot.backLeft.getPower());
-                    telemetry.addData("bR", robot.backRight.getPower());
-                    telemetry.addData("carousel", robot.carousel.getPower());
-                    telemetry.addData("carouselRight", robot.carouselRight.getPower());
-                    telemetry.update();
-                }
-
+            booleanIncrementer = 0;
+            telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
+            telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
+            telemetry.addData("fL", robot.frontLeft.getPower());
+            telemetry.addData("fR", robot.frontRight.getPower());
+            telemetry.addData("bL", robot.backLeft.getPower());
+            telemetry.addData("bR", robot.backRight.getPower());
+            telemetry.addData("carousel", robot.carousel.getPower());
+            telemetry.addData("carouselRight", robot.carouselRight.getPower());
+            telemetry.update();
+        }
+    }
         private boolean ifPressed (boolean button){
             boolean output = false;
             if (booleanArray.size() == booleanIncrementer) {

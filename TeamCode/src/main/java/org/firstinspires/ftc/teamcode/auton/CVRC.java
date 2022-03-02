@@ -235,24 +235,7 @@ public class CVRC extends LinearOpMode {
         encoderDriveStrafe(0.4, -13.5, -13.5, 2.0);
 
 
-        // forward
-        /*
-        encoderDrive(DRIVE_SPEED, 10, 10,2.0);
-        // lift arm
-        armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
-        // forward to shipping hub
-        encoderDrive(DRIVE_SPEED, 15, 15, 4.0);
-        // release block
-        claw.setPosition(.3);
-        sleep(250);
-        // backward
-        encoderDrive(DRIVE_SPEED, -10, -10, 3.0);
-        // point turn
-        encoderDrive(DRIVE_SPEED, -20, 20, 5.0);
-        // backward
-        encoderDrive(1.0, -63, -63, 4.0);
 
-         */
 
 
 

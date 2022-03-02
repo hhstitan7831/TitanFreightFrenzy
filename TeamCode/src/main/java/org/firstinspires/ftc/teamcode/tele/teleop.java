@@ -205,6 +205,7 @@ public class teleop extends OpMode {
             telemetry.update();
         }
     }
+
         private boolean ifPressed ( boolean button){
             boolean output = false;
             if (booleanArray.size() == booleanIncrementer) {

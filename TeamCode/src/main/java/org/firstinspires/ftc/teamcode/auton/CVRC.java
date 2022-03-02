@@ -197,13 +197,15 @@ public class CVRC extends LinearOpMode {
         // rest of auton
         // strafe left to carousel
         encoderDriveStrafe(0.5, 26, 26, 4.0);
+        // strafe right to make space for axel
+        encoderDriveStrafe(0.5, -3, -3, 1.0);
         //forward
         encoderDrive(0.5, 2, 2,5.0);
 
         // make turn
         encoderDrive(0.5, -17, 17, 5.0);
         // forward to carousel
-        encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
+        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);
         // spinning duck, duck go brrr
         carousel.setPower(-.7);
         sleep(2200);
@@ -219,7 +221,7 @@ public class CVRC extends LinearOpMode {
         // arm lift
         armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
         // forward
-        encoderDrive(DRIVE_SPEED, 10, 10, 3.0);
+        encoderDrive(DRIVE_SPEED, 9, 9, 3.0);
         // release block
         claw.setPosition(.1);
         sleep(250);

@@ -205,7 +205,8 @@ public class teleop extends OpMode {
             telemetry.update();
         }
     }
-        private boolean ifPressed (boolean button){
+
+        private boolean ifPressed ( boolean button){
             boolean output = false;
             if (booleanArray.size() == booleanIncrementer) {
                 booleanArray.add(false);
@@ -218,13 +219,13 @@ public class teleop extends OpMode {
             booleanIncrementer = booleanIncrementer + 1;
 
             return output;
-           }
+        }
 
-    public void armEncoderDrive(double speed, double inches, double timeoutS) {
-        int newarmTarget;
+        public void armEncoderDrive ( double speed, double inches, double timeoutS){
+            int newarmTarget;
 
 
-        // Ensure that the opmode is still active
+            // Ensure that the opmode is still active
             robot.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
@@ -263,5 +264,5 @@ public class teleop extends OpMode {
 
             // Turn off RUN_TO_POSITION
             robot.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
+        }
     }

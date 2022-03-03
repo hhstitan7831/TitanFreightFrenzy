@@ -44,9 +44,9 @@ public class CVRedWarehouse extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 9;
+    static final double LVL_1_INCHES = 11;
     static final double LVL_2_INCHES = 15;
-    static final double LVL_3_INCHES = 19;
+    static final double LVL_3_INCHES = 20;
 
     public static double liftHeight = 0.0;
     public static int BP = 0;
@@ -195,9 +195,9 @@ public class CVRedWarehouse extends LinearOpMode {
         sleep(1000);
         // rest of auton
         // strafe left to shipping hub
-        encoderDriveStrafe(DRIVE_SPEED, 26, 26, 4.0);
+        encoderDriveStrafe(0.5, 26, 26, 4.0);
         // forward
-        encoderDrive(DRIVE_SPEED, 10, 10,2.0);
+        encoderDrive(0.5, 10, 10,2.0);
         // lift arm
         armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
         // forward to shipping hub

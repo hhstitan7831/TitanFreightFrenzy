@@ -119,6 +119,8 @@ public class teleop extends OpMode {
             robot.claw.setPosition(.2);
         } else if (gamepad2.left_bumper) {
             robot.claw.setPosition(0);
+        }
+
 
             if (gamepad2.left_bumper) {
                 robot.claw.setPosition(0);
@@ -134,10 +136,10 @@ public class teleop extends OpMode {
 
 
             if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
-                double spinPower = .1;
+                double spinPower = .3;
                 double startSpin = time.milliseconds();
                 while (time.milliseconds() < startSpin + 1600) {
-                    if (time.milliseconds() % 250 > 150) spinPower *= 1.15;
+                    if (time.milliseconds() % 200 > 150) spinPower *= 1.15;
                     else if (spinPower > 1) spinPower = 1.0;
                     robot.carousel.setPower(spinPower);
                     robot.carouselRight.setPower(-spinPower);
@@ -146,7 +148,7 @@ public class teleop extends OpMode {
 //            robot.carouselRight.setPower(-.7);
                 }
             } else if (G2xPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
-                double spinPower = .1;
+                double spinPower = .3;
                 double startSpin = time.milliseconds();
                 while (time.milliseconds() < startSpin + 1600) {
                     if (time.milliseconds() % 200 > 150) spinPower *= 1.15;
@@ -173,7 +175,7 @@ public class teleop extends OpMode {
             telemetry.addData("carouselRight", robot.carouselRight.getPower());
             telemetry.update();
         }
-    }
+
 
         private boolean ifPressed ( boolean button){
             boolean output = false;

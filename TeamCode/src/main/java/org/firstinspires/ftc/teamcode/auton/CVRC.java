@@ -225,8 +225,10 @@ public class CVRC extends LinearOpMode {
         sleep(250);
         // backwards
         encoderDrive(0.7, -34, -34, 3.0);
+
         // close claw bc idk
         claw.setPosition(0);
+
         // arm d o w n
         armEncoderDrive(DRIVE_SPEED, -liftHeight, 3.0);
         // strafe right

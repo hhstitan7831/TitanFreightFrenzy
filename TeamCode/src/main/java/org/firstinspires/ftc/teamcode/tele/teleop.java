@@ -135,8 +135,6 @@ public class teleop extends OpMode {
             boolean G2bPressed = ifPressed(G2b);
             boolean G2xPressed = ifPressed(G2x);
 
-
-
             if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
                 double spinPower = .3;
                 double startSpin = time.milliseconds();
@@ -146,22 +144,8 @@ public class teleop extends OpMode {
                     robot.carousel.setPower(spinPower);
                     robot.carouselRight.setPower(-spinPower);
                     //Failsafe
-
-
-            if (G2bPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
-            double spinPower = .1;
-            double startSpin = time.milliseconds();
-            while (time.milliseconds() < startSpin + 1600) {
-                if (time.milliseconds() % 250 > 150) spinPower *= 1.15;
-                else if (spinPower > 1) spinPower = 1.0;
-                robot.carousel.setPower(spinPower);
-                robot.carouselRight.setPower(-spinPower);
-                //Failsafe
-
-//            robot.carousel.setPower(.7);
-//            robot.carouselRight.setPower(-.7);
                 }
-            } else if (G2xPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
+                } else if (G2xPressed && robot.carousel.getPower() == 0 && robot.carouselRight.getPower() == 0) {
                 double spinPower = .3;
                 double startSpin = time.milliseconds();
                 while (time.milliseconds() < startSpin + 1600) {
@@ -178,18 +162,6 @@ public class teleop extends OpMode {
                         robot.carouselRight.setPower(0);
                     }
 
-                    booleanIncrementer = 0;
-                    telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
-                    telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
-                    telemetry.addData("fL", robot.frontLeft.getPower());
-                    telemetry.addData("fR", robot.frontRight.getPower());
-                    telemetry.addData("bL", robot.backLeft.getPower());
-                    telemetry.addData("bR", robot.backRight.getPower());
-                    telemetry.addData("carousel", robot.carousel.getPower());
-                    telemetry.addData("carouselRight", robot.carouselRight.getPower());
-                    telemetry.update();
-                }
-
             booleanIncrementer = 0;
             telemetry.addData("gamepadRightStick", gamepad1.right_stick_y);
             telemetry.addData("gamepadLeftStick", gamepad1.left_stick_y);
@@ -201,9 +173,8 @@ public class teleop extends OpMode {
             telemetry.addData("carouselRight", robot.carouselRight.getPower());
             telemetry.update();
         }
-    }
 
-        private boolean ifPressed (boolean button){
+        private boolean ifPressed (boolean button) {
             boolean output = false;
             if (booleanArray.size() == booleanIncrementer) {
                 booleanArray.add(false);

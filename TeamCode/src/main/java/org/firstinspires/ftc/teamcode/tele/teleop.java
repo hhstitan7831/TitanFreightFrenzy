@@ -139,7 +139,7 @@ public class teleop extends OpMode {
                 double spinPower = .3;
                 double startSpin = time.milliseconds();
                 while (time.milliseconds() < startSpin + 1600) {
-                    if (time.milliseconds() % 200 > 150) spinPower *= 1.15;
+                    if (time.milliseconds() % 175 > 150) spinPower *= 1.15;
                     else if (spinPower > 1) spinPower = 1.0;
                     robot.carousel.setPower(spinPower);
                     robot.carouselRight.setPower(-spinPower);
@@ -149,7 +149,7 @@ public class teleop extends OpMode {
                 double spinPower = .3;
                 double startSpin = time.milliseconds();
                 while (time.milliseconds() < startSpin + 1600) {
-                    if (time.milliseconds() % 200 > 150) spinPower *= 1.15;
+                    if (time.milliseconds() % 175 > 150) spinPower *= 1.15;
                     else if (spinPower > 1) spinPower = 1.0;
                     robot.carousel.setPower(-spinPower);
                     robot.carouselRight.setPower(spinPower);

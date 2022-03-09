@@ -24,6 +24,7 @@ public class gyroAuto extends LinearOpMode {
 
         waitForStart();
         turnTo(90);
+
     }
 
     public void resetAngle() {

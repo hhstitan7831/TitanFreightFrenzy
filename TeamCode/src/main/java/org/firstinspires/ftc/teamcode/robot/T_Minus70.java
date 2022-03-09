@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
 
 public class T_Minus70 {
     //Movement / Base Motors
@@ -13,8 +15,7 @@ public class T_Minus70 {
     //Game-Related
     public DcMotor carousel = null, carouselRight = null,  arm = null;
     public Servo claw = null;
-
-    BNO055IMU imu;
+    public BNO055IMU imu;
 
     //This is like big robot hub so we don't have to repetitively put this info in every class
 
@@ -51,6 +52,7 @@ public class T_Minus70 {
 
         carouselRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         carousel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -63,12 +65,4 @@ public class T_Minus70 {
         imu = hwMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
     }
-
-
-
-    public void armEncoderDrive(double speed,
-                                double inches,
-                                double timeoutS) {
-        double x = speed+inches+timeoutS;
-        }
-    }
+}

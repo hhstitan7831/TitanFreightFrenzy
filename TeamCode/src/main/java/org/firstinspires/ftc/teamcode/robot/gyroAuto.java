@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
+
 @Autonomous (name = "Gyro Auto")
 public class gyroAuto extends LinearOpMode {
     T_Minus70 robot = new T_Minus70();

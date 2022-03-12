@@ -47,7 +47,7 @@ public class CVRedWarehouse extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 11;
+    static final double LVL_1_INCHES = 8;
     static final double LVL_2_INCHES = 15;
     static final double LVL_3_INCHES = 20;
 
@@ -197,7 +197,7 @@ public class CVRedWarehouse extends LinearOpMode {
         // point turn
         encoderDrive(DRIVE_SPEED, -20, 20, 5.0);
         // backward slowly
-        encoderDrive(DRIVE_SPEED,-40, -40,4.0);
+        encoderDrive(.3,-40, -40,4.0);
         // backward
         encoderDrive(1.0, -26, -26, 4.0);
 

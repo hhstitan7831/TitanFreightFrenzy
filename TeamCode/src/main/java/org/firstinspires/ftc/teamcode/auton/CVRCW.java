@@ -185,8 +185,8 @@ public class CVRCW extends LinearOpMode {
         sleep(1000);
         // rest of auton
         // strafe left to carousel
-        encoderDriveStrafe(0.5, 26, 26, 4.0);
-        // strafe right to make space for axel
+        encoderDriveStrafe(0.3, 22, 22, 4.0);
+        // strafe right to make space for axle
         encoderDriveStrafe(0.5, -3, -3, 1.0);
         //forward
         encoderDrive(0.5, 2, 2,5.0);
@@ -199,8 +199,6 @@ public class CVRCW extends LinearOpMode {
         robot.carousel.setPower(-.7);
         sleep(2200);
         robot.carousel.setPower(0);
-        // turn
-        encoderDrive(0.3, 2, -2, 4.0);
         // strafe right
         encoderDriveStrafe(0.5, -40, -40, 4.0);
         // turn
@@ -217,10 +215,10 @@ public class CVRCW extends LinearOpMode {
         // go backwards a little
         encoderDrive(DRIVE_SPEED, -2, -2, 0.5);
         // strafe right
-        encoderDriveStrafe(.4, -24, -24, 2.0);
+        encoderDriveStrafe(.4, -55, -55, 2.0);
         // drive forward at mach speed hella fast
-        armEncoderDrive(.3, LVL_3_INCHES, 2.0);
-        encoderDrive(.8, 70, 70, 2.0);
+        armEncoderDrive(.3, LVL_1_INCHES, 2.0);
+        encoderDrive(1, 75, 75, 2.0);
 
 
 

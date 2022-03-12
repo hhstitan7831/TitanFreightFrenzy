@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode.auton;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -21,9 +19,13 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="CVRCW", group="Tutorials")
 
-public class CVRCW extends LinearOpMode {
+
+
+
+@Autonomous(name="BCVCW", group="Tutorials")
+
+public class BCVCW extends LinearOpMode {
 
     T_Minus70 robot = new T_Minus70();
 
@@ -93,7 +95,6 @@ public class CVRCW extends LinearOpMode {
 
         robot.frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         robot.backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -185,42 +186,59 @@ public class CVRCW extends LinearOpMode {
         sleep(1000);
         // rest of auton
         // strafe left to carousel
-        encoderDriveStrafe(0.5, 26, 26, 4.0);
-        // strafe right to make space for axel
-        encoderDriveStrafe(0.5, -3, -3, 1.0);
+        encoderDriveStrafe(0.5, -26, -26, 4.0);
         //forward
         encoderDrive(0.5, 2, 2,5.0);
 
         // make turn
-        encoderDrive(0.5, -17, 17, 5.0);
+        encoderDrive(0.5, 17, -17, 5.0);
         // forward to carousel
-        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);
+        encoderDrive(DRIVE_SPEED, 8, 8, 5.0);
         // spinning duck, duck go brrr
-        robot.carousel.setPower(-.7);
+        robot.carouselRight.setPower(.7);
         sleep(2200);
-        robot.carousel.setPower(0);
+        robot.carouselRight.setPower(0);
         // turn
-        encoderDrive(0.3, 2, -2, 4.0);
+        encoderDrive(0.3, -2, 2, 4.0);
         // strafe right
-        encoderDriveStrafe(0.5, -40, -40, 4.0);
+        encoderDriveStrafe(0.5, 40, 40, 4.0);
         // turn
-        encoderDrive(DRIVE_SPEED, 38, -38, 4.0);
+        encoderDrive(DRIVE_SPEED, -37, 37, 4.0);
         // forward to shipping hub
         encoderDrive(0.4, 20, 20, 4.0);
         // arm lift
         armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
         // forward
-        encoderDrive(DRIVE_SPEED, 9, 9, 3.0);
+        encoderDrive(DRIVE_SPEED, 10, 10, 3.0);
         // release block
         robot.claw.setPosition(.1);
         sleep(250);
-        // go backwards a little
-        encoderDrive(DRIVE_SPEED, -2, -2, 0.5);
-        // strafe right
-        encoderDriveStrafe(.4, -24, -24, 2.0);
-        // drive forward at mach speed hella fast
-        armEncoderDrive(.3, LVL_3_INCHES, 2.0);
-        encoderDrive(.8, 70, 70, 2.0);
+        // backwards
+        encoderDrive(DRIVE_SPEED, -2, -2, 3.0);
+        // arm d o w n
+        armEncoderDrive(DRIVE_SPEED, -liftHeight, 3.0);
+        // strafe left
+        encoderDriveStrafe(0.4, 13.5, 13.5, 2.0);
+
+
+        // forward
+        /*
+        encoderDrive(DRIVE_SPEED, 10, 10,2.0);
+        // lift arm
+        armEncoderDrive(DRIVE_SPEED, liftHeight,2.0);
+        // forward to shipping hub
+        encoderDrive(DRIVE_SPEED, 15, 15, 4.0);
+        // release block
+        claw.setPosition(.3);
+        sleep(250);
+        // backward
+        encoderDrive(DRIVE_SPEED, -10, -10, 3.0);
+        // point turn
+        encoderDrive(DRIVE_SPEED, -20, 20, 5.0);
+        // backward
+        encoderDrive(1.0, -63, -63, 4.0);
+
+         */
 
 
 
@@ -485,5 +503,6 @@ public class CVRCW extends LinearOpMode {
     }
 
     public double getAbsoluteAngle() { return robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder .ZYX, AngleUnit.DEGREES).firstAngle; }
+
 
 }

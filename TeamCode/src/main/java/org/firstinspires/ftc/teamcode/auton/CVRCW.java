@@ -48,7 +48,7 @@ public class CVRCW extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 11;
+    static final double LVL_1_INCHES = 10;
     static final double LVL_2_INCHES = 15;
     static final double LVL_3_INCHES = 20;
 
@@ -185,9 +185,9 @@ public class CVRCW extends LinearOpMode {
         sleep(1000);
         // rest of auton
         // strafe left to carousel
-        encoderDriveStrafe(0.3, 22, 22, 4.0);
+        encoderDriveStrafe(0.3, 26, 26, 4.0);
         // strafe right to make space for axle
-        encoderDriveStrafe(0.5, -3, -3, 1.0);
+        //encoderDriveStrafe(0.5, -3, -3, 1.0);
         //forward
         encoderDrive(0.5, 2, 2,5.0);
 
@@ -202,7 +202,7 @@ public class CVRCW extends LinearOpMode {
         // strafe right
         encoderDriveStrafe(0.5, -40, -40, 4.0);
         // turn
-        encoderDrive(DRIVE_SPEED, 38, -38, 4.0);
+        encoderDrive(DRIVE_SPEED, 39, -39, 4.0);
         // forward to shipping hub
         encoderDrive(0.4, 20, 20, 4.0);
         // arm lift
@@ -215,10 +215,10 @@ public class CVRCW extends LinearOpMode {
         // go backwards a little
         encoderDrive(DRIVE_SPEED, -2, -2, 0.5);
         // strafe right
-        encoderDriveStrafe(.4, -55, -55, 2.0);
+        encoderDriveStrafe(.4, -40, -40, 2.0);
         // drive forward at mach speed hella fast
         armEncoderDrive(.3, LVL_1_INCHES, 2.0);
-        encoderDrive(1, 75, 75, 2.0);
+        encoderDrive(1.8, 78, 78, 2.0);
 
 
 

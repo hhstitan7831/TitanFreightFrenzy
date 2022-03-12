@@ -95,16 +95,16 @@ public class teleop extends OpMode {
         }
 
         //Game Related (P2)
-        if (gamepad2.dpad_down) {
-            double startArm = time.milliseconds();
-            armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES,3.0);
-        } else if (gamepad2.dpad_left) {
-            double startArm = time.milliseconds();
-            armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES,3.0);
-        } else if (gamepad2.dpad_up) {
-            double startArm = time.milliseconds();
-            armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES,3.0);
-        } else if (gamepad2.right_trigger > .1) {
+//        if (gamepad2.dpad_down) {
+//            double startArm = time.milliseconds();
+//            armEncoderDrive(DRIVE_SPEED, LVL_1_INCHES,3.0);
+//        } else if (gamepad2.dpad_left) {
+//            double startArm = time.milliseconds();
+//            armEncoderDrive(DRIVE_SPEED, LVL_2_INCHES,3.0);
+//        } else if (gamepad2.dpad_up) {
+//            double startArm = time.milliseconds();
+//            armEncoderDrive(DRIVE_SPEED, LVL_3_INCHES,3.0); }
+         if (gamepad2.right_trigger > .1) {
             double startArm = time.milliseconds();
             robot.arm.setPower(-gamepad2.right_trigger);
         } else if (gamepad2.left_trigger > .1) {

@@ -142,7 +142,7 @@ public class BCVC extends LinearOpMode {
 
         waitForStart();
 
-        liftHeight = LVL_3_INCHES;
+        //liftHeight = LVL_3_INCHES;
 
         robot.claw.setPosition(0);
         sleep(250);

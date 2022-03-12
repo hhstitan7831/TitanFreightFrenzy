@@ -47,7 +47,7 @@ public class CVRedWarehouse extends LinearOpMode {
     static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
     static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double LVL_1_INCHES = 8;
+    static final double LVL_1_INCHES = 3;
     static final double LVL_2_INCHES = 15;
     static final double LVL_3_INCHES = 20;
 
@@ -178,6 +178,7 @@ public class CVRedWarehouse extends LinearOpMode {
             }
         }
         telemetry.addData("BP", BP);
+        telemetry.addData("LH", liftHeight);
         telemetry.update();
         sleep(1000);
         // rest of auton

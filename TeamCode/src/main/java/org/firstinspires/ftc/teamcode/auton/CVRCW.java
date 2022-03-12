@@ -21,9 +21,9 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name="CVRC", group="Tutorials")
+@Autonomous(name="CVRCW", group="Tutorials")
 
-public class CVRC extends LinearOpMode {
+public class CVRCW extends LinearOpMode {
 
     T_Minus70 robot = new T_Minus70();
 
@@ -69,12 +69,12 @@ public class CVRC extends LinearOpMode {
     static final double WEBCAM_WIDTH = 640;
 
     // Red Range                                      Y      Cr     Cb
-   // public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
-   // public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
+    // public static Scalar scalarLowerYCrCb = new Scalar(0.0, 170.0, 0.0);
+    // public static Scalar scalarUpperYCrCb = new Scalar(255.0, 255.0, 128.0);
 
     // Green Range                                      Y      Cr     Cb
-     public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
-     public static Scalar scalarUpperYCrCb = new Scalar(255.0, 120.0, 128.0);
+    public static Scalar scalarLowerYCrCb = new Scalar(0.0, 0.0, 0.0);
+    public static Scalar scalarUpperYCrCb = new Scalar(255.0, 120.0, 128.0);
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -204,7 +204,7 @@ public class CVRC extends LinearOpMode {
         // strafe right
         encoderDriveStrafe(0.5, -40, -40, 4.0);
         // turn
-        encoderDrive(DRIVE_SPEED, 38, -38, 4.0);
+        encoderDrive(.4, 38, -38, 4.0);
         // forward to shipping hub
         encoderDrive(0.4, 22, 22, 4.0);
         // arm lift
@@ -214,18 +214,10 @@ public class CVRC extends LinearOpMode {
         // release block
         robot.claw.setPosition(.1);
         sleep(250);
-        // backwards
-        encoderDrive(0.7, -34, -34, 3.0);
-
-        // close claw bc idk
-        robot.claw.setPosition(0);
-
-        // arm d o w n
-        armEncoderDrive(DRIVE_SPEED, -liftHeight, 3.0);
+        // go backwards a little
+        encoderDrive(DRIVE_SPEED, -2, -2, 0.5);
         // strafe right
-        encoderDriveStrafe(0.4, -13.5, -13.5, 2.0);
-
-
+        encoderDriveStrafe(DRIVE_SPEED, -10, -10, 2.0);
 
 
 

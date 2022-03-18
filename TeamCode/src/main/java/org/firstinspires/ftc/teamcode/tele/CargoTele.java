@@ -21,7 +21,15 @@ public class CargoTele extends LinearOpMode{
         bl = hardwareMap.dcMotor.get("slamshead");
 
         waitForStart();
-        
-        //ass day
-    }
-}
+
+        fl.setPower(-.9);
+        fr.setPower(-.9);
+        br.setPower(.9);
+        bl.setPower(.9);
+        sleep(10000);
+
+        fl.setPower(.9);
+        fr.setPower(-.9);
+        br.setPower(-.9);
+        bl.setPower(.9);
+        sleep(5000);

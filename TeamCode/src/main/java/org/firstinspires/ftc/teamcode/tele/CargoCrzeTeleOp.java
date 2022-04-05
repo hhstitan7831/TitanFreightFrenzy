@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.tele;
 
+import android.view.ViewGroup;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -40,8 +42,37 @@ public class CargoCrzeTeleOp extends OpMode {
             fr.setPower(gamepad1.right_stick_x);
             br.setPower(gamepad1.right_stick_x);
 
-        }
+            if (Math.abs(gamepad1.right_stick_y) > .1) {
 
-        
+                fl.setPower(gamepad1.right_stick_y);
+                bl.setPower(gamepad1.left_stick_y);
+
+            } else if (Math.abs(gamepad1.left_stick_y) > .1) {
+
+                fr.setPower(-gamepad1.left_stick_x);
+                br.setPower(-gamepad1.left_stick_x);
+
+            } else {
+                fl.setPower(gamepad1.right_stick_y);
+                bl.setPower(gamepad1.right_stick_y);
+                fr.setPower(gamepad1.left_stick_x);
+                br.setPower(gamepad1.left_stick_x);
+
+            }
+
+        if (Math.abs(gamepad1.right_trigger) > .1) {
+
+            fr.setPower(-gamepad1.right_trigger);
+            fl.setPower(-gamepad1.right_trigger);
+            br.setPower(gamepad1.right_trigger);
+            bl.setPower(gamepad1.right_trigger);
+        }
+        if (Math.abs(gamepad1.left_trigger) > .1) {
+
+            fr.setPower(gamepad1.left_trigger);
+            fl.setPower(gamepad1.left_trigger);
+            br.setPower(-gamepad1.left_trigger);
+            bl.setPower(-gamepad1.left_trigger);
+        }
     }
 }

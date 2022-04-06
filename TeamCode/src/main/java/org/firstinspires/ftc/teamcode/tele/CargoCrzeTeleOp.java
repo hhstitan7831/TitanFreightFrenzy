@@ -5,14 +5,16 @@ import android.view.ViewGroup;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp (name = "pain")
 public class CargoCrzeTeleOp extends OpMode {
-
+//No servo???
     DcMotor fl;
     DcMotor br;
     DcMotor fr;
     DcMotor bl;
+    //Servo balls;
 
     @Override
     public void init() {
@@ -21,11 +23,15 @@ public class CargoCrzeTeleOp extends OpMode {
         br = hardwareMap.dcMotor.get("backRight");
         fr = hardwareMap.dcMotor.get("frontRight");
         bl = hardwareMap.dcMotor.get("backLeft");
-
+        //balls = hardwareMap.servo.get("balls");
+        //Temp name
+//No balls???
     }
 
     @Override
     public void loop() {
+        // movement
+//No gamepad 2???
         if (Math.abs(gamepad1.left_stick_y) > .1) {
 
             fl.setPower(gamepad1.left_stick_y);
@@ -57,5 +63,8 @@ public class CargoCrzeTeleOp extends OpMode {
                 br.setPower(-gamepad1.left_trigger);
                 bl.setPower(-gamepad1.left_trigger);
             }
-        }
-    }}
+            //{if (gamepad2.b);
+
+            //balls.setPosition(.1);
+        //}
+    }}}

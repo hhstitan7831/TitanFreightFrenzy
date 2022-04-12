@@ -32,23 +32,14 @@ public class CargoCrzeTeleOp extends OpMode {
     public void loop() {
         // movement
 //No gamepad 2???
-        if (Math.abs(gamepad1.left_stick_y) > .1) {
+        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1) {
 
             fl.setPower(gamepad1.left_stick_y);
             bl.setPower(gamepad1.left_stick_y);
-
-        } else if (Math.abs(gamepad1.right_stick_y) > .1) {
-
             fr.setPower(-gamepad1.right_stick_y);
             br.setPower(-gamepad1.right_stick_y);
 
-        } else {
-            fl.setPower(0);
-            bl.setPower(0);
-            fr.setPower(0);
-            br.setPower(0);
-
-
+        }
             if (Math.abs(gamepad1.right_trigger) > .1) {
 
                 fr.setPower(-gamepad1.right_trigger);
@@ -62,9 +53,17 @@ public class CargoCrzeTeleOp extends OpMode {
                 fl.setPower(gamepad1.left_trigger);
                 br.setPower(-gamepad1.left_trigger);
                 bl.setPower(-gamepad1.left_trigger);
-            }
+
+            }else {
+                    fl.setPower(0);
+                    bl.setPower(0);
+                    fr.setPower(0);
+                    br.setPower(0);
+
+                }
             //{if (gamepad2.b);
 
             //balls.setPosition(.1);
         //}
-    }}}
+    }}
+/// w o r k

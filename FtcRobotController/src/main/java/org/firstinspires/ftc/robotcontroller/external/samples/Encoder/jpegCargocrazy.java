@@ -53,9 +53,11 @@ DcMotor bl;
         bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
-                robot.leftDrive.getCurrentPosition(),
-                robot.rightDrive.getCurrentPosition());
+        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d",
+                fl.getCurrentPosition(),
+                bl.getCurrentPosition(),
+                br.getCurrentPosition(),
+                fr.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)

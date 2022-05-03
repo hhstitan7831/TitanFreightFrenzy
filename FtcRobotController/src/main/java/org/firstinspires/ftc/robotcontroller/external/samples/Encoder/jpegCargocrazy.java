@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-@Autonomous(name="Encoder", group="Pushbot")
+@Autonomous(name="EncodersPlsWork", group="Pushbot")
 public class jpegCargocrazy extends LinearOpMode {
 
 DcMotor fl;
@@ -15,7 +15,7 @@ DcMotor fr;
 DcMotor br;
 DcMotor bl;
 
-    HardwarePushbot robot   = new HardwarePushbot();   // Use a Pushbot's hardware
+
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;
@@ -36,7 +36,6 @@ DcMotor bl;
         fr = hardwareMap.dcMotor.get("frontRight");
         bl = hardwareMap.dcMotor.get("backLeft");
 
-        robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -53,9 +52,11 @@ DcMotor bl;
         bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
-                robot.leftDrive.getCurrentPosition(),
-                robot.rightDrive.getCurrentPosition());
+        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d",
+                fl.getCurrentPosition(),
+                fr.getCurrentPosition(),
+                br.getCurrentPosition(),
+                bl.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
@@ -93,7 +94,7 @@ DcMotor bl;
             // Determine new target position, and pass to motor controller
             newflTarget = fl.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newfrTarget = fr.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            newblTarget = bl.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newblTarget = bl.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newbrTarget = br.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             fl.setTargetPosition(newflTarget);
             fr.setTargetPosition(newfrTarget);

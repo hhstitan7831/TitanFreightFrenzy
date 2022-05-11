@@ -97,10 +97,10 @@ DcMotor out;
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newflTarget = fl.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newfrTarget = fr.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            newblTarget = bl.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newbrTarget = br.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newflTarget = fl.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            newfrTarget = fr.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
+            newblTarget = bl.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            newbrTarget = br.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
             fl.setTargetPosition(newflTarget);
             fr.setTargetPosition(newfrTarget);
             br.setTargetPosition(newbrTarget);
@@ -125,12 +125,12 @@ DcMotor out;
                     (fr.isBusy() && fl.isBusy() && br.isBusy() && bl.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d :%7d :%7d" , newflTarget, newblTarget, newfrTarget,newbrTarget);
-                telemetry.addData("Path2",  "Running at %7d :%7d :%7d :%7d",
-                    fr.getCurrentPosition(),
-                fl.getCurrentPosition(),
-                br.getCurrentPosition(),
-                bl.getCurrentPosition());
+                telemetry.addData("Path1", "Running to %7d :%7d :%7d :%7d", newflTarget, newblTarget, newfrTarget, newbrTarget);
+                telemetry.addData("Path2", "Running at %7d :%7d :%7d :%7d",
+                        fr.getCurrentPosition(),
+                        fl.getCurrentPosition(),
+                        br.getCurrentPosition(),
+                        bl.getCurrentPosition());
 
 
                 telemetry.update();
@@ -147,7 +147,38 @@ DcMotor out;
             fl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             fr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //  sleep(250);   // optional pause after each move
+        }
+
+    }
+
+            public void encoderARM(double speed, double Inches, double timeoutS) {
+                int newoutTarget;
+
+                if (opModeIsActive()) {
+
+                    newoutTarget = out.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
+
+                    out.setTargetPosition(newoutTarget);
+
+                    out.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    runtime.reset();
+                    out.setPower(Math.abs(speed));
+
+                    while (opModeIsActive() &&
+                            (runtime.seconds() < timeoutS) &&
+                            (out.isBusy())) {
+
+                        telemetry.addData("Path1", "Running to %7d", newoutTarget);
+                        telemetry.addData("Path2", "Running at %7d",
+                                out.getCurrentPosition());
+
+                        telemetry.update();
+                    }
+                    out.setPower(0);
+
+                    out.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         }
     }
-}
+}}}

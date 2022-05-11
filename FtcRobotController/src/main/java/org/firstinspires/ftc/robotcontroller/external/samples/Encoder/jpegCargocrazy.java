@@ -14,6 +14,7 @@ DcMotor fl;
 DcMotor fr;
 DcMotor br;
 DcMotor bl;
+DcMotor out;
 
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -35,6 +36,7 @@ DcMotor bl;
         br = hardwareMap.dcMotor.get("backRight");
         fr = hardwareMap.dcMotor.get("frontRight");
         bl = hardwareMap.dcMotor.get("backLeft");
+        out = hardwareMap.dcMotor.get("outtake");
 
 
         // Send telemetry message to signify robot waiting;
@@ -45,25 +47,29 @@ DcMotor bl;
         fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        out.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         fl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         fr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        out.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d",
+        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d :%7d",
                 fl.getCurrentPosition(),
                 fr.getCurrentPosition(),
                 br.getCurrentPosition(),
-                bl.getCurrentPosition());
+                bl.getCurrentPosition(),
+                out.getCurrentPosition());
+
         telemetry.update();
 
         waitForStart();
 
-        encoderDrive(DRIVE_SPEED,  -60,  6, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED,   20, 20, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        encoderDrive(.3, -24, 24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  -60,  6, 5.0);
+        encoderDrive(DRIVE_SPEED,   20, 20, 4.0);
+        encoderDrive(.3, -24, 24, 4.0);
         encoderDrive(DRIVE_SPEED, 30, -30, 5.0);
 
 

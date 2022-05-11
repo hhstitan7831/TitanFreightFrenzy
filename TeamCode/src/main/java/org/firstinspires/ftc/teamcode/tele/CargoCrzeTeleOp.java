@@ -14,7 +14,9 @@ public class CargoCrzeTeleOp extends OpMode {
     DcMotor br;
     DcMotor fr;
     DcMotor bl;
-    //Servo balls;
+    DcMotor in;
+    DcMotor out;
+    Servo box;
 
     @Override
     public void init() {
@@ -23,9 +25,9 @@ public class CargoCrzeTeleOp extends OpMode {
         br = hardwareMap.dcMotor.get("backRight");
         fr = hardwareMap.dcMotor.get("frontRight");
         bl = hardwareMap.dcMotor.get("backLeft");
-        //balls = hardwareMap.servo.get("balls");
-        //Temp name
-//No balls???
+        in = hardwareMap.dcMotor.get("intake");
+        out = hardwareMap.dcMotor.get("outtake");
+        box = hardwareMap.servo.get("box");
     }
 
     @Override
@@ -39,6 +41,12 @@ public class CargoCrzeTeleOp extends OpMode {
             fr.setPower(-gamepad1.right_stick_y);
             br.setPower(-gamepad1.right_stick_y);
 
+        } else {
+            fl.setPower(0);
+            bl.setPower(0);
+            fr.setPower(0);
+            br.setPower(0);
+
         }
             if (Math.abs(gamepad1.right_trigger) > .1) {
 
@@ -46,6 +54,13 @@ public class CargoCrzeTeleOp extends OpMode {
                 fl.setPower(-gamepad1.right_trigger);
                 br.setPower(gamepad1.right_trigger);
                 bl.setPower(gamepad1.right_trigger);
+
+            } else {
+                fl.setPower(0);
+                bl.setPower(0);
+                fr.setPower(0);
+                br.setPower(0);
+
             }
             if (Math.abs(gamepad1.left_trigger) > .1) {
 
@@ -54,16 +69,44 @@ public class CargoCrzeTeleOp extends OpMode {
                 br.setPower(-gamepad1.left_trigger);
                 bl.setPower(-gamepad1.left_trigger);
 
-            }else {
-                    fl.setPower(0);
-                    bl.setPower(0);
-                    fr.setPower(0);
-                    br.setPower(0);
+            } else {
+                fl.setPower(0);
+                bl.setPower(0);
+                fr.setPower(0);
+                br.setPower(0);
+
+                if (gamepad2.x) {
+
+                    in.setPower(1);
+
+                } else {
+
+                    in.setPower(0);
+                }
+                if (gamepad2.y) {
+
+                    in.setPower(-1);
+
+                } else {
+
+                    in.setPower(0);
 
                 }
-            
-            //{if (gamepad2.b);
+                if (gamepad2.b) {
+                    box.setPosition(1);
 
-            //balls.setPosition(.1);
-        //}
-    }}
+                } else {
+
+                    box.setPosition(0);
+
+                }
+
+                if (gamepad2.dpad_down) {
+
+                    out.setPower(1);
+                    }
+                }
+            }
+
+
+            }

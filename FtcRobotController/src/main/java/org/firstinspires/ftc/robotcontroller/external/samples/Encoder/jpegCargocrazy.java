@@ -20,14 +20,18 @@ DcMotor out;
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;
-    ;    // eg Gobilda Motor Encoder
-    //no gobilda?????
     static final double     DRIVE_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+
+    static final double     COUNTS_PER_SPOOL_MOTOR_REV    = 2786.2  ;
+    static final double     DRIVE_SPOOL_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
+    static final double     SPOOL_DIAMETER_INCHES   = 2.2 ;     // For figuring circumference
+    static final double     ROTATION_PER_INCH         = (COUNTS_PER_SPOOL_MOTOR_REV * DRIVE_SPOOL_GEAR_REDUCTION) /
+            (SPOOL_DIAMETER_INCHES * 3.1415);
+
 
     @Override
     public void runOpMode() {
@@ -71,7 +75,7 @@ DcMotor out;
         encoderDrive(DRIVE_SPEED,   20, 20, 4.0);
         encoderDrive(.3, -24, 24, 4.0);
         encoderDrive(DRIVE_SPEED, 30, -30, 5.0);
-
+        encoderBOX(.5, 7,4);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -151,12 +155,12 @@ DcMotor out;
 
     }
 
-            public void encoderARM(double speed, double Inches, double timeoutS) {
+            public void encoderBOX(double speed, double Inches, double timeoutS) {
                 int newoutTarget;
 
                 if (opModeIsActive()) {
 
-                    newoutTarget = out.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
+                    newoutTarget = out.getCurrentPosition() + (int)(Inches * ROTATION_PER_INCH);
 
                     out.setTargetPosition(newoutTarget);
 

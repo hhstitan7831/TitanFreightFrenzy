@@ -1,23 +1,20 @@
 package org.firstinspires.ftc.robotcontroller.external.samples.Encoder;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Autonomous(name="EncodersPlsWork", group="Pushbot")
-public class jpegCargocrazy extends LinearOpMode {
+public class CargoCrazyRedCycle extends LinearOpMode {
 
-DcMotor fl;
-DcMotor fr;
-DcMotor br;
-DcMotor bl;
-DcMotor out;
-DcMotor in;
-Servo box;
+    DcMotor fl;
+    DcMotor fr;
+    DcMotor br;
+    DcMotor bl;
+    DcMotor out;
+    DcMotor in;
+    Servo box;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -160,33 +157,33 @@ Servo box;
 
     }
 
-            public void encoderBOX(double speed, double Inches, double timeoutS) {
-                int newoutTarget;
+    public void encoderBOX(double speed, double Inches, double timeoutS) {
+        int newoutTarget;
 
-                if (opModeIsActive()) {
+        if (opModeIsActive()) {
 
-                    newoutTarget = out.getCurrentPosition() + (int)(Inches * ROTATION_PER_INCH);
+            newoutTarget = out.getCurrentPosition() + (int)(Inches * ROTATION_PER_INCH);
 
-                    out.setTargetPosition(newoutTarget);
+            out.setTargetPosition(newoutTarget);
 
-                    out.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            out.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                    runtime.reset();
-                    out.setPower(Math.abs(speed));
+            runtime.reset();
+            out.setPower(Math.abs(speed));
 
-                    while (opModeIsActive() &&
-                            (runtime.seconds() < timeoutS) &&
-                            (out.isBusy())) {
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (out.isBusy())) {
 
-                        telemetry.addData("Path1", "Running to %7d", newoutTarget);
-                        telemetry.addData("Path2", "Running at %7d",
-                                out.getCurrentPosition());
+                telemetry.addData("Path1", "Running to %7d", newoutTarget);
+                telemetry.addData("Path2", "Running at %7d",
+                        out.getCurrentPosition());
 
-                        telemetry.update();
-                    }
-                    out.setPower(0);
+                telemetry.update();
+            }
+            out.setPower(0);
 
-                    out.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            out.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         }
     }

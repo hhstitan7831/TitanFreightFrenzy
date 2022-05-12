@@ -95,18 +95,28 @@ public class CargoCrzeTeleOp extends OpMode {
                 if (gamepad2.b) {
                     box.setPosition(1);
 
-                } else {
+                } else if (gamepad2.a) {
 
+                    box.setPosition(.5);
+
+                } else
+
+
+                if (gamepad2.dpad_down) {
+
+                    out.setPower(-1);
+                    box.setPosition(.5);
+                    }
+
+                else  {
+
+                    out.setPower(0);
                     box.setPosition(0);
 
                 }
 
-                if (gamepad2.dpad_down) {
-
-                    out.setPower(1);
-                    }
-                }
-            }
-
 
             }
+
+
+            }}

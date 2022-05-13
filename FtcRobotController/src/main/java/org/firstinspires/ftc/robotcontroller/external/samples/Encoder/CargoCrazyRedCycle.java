@@ -19,15 +19,15 @@ public class CargoCrazyRedCycle extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;
-    static final double     DRIVE_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;     // For figuring circumference
+    static final double     DRIVE_GEAR_REDUCTION    =  1 ;
+    static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
 
     static final double     COUNTS_PER_SPOOL_MOTOR_REV    = 2786.2  ;
-    static final double     DRIVE_SPOOL_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
-    static final double     SPOOL_DIAMETER_INCHES   = 2.2 ;     // For figuring circumference
+    static final double     DRIVE_SPOOL_GEAR_REDUCTION    =  1 ;
+    static final double     SPOOL_DIAMETER_INCHES   = 2.2 ;
     static final double     ROTATION_PER_INCH         = (COUNTS_PER_SPOOL_MOTOR_REV * DRIVE_SPOOL_GEAR_REDUCTION) /
             (SPOOL_DIAMETER_INCHES * 3.1415);
 

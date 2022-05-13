@@ -23,7 +23,7 @@ Servo box;
 
     static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;
     static final double     DRIVE_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_INCHES   = 3.6 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
@@ -75,12 +75,18 @@ Servo box;
 
         waitForStart();
 
-        encoderDrive(DRIVE_SPEED,  -60,  6, 5.0);
-        encoderDrive(DRIVE_SPEED,   20, 20, 4.0);
-        encoderDrive(.3, -24, 24, 4.0);
+        encoderDrive(DRIVE_SPEED,  -52,  52, 5.0);
+        encoderDrive(DRIVE_SPEED,   19, 19, 4.0);
         in.setPower(1);
+        encoderDrive(.1, -22, 22, 4.0);
         encoderDrive(DRIVE_SPEED, 30, -30, 5.0);
-        encoderBOX(.5, 7,4);
+        encoderDrive(DRIVE_SPEED, -15, 15, 4.0 );
+        encoderDrive(.1, -14, 14, 4.0);
+        encoderDrive(DRIVE_SPEED,30,-30,4.0);
+        encoderDrive(DRIVE_SPEED,18,18,4.0);
+        encoderDrive(DRIVE_SPEED,-10,10,5.0);
+        encoderDrive(DRIVE_SPEED,-19,-19,4.0);
+        encoderDrive(DRIVE_SPEED,45,-45,4.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

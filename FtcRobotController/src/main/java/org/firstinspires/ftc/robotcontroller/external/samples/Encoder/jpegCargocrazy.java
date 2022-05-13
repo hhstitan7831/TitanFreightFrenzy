@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-@Autonomous(name="EncodersPlsWork", group="Pushbot")
+@Autonomous(name="EncoderRedCycle", group="Pushbot")
 public class jpegCargocrazy extends LinearOpMode {
 
 DcMotor fl;

@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.robotcontroller.external.samples.Encoder;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@Autonomous(name="T E S T", group="Pushbot")
-public class CargoCrazyRedCycle extends LinearOpMode {
+
+import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+@Autonomous(name="EncoderBluCycle", group="Pushbot")
+public class jpegCargocrazyBluCycle extends LinearOpMode {
 
     DcMotor fl;
     DcMotor fr;
@@ -19,15 +22,15 @@ public class CargoCrazyRedCycle extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;
-    static final double     DRIVE_GEAR_REDUCTION    =  1 ;
-    static final double     WHEEL_DIAMETER_INCHES   = 3.77953 ;
+    static final double     DRIVE_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
+    static final double     WHEEL_DIAMETER_INCHES   = 3.6 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
 
     static final double     COUNTS_PER_SPOOL_MOTOR_REV    = 2786.2  ;
-    static final double     DRIVE_SPOOL_GEAR_REDUCTION    =  1 ;
-    static final double     SPOOL_DIAMETER_INCHES   = 2.2 ;
+    static final double     DRIVE_SPOOL_GEAR_REDUCTION    =  1 ;     // This is < 1.0 if geared UP
+    static final double     SPOOL_DIAMETER_INCHES   = 2.2 ;     // For figuring circumference
     static final double     ROTATION_PER_INCH         = (COUNTS_PER_SPOOL_MOTOR_REV * DRIVE_SPOOL_GEAR_REDUCTION) /
             (SPOOL_DIAMETER_INCHES * 3.1415);
 
@@ -72,7 +75,18 @@ public class CargoCrazyRedCycle extends LinearOpMode {
 
         waitForStart();
 
-        encoderBOX(DRIVE_SPEED,  1, 1);
+        encoderDrive(DRIVE_SPEED,  -52,  52, 5.0);
+        encoderDrive(DRIVE_SPEED,   -19, -19, 4.0);
+        in.setPower(1);
+        encoderDrive(.1, -22, 22, 4.0);
+        encoderDrive(DRIVE_SPEED, 30, -30, 5.0);
+        encoderDrive(DRIVE_SPEED, -15, 15, 4.0 );
+        encoderDrive(.1, -14, 14, 4.0);
+        encoderDrive(DRIVE_SPEED,30,-30,4.0);
+        encoderDrive(DRIVE_SPEED,-18,-18,4.0);
+        encoderDrive(DRIVE_SPEED,-10,10,5.0);
+        encoderDrive(DRIVE_SPEED,19,19,4.0);
+        encoderDrive(DRIVE_SPEED,45,-45,4.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

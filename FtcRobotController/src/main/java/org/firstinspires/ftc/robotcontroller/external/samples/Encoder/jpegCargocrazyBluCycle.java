@@ -77,17 +77,24 @@ public class jpegCargocrazyBluCycle extends LinearOpMode {
 
         encoderDrive(DRIVE_SPEED,  -60,  60, 5.0);
         encoderDrive(DRIVE_SPEED,   -17, -17, 4.0);
-        encoderDrive(DRIVE_SPEED, -3,3,4.0);
         in.setPower(1);
-        encoderDrive(.1, -22, 22, 4.0);
+        encoderDrive(.1, -9, 9, 4.0);
         encoderDrive(DRIVE_SPEED, 30, -30, 5.0);
-        encoderDrive(DRIVE_SPEED, -20, 20, 4.0 );
+        encoderBOX(DRIVE_SPEED,-1,4.0);
+        box.setPosition(0.13);
+        sleep(2000);
+        box.setPosition(0.92);
+        encoderDrive(DRIVE_SPEED, -10, 10, 4.0 );
         encoderDrive(.1, -17, 17, 4.0);
         encoderDrive(DRIVE_SPEED,30,-30,4.0);
-        encoderDrive(DRIVE_SPEED,-18,-18,4.0);
+        encoderBOX(DRIVE_SPEED,-1,4.0);
+        box.setPosition(0.13);
+        sleep(2000);
+        box.setPosition(0.92);
+       /* encoderDrive(DRIVE_SPEED,-18,-18,4.0);
         encoderDrive(DRIVE_SPEED,-15,15,5.0);
         encoderDrive(DRIVE_SPEED,29,29,4.0);
-        encoderDrive(DRIVE_SPEED,45,-45,4.0);
+        encoderDrive(DRIVE_SPEED,45,-45,4.0);*/
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

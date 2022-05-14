@@ -92,6 +92,50 @@ public class CargoCrzeTeleOp extends OpMode {
                  br.setPower(0);
                  bl.setPower(0);
 
+                 if (gamepad1.dpad_down) {
+
+                     fl.setPower(.4);
+                     fr.setPower(-.4);
+                     br.setPower(-.4);
+                     bl.setPower(.4);
+
+                 } else {
+
+                     fl.setPower(0);
+                     fr.setPower(0);
+                     br.setPower(0);
+                     bl.setPower(0);
+
+                 if (gamepad1.dpad_left) {
+
+                     fl.setPower(.4);
+                     fr.setPower(.4);
+                     br.setPower(.4);
+                     bl.setPower(.4);
+
+                 } else {
+
+                     fl.setPower(0);
+                     fr.setPower(0);
+                     br.setPower(0);
+                     bl.setPower(0);
+
+                 if (gamepad1.dpad_right) {
+
+                     fl.setPower(-.4);
+                     fr.setPower(-.4);
+                     br.setPower(-.4);
+                     bl.setPower(-.4);
+
+                 }else {
+
+                     fl.setPower(0);
+                     fr.setPower(0);
+                     br.setPower(0);
+                     bl.setPower(0);
+
+                 }
+
                 if (gamepad2.x) {
 
                     in.setPower(1);
@@ -111,7 +155,7 @@ public class CargoCrzeTeleOp extends OpMode {
                 }
                 if (gamepad2.b) {
 
-                    box.setPosition(0);
+                    box.setPosition(0.13);
 
                 } else if (gamepad2.a) {
 
@@ -139,7 +183,8 @@ public class CargoCrzeTeleOp extends OpMode {
 
                     out.setPower(0);
 
+
                 }
 
 
-            }}}
+            }}} }}

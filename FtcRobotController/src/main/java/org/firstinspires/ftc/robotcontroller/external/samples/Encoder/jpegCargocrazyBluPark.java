@@ -79,7 +79,7 @@ public class jpegCargocrazyBluPark extends LinearOpMode {
         encoderDrive(DRIVE_SPEED,-17, -17, 4.0);
         encoderDrive(DRIVE_SPEED, -16,16,4.0);
         encoderDrive(DRIVE_SPEED, 17, 17, 4.0);
-        encoderDrive(.3, 50, -50, 4.0);
+        encoderDrive(.3, 43, -43, 4.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

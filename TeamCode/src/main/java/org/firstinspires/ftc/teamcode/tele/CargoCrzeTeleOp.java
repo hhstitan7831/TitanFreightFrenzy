@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCaptureSequence;
 
-@TeleOp (name = "pain")
+@TeleOp (name = "CargoCrazyTeleOp")
 public class CargoCrzeTeleOp extends OpMode {
 //No servo???
     DcMotor fl;
@@ -77,6 +77,21 @@ public class CargoCrzeTeleOp extends OpMode {
                 fr.setPower(0);
                 br.setPower(0);
 
+            }
+             if (gamepad1.dpad_up) {
+
+                 fl.setPower(-.4);
+                 fr.setPower(.4);
+                 br.setPower(.4);
+                 bl.setPower(-.4);
+
+             } else {
+
+                 fl.setPower(0);
+                 fr.setPower(0);
+                 br.setPower(0);
+                 bl.setPower(0);
+
                 if (gamepad2.x) {
 
                     in.setPower(1);
@@ -96,20 +111,29 @@ public class CargoCrzeTeleOp extends OpMode {
                 }
                 if (gamepad2.b) {
 
-                    box.setPosition(-0.4);
+                    box.setPosition(0);
 
                 } else if (gamepad2.a) {
 
-                    box.setPosition(0.5);
+                    box.setPosition(0.55);
 
                 } else if (gamepad2.right_bumper) {
 
-                    box.setPosition(0.9);
+                    box.setPosition(0.92);
 
                 }
                 if (gamepad2.dpad_up) {
 
-                    out.setPower(.1);
+                    out.setPower(.9);
+
+                } else {
+
+                    out.setPower(0);
+
+                }
+                if (gamepad2.dpad_down) {
+
+                    out.setPower(-.9);
 
                 } else {
 

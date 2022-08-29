@@ -54,33 +54,24 @@ public class AutoDemo extends LinearOpMode {
         br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d :%7d",
+       /* // Send telemetry message to indicate successful Encoder reset
+        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d,
                 fl.getCurrentPosition(),
                 fr.getCurrentPosition(),
                 br.getCurrentPosition(),
                 bl.getCurrentPosition(),
-
-
-        telemetry.update();
+                telemetry.update();
+*/
 
         waitForStart();
 
+        // forward
         encoderDrive(DRIVE_SPEED,  -50,  50, 5.0);
-        encoderDrive(DRIVE_SPEED,   19, 19, 4.0);
-
-        encoderDrive(.1, -9, 9, 4.0);
-        encoderDrive(DRIVE_SPEED, 30, -30, 5.0);
+        //spin
+        encoderDrive(DRIVE_SPEED,   60, 60, 4.0);
 
 
-        sleep(2000);
 
-        encoderDrive(DRIVE_SPEED, -15, 15, 4.0 );
-        encoderDrive(.1, -14, 14, 4.0);
-        encoderDrive(DRIVE_SPEED,30,-30,4.0);
-
-
-        sleep(2000);
 
 
 

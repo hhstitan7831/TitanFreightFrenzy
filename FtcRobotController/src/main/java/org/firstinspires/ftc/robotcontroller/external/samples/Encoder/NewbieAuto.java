@@ -11,29 +11,38 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class NewbieAuto extends LinearOpMode {
     DcMotor frontLeft;
-    DcMotor ?;
-    DcMotor ?;
+    // DcMotor ?;
+    //DcMotor ?;
     DcMotor backRight;
 
     @Override
     public void runOpMode() {
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
-        ? = hardwareMap.dcMotor.get("?");
-        ? = hardwareMap.dcMotor.get("?");
+       // ? = hardwareMap.dcMotor.get("?");
+       // ? = hardwareMap.dcMotor.get("?");
         backRight = hardwareMap.dcMotor.get("backRight");
 
         waitForStart();
         // move forward
-        frontLeft.setPower(?);
-        backRight.setPower(?);
+        //frontLeft.setPower(?);
+        //backRight.setPower(?);
 
         //move backward
+        //frontLeft.setPower(?);
+        //backRight.setPower(?);
 
 
         // left turn
+        //frontLeft.setPower(?);
+        //backRight.setPower(?);
 
 
-        //right turn 
+        //right turn
+        //frontLeft.setPower(?);
+        //backRight.setPower(?);
+
+
+        //
 
     }
 }
